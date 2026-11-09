@@ -37,7 +37,7 @@
             position: relative;
         }
 
-        /* Animated Background Glowing Orbs */
+        /* Background Animation Orbs */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -53,7 +53,7 @@
             position: absolute;
             border-radius: 50%;
             filter: blur(130px);
-            opacity: 0.18;
+            opacity: 0.15;
             animation: floatOrb 12s ease-in-out infinite alternate;
         }
 
@@ -79,7 +79,7 @@
             100% { transform: translateY(35px) scale(1.08); }
         }
 
-        /* Sidebar Navigation (Desktop) */
+        /* Sidebar Navigation */
         aside {
             width: 270px;
             background: var(--sidebar-bg);
@@ -250,7 +250,7 @@
             align-items: center;
         }
 
-        .hero-content .secure-badge {
+        .hero-content .status-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -345,7 +345,7 @@
             opacity: 0.95;
         }
 
-        /* Shield Graphic Area */
+        /* Graphic Showcase Area */
         .shield-graphic-container {
             display: flex;
             justify-content: center;
@@ -548,9 +548,9 @@
 
         <div class="sidebar-footer-box">
             <div class="secure-tag">
-                <i class="fas fa-shield-check"></i> 100% Secure
+                <i class="fas fa-server"></i> Active Ecosystem
             </div>
-            <p>We never store your credentials or sessions.</p>
+            <p>High-performance Telegram bots infrastructure.</p>
             <div style="margin-top: 10px; font-size: 10px; color: var(--text-muted);">
                 &copy; 2026 Built for Archon
             </div>
@@ -563,57 +563,57 @@
         <div id="home" class="page-section active">
             <div class="hero-grid">
                 <div class="hero-content">
-                    <div class="secure-badge">
-                        <i class="fas fa-shield-alt"></i> Secure. Private. Trusted.
+                    <div class="status-badge">
+                        <div class="status-dot"></div> All Bots Online & Operational
                     </div>
-                    <h1>Generate Your Own <span>Telegram Session</span></h1>
-                    <p>Create Pyrogram or Telethon session strings safely and securely. We never store your credentials or sessions. Built for Archon.</p>
+                    <h1>Next-Gen <span>Telegram Bots</span> Ecosystem</h1>
+                    <p>Welcome to Foxry HQ. High-performance music streaming, advanced group security moderation, and GitHub notification pipelines. Built for Archon.</p>
                     
                     <div class="hero-cards-row">
                         <div class="mini-card" onclick="switchPage('bots')">
                             <i class="fas fa-music"></i>
-                            <h4>Pyrogram Session</h4>
-                            <span>For Pyrogram Clients</span>
+                            <h4>Music & Guard</h4>
+                            <span>Active Telegram Bots</span>
                         </div>
                         <div class="mini-card" onclick="switchPage('community')">
                             <i class="fas fa-comments"></i>
-                            <h4>Telethon Session</h4>
-                            <span>For Telethon Clients</span>
+                            <h4>FoxryChat</h4>
+                            <span>Support Community</span>
                         </div>
                     </div>
 
                     <button class="btn-main" onclick="switchPage('bots')">
-                        Get Started <i class="fas fa-arrow-right"></i>
+                        Explore Bots <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
 
                 <!-- Graphic Showcase -->
                 <div class="shield-graphic-container">
-                    <i class="fas fa-shield-halved shield-icon-glow"></i>
+                    <i class="fas fa-robot shield-icon-glow"></i>
                 </div>
             </div>
 
             <!-- Bottom Features Bar -->
             <div class="features-bar">
                 <div class="feature-item">
-                    <i class="fas fa-lock"></i>
-                    <div>
-                        <h5>End-to-End Secure</h5>
-                        <p>Encrypted in transit</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-database"></i>
-                    <div>
-                        <h5>Zero Data Storage</h5>
-                        <p>We don't store anything</p>
-                    </div>
-                </div>
-                <div class="feature-item">
                     <i class="fas fa-bolt"></i>
                     <div>
-                        <h5>Blazing Fast</h5>
-                        <p>Instant generation</p>
+                        <h5>High Speed</h5>
+                        <p>Lightning fast response</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-shield-halved"></i>
+                    <div>
+                        <h5>Group Moderation</h5>
+                        <p>Advanced security tools</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-server"></i>
+                    <div>
+                        <h5>99.9% Uptime</h5>
+                        <p>Reliable infrastructure</p>
                     </div>
                 </div>
             </div>
@@ -746,19 +746,19 @@
         <div id="about" class="page-section">
             <div class="section-heading">
                 <h2>About Foxry HQ</h2>
-                <p>Our vision and mission for secure Telegram automation ecosystems.</p>
+                <p>Our vision and mission for Telegram automation ecosystems.</p>
             </div>
             <div class="card" style="max-width: 780px; margin: 0 auto; text-align: left;">
-                <h3 style="color: #fff; margin-bottom: 12px;">Scalable Architecture & Security</h3>
-                <p style="margin-bottom: 14px; color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">Foxry HQ is an independent ecosystem dedicated to creating fast, reliable, and secure tools for Telegram communities. Built under the supervision of Archon infrastructure, from uninterrupted music streams to group security management.</p>
-                <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">We maintain strict zero-data storage policies to ensure all user sessions and credentials remain fully protected and private.</p>
+                <h3 style="color: #fff; margin-bottom: 12px;">Scalable Architecture & Infrastructure</h3>
+                <p style="margin-bottom: 14px; color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">Foxry HQ is an independent ecosystem dedicated to creating fast, reliable, and secure tools for Telegram communities. Built under the supervision of Archon infrastructure, delivering uninterrupted music streams, group security management, and developer tools.</p>
+                <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">We maintain stable hosting environments to ensure all our bots run smoothly 24/7 without interruption.</p>
             </div>
         </div>
 
         <!-- Footer -->
         <footer>
             <p>&copy; 2026 <span>Foxry HQ</span>. Built for Archon.</p>
-            <p style="font-size: 11px;">Secure. Private. Trusted.</p>
+            <p style="font-size: 11px;">High-Performance Telegram Ecosystem.</p>
         </footer>
     </main>
 
