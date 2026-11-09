@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foxry HQ — High-Performance Telegram Ecosystem</title>
+    <title>Foxry HQ — Telegram Ecosystem</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -29,21 +29,20 @@
             background-color: var(--bg);
             color: var(--text-main);
             min-height: 100vh;
-            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* Ambient Background Glows */
         .glow-blob {
             position: absolute;
             width: 450px;
             height: 450px;
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(56, 189, 248, 0.1));
             filter: blur(120px);
-            border-radius: 50z%;
+            border-radius: 50%;
             z-index: -1;
         }
         .blob-1 { top: -100px; left: 10%; }
@@ -57,11 +56,11 @@
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
-            padding: 24px 20px;
+            padding: 20px;
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(3, 7, 18, 0.8);
+            background: rgba(3, 7, 18, 0.85);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
         }
@@ -74,21 +73,21 @@
         }
 
         .brand-logo {
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 18px;
+            font-size: 16px;
             color: #fff;
-            box-shadow: 0 0 20px var(--primary-glow);
+            box-shadow: 0 0 15px var(--primary-glow);
         }
 
         .brand-name {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             color: #fff;
             letter-spacing: -0.5px;
@@ -98,21 +97,141 @@
             color: var(--accent);
         }
 
-        .nav-actions {
+        .nav-links {
             display: flex;
-            gap: 12px;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-tab:hover, .nav-tab.active {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--border);
+            color: #fff;
+        }
+
+        .nav-tab.active {
+            border-color: var(--primary);
+            color: var(--accent);
+        }
+
+        /* Page Content Sections */
+        .page-section {
+            display: none;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            backdrop-filter: blur(12px);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
         .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             padding: 10px 18px;
             border-radius: 8px;
             font-size: 14px;
             font-weight: 600;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #4f46e5);
+            color: #fff;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
 
         .btn-outline {
@@ -123,59 +242,18 @@
 
         .btn-outline:hover {
             background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), #4f46e5);
-            color: #fff;
-            box-shadow: 0 4px 15px var(--primary-glow);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
-        }
-
-        /* Hero Section */
-        .hero {
-            max-width: 900px;
-            margin: 60px auto 40px;
-            padding: 0 20px;
+        /* Hero Specific */
+        .hero-content {
             text-align: center;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            color: #34d399;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 24px;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #34d399;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #34d399;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.4; }
-            100% { opacity: 1; }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 20px;
@@ -185,92 +263,27 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
+        .hero-content p {
             font-size: 1.15rem;
             color: var(--text-muted);
             line-height: 1.6;
-            max-width: 650px;
-            margin: 0 auto 32px;
+            margin-bottom: 30px;
         }
 
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        /* Main Content Section */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto 80px;
-            padding: 0 20px;
-            width: 100%;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .section-header h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 24px;
-        }
-
-        .card {
+        /* Contact & Developer Styles */
+        .info-box {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 32px;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
         }
 
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(99, 102, 241, 0.4);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-        }
-
-        .card-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-
-        .card p {
+        .info-box p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            margin-bottom: 24px;
             line-height: 1.6;
         }
 
@@ -278,7 +291,7 @@
         footer {
             border-top: 1px solid var(--border);
             background: rgba(3, 7, 18, 0.9);
-            padding: 30px 20px;
+            padding: 24px 20px;
             text-align: center;
             color: var(--text-muted);
             font-size: 0.9rem;
@@ -295,77 +308,149 @@
     <div class="glow-blob blob-1"></div>
     <div class="glow-blob blob-2"></div>
 
-    <!-- Navigation -->
+    <!-- Navigation Tabs -->
     <nav>
-        <a href="#" class="brand">
+        <a href="#" class="brand" onclick="switchPage('home')">
             <div class="brand-logo">FX</div>
             <div class="brand-name">Foxry<span>HQ</span></div>
         </a>
-        <div class="nav-actions">
-            <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-outline">
-                <i class="fab fa-telegram-plane"></i> Channel
-            </a>
-            <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-primary">
-                <i class="fas fa-headset"></i> Support
-            </a>
+        <div class="nav-links">
+            <button class="nav-tab active" onclick="switchPage('home')">Home</button>
+            <button class="nav-tab" onclick="switchPage('bots')">Bots</button>
+            <button class="nav-tab" onclick="switchPage('community')">Channel & Group</button>
+            <button class="nav-tab" onclick="switchPage('developer')">Developer</button>
+            <button class="nav-tab" onclick="switchPage('about')">About</button>
+            <button class="nav-tab" onclick="switchPage('contact')">Contact</button>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <main>
-        <section class="hero">
-            <div class="status-badge">
-                <div class="status-dot"></div> All Systems Operational & Online
-            </div>
-            <h1>Empowering Telegram Communities with Advanced Automation</h1>
-            <p>Welcome to Foxry HQ. High-performance music streaming, intelligent group management, and real-time developer notification tools built for speed and reliability.</p>
-            
-            <div class="hero-buttons">
-                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-primary" style="padding: 12px 24px; font-size: 15px;">
-                    <i class="fab fa-telegram"></i> Join Updates (@FoxryHQ)
-                </a>
-                <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-outline" style="padding: 12px 24px; font-size: 15px;">
-                    <i class="fas fa-comments"></i> Join Group (@FoxryChat)
-                </a>
-            </div>
-        </section>
-
-        <!-- Bots Grid -->
-        <div class="container">
-            <div class="section-header">
-                <h2>Ecosystem Core</h2>
-                <p>Engineered for high availability, low latency, and seamless user interaction.</p>
-            </div>
-
-            <div class="grid">
-                <!-- Music Bot -->
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-music"></i></div>
-                    <h3>Music Streaming Suite</h3>
-                    <p>Delivering high-fidelity audio streams directly into group voice chats. Features ultra-low latency playback, custom audio filters, and stable queue handlers.</p>
-                </div>
-
-                <!-- Management Bot -->
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
-                    <h3>Group Management</h3>
-                    <p>Robust moderation tools designed to keep your communities secure. Automated filtering, user tracking, and smart administrative workflows.</p>
-                </div>
-
-                <!-- GitHub Bot -->
-                <div class="card">
-                    <div class="card-icon"><i class="fab fa-github"></i></div>
-                    <h3>GitHub Notifications</h3>
-                    <p>Bridge your code repositories straight to your channels. Instant push notifications, pull request updates, and continuous deployment logs in real-time.</p>
-                </div>
+    <!-- 1. HOME PAGE -->
+    <div id="home" class="page-section active">
+        <div class="hero-content">
+            <h1>Next-Gen Telegram Bots Ecosystem</h1>
+            <p>Welcome to Foxry HQ. High-performance music streaming, intelligent management systems, and developer tools built for speed and uptime.</p>
+            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="switchPage('bots')">Explore Bots</button>
+                <button class="btn btn-outline" onclick="switchPage('community')">Join Community</button>
             </div>
         </div>
-    </main>
+    </div>
+
+    <!-- 2. BOTS PAGE -->
+    <div id="bots" class="page-section">
+        <div class="section-header">
+            <h2>Our Bots</h2>
+            <p>Advanced Telegram automation built with Python and Golang.</p>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-music"></i></div>
+                <h3>Music Streaming Bot</h3>
+                <p>High-fidelity audio streaming for group voice chats with minimal latency and smooth queue controls.</p>
+                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-outline">Learn More</a>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
+                <h3>Group Management Bot</h3>
+                <p>Secure your groups with automated moderation, anti-spam filters, and member tracking.</p>
+                <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-outline">Support Group</a>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fab fa-github"></i></div>
+                <h3>GitHub Notification Bot</h3>
+                <p>Get real-time repository commits, push alerts, and CI/CD deployment logs straight to Telegram.</p>
+                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-outline">View Updates</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. CHANNEL & GROUP PAGE -->
+    <div id="community" class="page-section">
+        <div class="section-header">
+            <h2>Community & Updates</h2>
+            <p>Connect with other users and stay updated with the latest bot releases.</p>
+        </div>
+        <div class="grid">
+            <div class="card" style="text-align: center;">
+                <div class="card-icon" style="margin: 0 auto 20px;"><i class="fab fa-telegram-plane"></i></div>
+                <h3>Update Channel</h3>
+                <p>Official broadcast channel for announcements, updates, and new features.</p>
+                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-primary">@FoxryHQ</a>
+            </div>
+            <div class="card" style="text-align: center;">
+                <div class="card-icon" style="margin: 0 auto 20px;"><i class="fas fa-comments"></i></div>
+                <h3>Support Group</h3>
+                <p>Join our interactive community group to ask questions, report bugs, and chat.</p>
+                <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-primary">@FoxryChat</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. DEVELOPER PAGE -->
+    <div id="developer" class="page-section">
+        <div class="section-header">
+            <h2>Developer Profile</h2>
+            <p>The engineer behind the architecture and systems.</p>
+        </div>
+        <div class="info-box">
+            <div class="card-icon" style="margin: 0 auto 20px;"><i class="fas fa-code"></i></div>
+            <h3>Backend & Bot Developer</h3>
+            <p>Specialized in developing robust Telegram bots using Python (Pyrogram, Kurigram), Golang, and integrating databases like MongoDB with high-speed RAM caching and Vercel/Heroku deployments.</p>
+            <a href="https://github.com/" target="_blank" class="btn btn-outline"><i class="fab fa-github"></i> GitHub Profile</a>
+        </div>
+    </div>
+
+    <!-- 5. ABOUT PAGE -->
+    <div id="about" class="page-section">
+        <div class="section-header">
+            <h2>About Foxry HQ</h2>
+            <p>Our vision and mission for community automation.</p>
+        </div>
+        <div class="info-box" style="text-align: left;">
+            <h3 style="color: #fff; margin-bottom: 12px;">Building Scalable Solutions</h3>
+            <p>Foxry HQ is an independent ecosystem dedicated to creating fast, reliable, and open-source tools for Telegram communities. From continuous music playback to security management and developer integrations, we aim to provide seamless digital experiences.</p>
+        </div>
+    </div>
+
+    <!-- 6. CONTACT PAGE -->
+    <div id="contact" class="page-section">
+        <div class="section-header">
+            <h2>Get in Touch</h2>
+            <p>Reach out to us for support, partnerships, or inquiries.</p>
+        </div>
+        <div class="info-box">
+            <p>The fastest way to reach us is through our official support group or channel on Telegram.</p>
+            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-primary"><i class="fas fa-headset"></i> Open Support Chat</a>
+                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-outline"><i class="fab fa-telegram"></i> Visit Channel</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 <span>Foxry HQ</span>. Built with precision and speed.</p>
+        <p>&copy; 2026 <span>Foxry HQ</span>. All Rights Reserved.</p>
     </footer>
+
+    <!-- Simple JS for Page Switching -->
+    <script>
+        function switchPage(pageId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show target section
+            document.getElementById(pageId).classList.add('active');
+
+            // Highlight corresponding tab
+            event.target.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
 
 </body>
 </html>
