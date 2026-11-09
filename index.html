@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foxry HQ — Telegram Ecosystem</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg: #030712;
-            --card-bg: rgba(17, 24, 39, 0.7);
-            --border: rgba(255, 255, 255, 0.08);
-            --primary: #6366f1;
-            --primary-glow: rgba(99, 102, 241, 0.3);
-            --accent: #38bdf8;
+            --bg: #050814;
+            --card-bg: rgba(13, 19, 33, 0.75);
+            --border: rgba(0, 242, 254, 0.2);
+            --primary: #00f2fe;
+            --primary-glow: rgba(0, 242, 254, 0.25);
+            --accent: #4facfe;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
         }
@@ -22,6 +22,8 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--bg);
         }
 
         body {
@@ -36,19 +38,20 @@
             overflow-x: hidden;
         }
 
+        /* Cyberpunk Ambient Glows */
         .glow-blob {
             position: absolute;
-            width: 450px;
-            height: 450px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(56, 189, 248, 0.1));
-            filter: blur(120px);
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.12), rgba(79, 172, 254, 0.06));
+            filter: blur(100px);
             border-radius: 50%;
             z-index: -1;
         }
-        .blob-1 { top: -100px; left: 10%; }
-        .blob-2 { top: 40%; right: 5%; }
+        .blob-1 { top: -50px; left: -50px; }
+        .blob-2 { top: 30%; right: -50px; }
 
-        /* Navbar */
+        /* Professional Header & Navbar */
         nav {
             display: flex;
             justify-content: space-between;
@@ -56,84 +59,101 @@
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
-            padding: 20px;
+            padding: 18px 20px;
             position: sticky;
             top: 0;
-            z-index: 100;
-            background: rgba(3, 7, 18, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            background: rgba(5, 8, 20, 0.9);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
         }
 
         .brand-logo {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 800;
             font-size: 16px;
-            color: #fff;
+            color: #050814;
             box-shadow: 0 0 15px var(--primary-glow);
         }
 
         .brand-name {
+            font-family: 'Orbitron', sans-serif;
             font-size: 18px;
             font-weight: 800;
             color: #fff;
-            letter-spacing: -0.5px;
+            letter-spacing: 0.5px;
         }
 
         .brand-name span {
-            color: var(--accent);
+            color: var(--primary);
         }
 
+        /* Desktop & Mobile Menu */
         .nav-links {
             display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .nav-tab {
             background: transparent;
-            border: 1px solid transparent;
+            border: none;
             color: var(--text-muted);
             padding: 8px 14px;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
+            white-space: nowrap;
         }
 
         .nav-tab:hover, .nav-tab.active {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--border);
-            color: #fff;
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--primary);
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
         }
 
         .nav-tab.active {
-            border-color: var(--primary);
-            color: var(--accent);
+            border: 1px solid var(--border);
+            box-shadow: 0 0 15px var(--primary-glow);
         }
 
-        /* Page Content Sections */
+        /* Mobile Hamburger Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        /* Pages Container */
         .page-section {
             display: none;
             max-width: 1100px;
             margin: 40px auto;
             padding: 0 20px;
             width: 100%;
-            animation: fadeIn 0.4s ease forwards;
+            animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .page-section.active {
@@ -141,7 +161,7 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -151,22 +171,25 @@
         }
 
         .section-header h2 {
-            font-size: 2.2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
             font-weight: 800;
             margin-bottom: 10px;
-            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 30%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .section-header p {
             color: var(--text-muted);
-            font-size: 1.05rem;
+            font-size: 1rem;
         }
 
-        /* Cards Grid */
+        /* Cards Layout */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
 
         .card {
@@ -175,76 +198,103 @@
             border-radius: 16px;
             padding: 28px;
             backdrop-filter: blur(12px);
-            transition: transform 0.3s, border-color 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.15);
+        }
+
+        .card:hover::before {
+            opacity: 1;
         }
 
         .card-icon {
             width: 48px;
             height: 48px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid var(--border);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 20px;
-            color: var(--accent);
+            color: var(--primary);
             margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.1);
         }
 
         .card h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
             margin-bottom: 10px;
             color: #fff;
         }
 
         .card p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.93rem;
             line-height: 1.6;
             margin-bottom: 20px;
         }
 
+        /* Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            padding: 10px 18px;
-            border-radius: 8px;
+            padding: 10px 20px;
+            border-radius: 10px;
             font-size: 14px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.2s;
+            transition: all 0.25s ease;
+            cursor: pointer;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), #4f46e5);
-            color: #fff;
-            box-shadow: 0 4px 15px var(--primary-glow);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #050814;
+            box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3);
+            border: none;
         }
 
         .btn-primary:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 242, 254, 0.5);
         }
 
         .btn-outline {
-            background: rgba(255, 255, 255, 0.03);
+            background: transparent;
             border: 1px solid var(--border);
-            color: var(--text-main);
+            color: var(--primary);
         }
 
         .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(0, 242, 254, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
         }
 
-        /* Hero Specific */
+        /* Hero Section */
         .hero-content {
             text-align: center;
             max-width: 800px;
@@ -252,33 +302,65 @@
             padding: 0 20px;
         }
 
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+        }
+
+        .live-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.4); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
         .hero-content h1 {
-            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
             font-weight: 800;
-            line-height: 1.1;
+            line-height: 1.15;
             margin-bottom: 20px;
-            letter-spacing: -1px;
-            background: linear-gradient(180deg, #fff 30%, var(--text-muted) 100%);
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 20%, var(--text-muted) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero-content p {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 30px;
         }
 
-        /* Contact & Developer Styles */
+        /* Info Boxes */
         .info-box {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 32px;
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
             text-align: center;
+            backdrop-filter: blur(12px);
         }
 
         .info-box p {
@@ -289,8 +371,8 @@
 
         /* Footer */
         footer {
-            border-top: 1px solid var(--border);
-            background: rgba(3, 7, 18, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(5, 8, 20, 0.95);
             padding: 24px 20px;
             text-align: center;
             color: var(--text-muted);
@@ -298,8 +380,36 @@
         }
 
         footer span {
-            color: #fff;
+            color: var(--primary);
             font-weight: 600;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(5, 8, 20, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                padding: 15px 20px;
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .nav-tab {
+                width: 100%;
+                text-align: left;
+                padding: 12px 16px;
+            }
         }
     </style>
 </head>
@@ -308,13 +418,16 @@
     <div class="glow-blob blob-1"></div>
     <div class="glow-blob blob-2"></div>
 
-    <!-- Navigation Tabs -->
+    <!-- Navigation Bar -->
     <nav>
         <a href="#" class="brand" onclick="switchPage('home')">
             <div class="brand-logo">FX</div>
             <div class="brand-name">Foxry<span>HQ</span></div>
         </a>
-        <div class="nav-links">
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-links" id="navLinks">
             <button class="nav-tab active" onclick="switchPage('home')">Home</button>
             <button class="nav-tab" onclick="switchPage('bots')">Bots</button>
             <button class="nav-tab" onclick="switchPage('community')">Channel & Group</button>
@@ -327,6 +440,9 @@
     <!-- 1. HOME PAGE -->
     <div id="home" class="page-section active">
         <div class="hero-content">
+            <div class="live-badge">
+                <div class="live-dot"></div> Ecosystem Operational Online
+            </div>
             <h1>Next-Gen Telegram Bots Ecosystem</h1>
             <p>Welcome to Foxry HQ. High-performance music streaming, intelligent management systems, and developer tools built for speed and uptime.</p>
             <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
@@ -339,27 +455,27 @@
     <!-- 2. BOTS PAGE -->
     <div id="bots" class="page-section">
         <div class="section-header">
-            <h2>Our Bots</h2>
-            <p>Advanced Telegram automation built with Python and Golang.</p>
+            <h2>Our Telegram Bots</h2>
+            <p>Advanced automation built with Python, Pyrogram, and Golang.</p>
         </div>
         <div class="grid">
             <div class="card">
                 <div class="card-icon"><i class="fas fa-music"></i></div>
                 <h3>Music Streaming Bot</h3>
-                <p>High-fidelity audio streaming for group voice chats with minimal latency and smooth queue controls.</p>
-                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-outline">Learn More</a>
+                <p>High-fidelity audio streaming across group voice chats with minimal latency, smooth queues, and custom filters.</p>
+                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-outline" style="width: 100%;">View Updates</a>
             </div>
             <div class="card">
                 <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
                 <h3>Group Management Bot</h3>
-                <p>Secure your groups with automated moderation, anti-spam filters, and member tracking.</p>
-                <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-outline">Support Group</a>
+                <p>Advanced security, automated moderation, member tracking, and smart tools to keep active communities secure.</p>
+                <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-outline" style="width: 100%;">Support Group</a>
             </div>
             <div class="card">
                 <div class="card-icon"><i class="fab fa-github"></i></div>
                 <h3>GitHub Notification Bot</h3>
-                <p>Get real-time repository commits, push alerts, and CI/CD deployment logs straight to Telegram.</p>
-                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-outline">View Updates</a>
+                <p>Real-time repository tracking, push alerts, pull request logs, and deployment status directly in your channel.</p>
+                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-outline" style="width: 100%;">Learn More</a>
             </div>
         </div>
     </div>
@@ -367,21 +483,21 @@
     <!-- 3. CHANNEL & GROUP PAGE -->
     <div id="community" class="page-section">
         <div class="section-header">
-            <h2>Community & Updates</h2>
-            <p>Connect with other users and stay updated with the latest bot releases.</p>
+            <h2>Community & Ecosystem</h2>
+            <p>Stay connected with our official updates and support channels.</p>
         </div>
         <div class="grid">
             <div class="card" style="text-align: center;">
                 <div class="card-icon" style="margin: 0 auto 20px;"><i class="fab fa-telegram-plane"></i></div>
                 <h3>Update Channel</h3>
-                <p>Official broadcast channel for announcements, updates, and new features.</p>
-                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-primary">@FoxryHQ</a>
+                <p>Official broadcast channel for new bot releases, logs, and announcements.</p>
+                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-primary" style="width: 100%;">@FoxryHQ</a>
             </div>
             <div class="card" style="text-align: center;">
                 <div class="card-icon" style="margin: 0 auto 20px;"><i class="fas fa-comments"></i></div>
                 <h3>Support Group</h3>
-                <p>Join our interactive community group to ask questions, report bugs, and chat.</p>
-                <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-primary">@FoxryChat</a>
+                <p>Join our interactive community group to report bugs, chat, and get help.</p>
+                <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-primary" style="width: 100%;">@FoxryChat</a>
             </div>
         </div>
     </div>
@@ -390,12 +506,12 @@
     <div id="developer" class="page-section">
         <div class="section-header">
             <h2>Developer Profile</h2>
-            <p>The engineer behind the architecture and systems.</p>
+            <p>Engineered for high-speed performance and reliability.</p>
         </div>
         <div class="info-box">
             <div class="card-icon" style="margin: 0 auto 20px;"><i class="fas fa-code"></i></div>
-            <h3>Backend & Bot Developer</h3>
-            <p>Specialized in developing robust Telegram bots using Python (Pyrogram, Kurigram), Golang, and integrating databases like MongoDB with high-speed RAM caching and Vercel/Heroku deployments.</p>
+            <h3>Backend & Bot Architect</h3>
+            <p>Specialized in building robust Telegram bots using Python (Pyrogram, Kurigram), Golang, and integrating persistent MongoDB storage with RAM caching and cloud deployments.</p>
             <a href="https://github.com/" target="_blank" class="btn btn-outline"><i class="fab fa-github"></i> GitHub Profile</a>
         </div>
     </div>
@@ -404,11 +520,11 @@
     <div id="about" class="page-section">
         <div class="section-header">
             <h2>About Foxry HQ</h2>
-            <p>Our vision and mission for community automation.</p>
+            <p>The vision behind our automation ecosystem.</p>
         </div>
         <div class="info-box" style="text-align: left;">
-            <h3 style="color: #fff; margin-bottom: 12px;">Building Scalable Solutions</h3>
-            <p>Foxry HQ is an independent ecosystem dedicated to creating fast, reliable, and open-source tools for Telegram communities. From continuous music playback to security management and developer integrations, we aim to provide seamless digital experiences.</p>
+            <h3 style="font-family: 'Orbitron', sans-serif; color: #fff; margin-bottom: 12px;">Scalable Solutions</h3>
+            <p>Foxry HQ is a dedicated ecosystem creating fast, secure, and open-source automation tools for Telegram communities. From uninterrupted music streams to advanced group protection, we deliver seamless experiences.</p>
         </div>
     </div>
 
@@ -416,39 +532,48 @@
     <div id="contact" class="page-section">
         <div class="section-header">
             <h2>Get in Touch</h2>
-            <p>Reach out to us for support, partnerships, or inquiries.</p>
+            <p>Reach out for queries, support, or collaborations.</p>
         </div>
         <div class="info-box">
-            <p>The fastest way to reach us is through our official support group or channel on Telegram.</p>
+            <p>The fastest way to connect with us is through our official Telegram support group or channel.</p>
             <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-                <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-primary"><i class="fas fa-headset"></i> Open Support Chat</a>
-                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-outline"><i class="fab fa-telegram"></i> Visit Channel</a>
+                <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-primary"><i class="fas fa-headset"></i> Support Chat</a>
+                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-outline"><i class="fab fa-telegram"></i> Telegram Channel</a>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 <span>Foxry HQ</span>. All Rights Reserved.</p>
+        <p>&copy; 2026 <span>Foxry HQ</span>. Engineered for Excellence.</p>
     </footer>
 
-    <!-- Simple JS for Page Switching -->
+    <!-- JavaScript for Mobile Menu & Tabs -->
     <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('open');
+        }
+
         function switchPage(pageId) {
-            // Hide all sections
             const sections = document.querySelectorAll('.page-section');
             sections.forEach(sec => sec.classList.remove('active'));
 
-            // Remove active class from all tabs
             const tabs = document.querySelectorAll('.nav-tab');
             tabs.forEach(tab => tab.classList.remove('active'));
 
-            // Show target section
             document.getElementById(pageId).classList.add('active');
 
-            // Highlight corresponding tab
-            event.target.classList.add('active');
-            window.scrollTo(0, 0);
+            // Find matching tab and activate
+            tabs.forEach(tab => {
+                if(tab.getAttribute('onclick').includes(pageId)) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Close mobile menu if open
+            document.getElementById('navLinks').classList.remove('open');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 
