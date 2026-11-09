@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foxry HQ — Telegram Bots & Ecosystem</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Foxry HQ — Enterprise Telegram Ecosystem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg: #090d16;
-            --card-bg: #111827;
+            --bg: #050b14;
+            --surface: #0a1120;
+            --surface-card: rgba(13, 20, 38, 0.7);
             --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(59, 130, 246, 0.4);
             --primary: #3b82f6;
-            --primary-hover: #2563eb;
+            --primary-glow: rgba(59, 130, 246, 0.25);
             --accent: #06b6d4;
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
+            --success: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
 
         * {
@@ -32,256 +35,334 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* Top Header / Navbar */
+        /* Ambient Background Gradients */
+        .ambient-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.05));
+            filter: blur(140px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        .glow-1 { top: -100px; left: 10%; }
+        .glow-2 { top: 40% ; right: 5%; }
+
+        /* Enterprise Header */
         header {
-            background: rgba(17, 24, 39, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(5, 11, 20, 0.85);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 16px 20px;
+            padding: 18px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
+        .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
             color: #fff;
-            font-weight: 800;
-            font-size: 20px;
         }
 
-        .logo-badge {
-            width: 36px;
-            height: 36px;
+        .brand-emblem {
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 16px;
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-        }
-
-        .btn-tg {
-            background: #229ed9;
-            color: #fff;
-        }
-
-        .btn-tg:hover {
-            background: #1b85b8;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-main);
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--primary);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 60px 20px 40px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .trust-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            color: #60a5fa;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 4vw, 3.2rem);
-            font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-        }
-
-        .hero h1 span {
-            color: var(--primary);
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .stats-row {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-            padding: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-        }
-
-        .stat-item h3 {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .stat-item p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin: 0;
-        }
-
-        /* Main Container & Cards Grid */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto 60px;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(59, 130, 246, 0.4);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-        }
-
-        .card-icon {
-            width: 44px;
-            height: 44px;
-            background: rgba(59, 130, 246, 0.1);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary);
-            font-size: 18px;
+            font-weight: 800;
+            font-size: 16px;
+            color: #fff;
+            box-shadow: 0 0 20px var(--primary-glow);
         }
 
-        .tag {
-            background: rgba(6, 182, 212, 0.1);
-            color: var(--accent);
-            padding: 4px 10px;
-            border-radius: 6px;
+        .brand-title {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-title span {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 20px var(--primary-glow);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 900px;
+            margin: 60px auto 40px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .system-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            padding: 6px 14px;
+            border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 24px;
         }
 
-        .card h3 {
-            font-size: 1.2rem;
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -1.5px;
+            background: linear-gradient(180deg, #fff 30%, var(--text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 650px;
+            margin: 0 auto 36px;
+        }
+
+        /* Metric Grid Bar */
+        .metrics-bar {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .metric-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            text-align: left;
+        }
+
+        .metric-card .label {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-card .value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Ecosystem Grid */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto 80px;
+            padding: 0 30px;
+            width: 100%;
+        }
+
+        .section-heading {
+            margin-bottom: 30px;
+        }
+
+        .section-heading h2 {
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .section-heading p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        .status-pill {
+            font-size: 11px;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
             color: #fff;
         }
 
-        .card p {
+        .service-card p {
             color: var(--text-muted);
-            font-size: 0.93rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
         }
 
-        .features-list {
+        .spec-list {
             list-style: none;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             border-top: 1px solid var(--border);
-            padding-top: 16px;
+            padding-top: 20px;
         }
 
-        .features-list li {
+        .spec-list li {
             font-size: 0.88rem;
             color: var(--text-muted);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .features-list li i {
-            color: #10b981;
+        .spec-list li i {
+            color: var(--primary);
             font-size: 12px;
         }
 
-        /* Footer */
+        /* Enterprise Footer */
         footer {
-            background: var(--card-bg);
+            background: rgba(5, 11, 20, 0.95);
             border-top: 1px solid var(--border);
-            padding: 24px 20px;
+            padding: 30px 20px;
             text-align: center;
             color: var(--text-muted);
             font-size: 0.88rem;
@@ -291,113 +372,128 @@
             color: #fff;
             font-weight: 600;
         }
+
+        @media (max-width: 768px) {
+            .nav-container { padding: 15px 20px; }
+            .container { padding: 0 15px; }
+            .grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
     <!-- Header -->
     <header>
         <div class="nav-container">
-            <a href="#" class="logo">
-                <div class="logo-badge">FX</div>
-                FoxryHQ
+            <a href="#" class="brand">
+                <div class="brand-emblem">FX</div>
+                <div class="brand-title">Foxry<span>HQ</span></div>
             </a>
-            <div class="nav-buttons">
-                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-outline"><i class="fab fa-telegram-plane"></i> Channel</a>
-                <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-tg"><i class="fas fa-headset"></i> Support</a>
+            <div class="nav-cta">
+                <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-ghost">
+                    <i class="fab fa-telegram-plane"></i> Channel
+                </a>
+                <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-primary">
+                    <i class="fas fa-headset"></i> Support
+                </a>
             </div>
         </div>
     </header>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <main>
         <section class="hero">
-            <div class="trust-badge">
-                <i class="fas fa-shield-alt"></i> Trusted Telegram Automation Ecosystem
+            <div class="system-status">
+                <div class="status-dot"></div> ALL NODES OPERATIONAL (99.99%)
             </div>
-            <h1>High-Performance <span>Telegram Bots</span> & Infrastructure</h1>
-            <p>Explore our advanced suite of music streaming bots, group security management tools, and automated GitHub notification pipelines.</p>
-            
-            <div class="stats-row">
-                <div class="stat-item">
-                    <h3>99.9%</h3>
-                    <p>Uptime Guarantee</p>
-                </div>
-                <div class="stat-item">
-                    <h3>24/7</h3>
-                    <p>Active Support</p>
-                </div>
-                <div class="stat-item">
-                    <h3>Lightning</h3>
-                    <p>Fast Response Speed</p>
-                </div>
-            </div>
+            <h1>High-Performance <span>Telegram Infrastructure</span> & Automation</h1>
+            <p>Architected for scale. Providing robust music streaming clusters, automated group security frameworks, and real-time developer CI/CD pipelines.</p>
         </section>
 
-        <!-- Bots Grid / Plans Style -->
+        <!-- Metric Bar -->
+        <div class="metrics-bar">
+            <div class="metric-card">
+                <div class="label">Latency</div>
+                <div class="value">&lt; 45ms</div>
+            </div>
+            <div class="metric-card">
+                <div class="label">Architecture</div>
+                <div class="value">Async Python / Go</div>
+            </div>
+            <div class="metric-card">
+                <div class="label">Database</div>
+                <div class="value">MongoDB + RAM Cache</div>
+            </div>
+        </div>
+
+        <!-- Ecosystem Services Grid -->
         <div class="container">
-            <div class="section-title">
-                <i class="fas fa-server" style="color: var(--primary);"></i> Featured Bots & Services
+            <div class="section-heading">
+                <h2>Ecosystem Core Services</h2>
+                <p>Enterprise-grade modules built for heavy-duty community interaction.</p>
             </div>
 
             <div class="grid">
-                <!-- Music Bot Card -->
-                <div class="card">
+                <!-- Music Bot -->
+                <div class="service-card">
                     <div>
-                        <div class="card-header">
-                            <div class="card-icon"><i class="fas fa-music"></i></div>
-                            <span class="tag">Audio Streaming</span>
+                        <div class="card-top">
+                            <div class="service-icon"><i class="fas fa-music"></i></div>
+                            <span class="status-pill">ONLINE</span>
                         </div>
-                        <h3>Music Streaming Bot</h3>
-                        <p>High-fidelity audio streaming across group voice chats with zero lag and smooth queue handlers.</p>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check"></i> Uninterrupted 24/7 Playback</li>
-                            <li><i class="fas fa-check"></i> Advanced Audio Filters</li>
-                            <li><i class="fas fa-check"></i> Easy Queue Control</li>
+                        <h3>Music Streaming Suite</h3>
+                        <p>High-fidelity audio streaming pipelines engineered for group voice chats with minimal CPU usage and instantaneous queue response.</p>
+                        <ul class="spec-list">
+                            <li><i class="fas fa-check-circle"></i> Uninterrupted 24/7 Voice Chat Audio</li>
+                            <li><i class="fas fa-check-circle"></i> Dynamic Audio Equalizers & Filters</li>
+                            <li><i class="fas fa-check-circle"></i> Seamless Multi-User Queue Manager</li>
                         </ul>
                     </div>
-                    <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-tg" style="width: 100%; justify-content: center;">
-                        <i class="fab fa-telegram"></i> View Updates
+                    <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-ghost" style="width: 100%; justify-content: center;">
+                        <i class="fab fa-telegram"></i> Access Channel
                     </a>
                 </div>
 
-                <!-- Management Bot Card -->
-                <div class="card">
+                <!-- Management Bot -->
+                <div class="service-card">
                     <div>
-                        <div class="card-header">
-                            <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
-                            <span class="tag">Security</span>
+                        <div class="card-top">
+                            <div class="service-icon"><i class="fas fa-shield-halved"></i></div>
+                            <span class="status-pill">ACTIVE</span>
                         </div>
-                        <h3>Group Management Bot</h3>
-                        <p>Advanced community protection with automated moderation, anti-spam, and member tracking.</p>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check"></i> Instant Spam Filtering</li>
-                            <li><i class="fas fa-check"></i> Real-time Member Logs</li>
-                            <li><i class="fas fa-check"></i> Smart Administrative Tools</li>
+                        <h3>Group Management System</h3>
+                        <p>Advanced security modules designed to neutralize spam, track name/username modifications, and enforce automated group rules securely.</p>
+                        <ul class="spec-list">
+                            <li><i class="fas fa-check-circle"></i> Real-time Imposter & Spam Filtering</li>
+                            <li><i class="fas fa-check-circle"></i> Persistent MongoDB User Logging</li>
+                            <li><i class="fas fa-check-circle"></i> Automated Administrative Workflows</li>
                         </ul>
                     </div>
-                    <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-tg" style="width: 100%; justify-content: center;">
+                    <a href="https://t.me/FoxryChat" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;">
                         <i class="fas fa-comments"></i> Join Support Group
                     </a>
                 </div>
 
-                <!-- GitHub Notification Bot Card -->
-                <div class="card">
+                <!-- GitHub Notification Bot -->
+                <div class="service-card">
                     <div>
-                        <div class="card-header">
-                            <div class="card-icon"><i class="fab fa-github"></i></div>
-                            <span class="tag">Developer Tool</span>
+                        <div class="card-top">
+                            <div class="service-icon"><i class="fab fa-github"></i></div>
+                            <span class="status-pill">DEPLOYED</span>
                         </div>
-                        <h3>GitHub Notification Bot</h3>
-                        <p>Bridge your repositories straight to Telegram channels with instant push and CI/CD alerts.</p>
-                        <ul class="features-list">
-                            <li><i class="fas fa-check"></i> Real-time Commit Alerts</li>
-                            <li><i class="fas fa-check"></i> Pull Request Tracking</li>
-                            <li><i class="fas fa-check"></i> Deployment Status Logs</li>
+                        <h3>GitHub Notification Pipeline</h3>
+                        <p>Directly bridge your software repositories to Telegram channels with instantaneous push logs, pull request updates, and CI/CD status.</p>
+                        <ul class="spec-list">
+                            <li><i class="fas fa-check-circle"></i> Instant Commit & Push Alerts</li>
+                            <li><i class="fas fa-check-circle"></i> Automated CI/CD Workflow Logs</li>
+                            <li><i class="fas fa-check-circle"></i> Secure Webhook Integration</li>
                         </ul>
                     </div>
-                    <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-tg" style="width: 100%; justify-content: center;">
-                        <i class="fab fa-telegram"></i> Explore Channel
+                    <a href="https://t.me/FoxryHQ" target="_blank" class="btn btn-ghost" style="width: 100%; justify-content: center;">
+                        <i class="fab fa-telegram"></i> View Updates
                     </a>
                 </div>
             </div>
@@ -406,7 +502,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 <span>Foxry HQ</span>. Built for high-performance automation.</p>
+        <p>&copy; 2026 <span>Foxry HQ</span>. Built for high availability and performance.</p>
     </footer>
 
 </body>
