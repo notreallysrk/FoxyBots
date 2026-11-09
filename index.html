@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foxy — Built for Archon</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <title>Foxry HQ — Built for Archon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg: #07060b;
-            --sidebar-bg: #0b0914;
-            --card-bg: rgba(18, 14, 30, 0.75);
-            --border: rgba(147, 51, 234, 0.18);
-            --border-hover: rgba(147, 51, 234, 0.5);
-            --primary: #9333ea;
-            --primary-glow: rgba(147, 51, 234, 0.35);
-            --accent: #c084fc;
+            --bg: #09070f;
+            --sidebar-bg: #0e0b17;
+            --card-bg: #141022;
+            --border: rgba(147, 51, 234, 0.15);
+            --border-hover: rgba(147, 51, 234, 0.4);
+            --primary: #8b5cf6;
+            --primary-glow: rgba(139, 92, 246, 0.2);
+            --accent: #a855f7;
             --success: #10b981;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
         }
 
         * {
@@ -37,7 +37,7 @@
             position: relative;
         }
 
-        /* Animated Background Gradients & Orbs */
+        /* Subtle Background Animation */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -52,42 +52,42 @@
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(140px);
-            opacity: 0.25;
-            animation: floatOrb 12s ease-in-out infinite alternate;
+            filter: blur(120px);
+            opacity: 0.15;
+            animation: floatOrb 10s ease-in-out infinite alternate;
         }
 
         .orb-1 {
-            width: 450px;
-            height: 450px;
-            background: #9333ea;
-            top: -100px;
-            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: #8b5cf6;
+            top: -50px;
+            left: -50px;
         }
 
         .orb-2 {
-            width: 500px;
-            height: 500px;
+            width: 450px;
+            height: 450px;
             background: #6d28d9;
-            bottom: -150px;
-            right: -100px;
-            animation-delay: -6s;
+            bottom: -100px;
+            right: -50px;
+            animation-delay: -5s;
         }
 
         @keyframes floatOrb {
-            0% { transform: translateY(0px) scale(1); }
-            100% { transform: translateY(40px) scale(1.1); }
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(30px); }
         }
 
-        /* Sidebar Navigation (Desktop) */
+        /* Sidebar Navigation */
         aside {
-            width: 280px;
+            width: 260px;
             background: var(--sidebar-bg);
             border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 30px 20px;
+            padding: 25px 20px;
             height: 100vh;
             position: sticky;
             top: 0;
@@ -100,27 +100,26 @@
             gap: 12px;
             text-decoration: none;
             color: #fff;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
+            cursor: pointer;
         }
 
         .brand-emblem {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            font-size: 20px;
+            font-weight: 700;
+            font-size: 18px;
             color: #fff;
-            box-shadow: 0 0 20px var(--primary-glow);
         }
 
         .brand-title {
-            font-size: 17px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
+            font-size: 16px;
+            font-weight: 700;
             line-height: 1.2;
         }
 
@@ -128,66 +127,60 @@
             display: block;
             font-size: 11px;
             color: var(--text-muted);
-            font-weight: 500;
-            letter-spacing: 0.5px;
+            font-weight: 400;
         }
 
         .nav-menu {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             flex-grow: 1;
         }
 
         .nav-item {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             background: transparent;
             border: 1px solid transparent;
             color: var(--text-muted);
-            padding: 12px 16px;
-            border-radius: 12px;
+            padding: 10px 14px;
+            border-radius: 10px;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             text-align: left;
             width: 100%;
         }
 
         .nav-item i {
-            font-size: 16px;
-            width: 20px;
+            font-size: 15px;
+            width: 18px;
             text-align: center;
         }
 
         .nav-item:hover, .nav-item.active {
-            background: rgba(147, 51, 234, 0.12);
+            background: rgba(139, 92, 246, 0.08);
             color: var(--accent);
             border-color: var(--border);
         }
 
-        .nav-item.active {
-            box-shadow: 0 0 20px rgba(147, 51, 234, 0.15);
-        }
-
         .sidebar-footer-box {
-            background: rgba(147, 51, 234, 0.05);
+            background: rgba(139, 92, 246, 0.04);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 16px;
-            text-align: left;
+            border-radius: 12px;
+            padding: 14px;
         }
 
         .sidebar-footer-box .secure-tag {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 12px;
-            font-weight: 700;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 600;
             color: #c084fc;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .sidebar-footer-box p {
@@ -205,7 +198,7 @@
             width: 100%;
             background: var(--sidebar-bg);
             border-bottom: 1px solid var(--border);
-            padding: 15px 20px;
+            padding: 12px 16px;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
@@ -215,25 +208,25 @@
             background: none;
             border: none;
             color: #fff;
-            font-size: 22px;
+            font-size: 20px;
             cursor: pointer;
         }
 
-        /* Main Content Area */
+        /* Main Content */
         main {
             flex-grow: 1;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 50px 60px;
+            padding: 40px 50px;
             overflow-y: auto;
         }
 
         .page-section {
             display: none;
-            animation: fadeIn 0.4s ease forwards;
-            max-width: 1100px;
+            animation: fadeIn 0.3s ease forwards;
+            max-width: 1050px;
             margin: 0 auto;
             width: 100%;
         }
@@ -243,38 +236,38 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hero / Home Layout (Matching Screenshot) */
+        /* Home Hero Grid */
         .hero-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
+            gap: 30px;
             align-items: center;
         }
 
         .hero-content .secure-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(16, 185, 129, 0.1);
+            gap: 6px;
+            background: rgba(16, 185, 129, 0.08);
             border: 1px solid rgba(16, 185, 129, 0.2);
             color: var(--success);
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .hero-content h1 {
-            font-size: clamp(2.5rem, 4vw, 3.8rem);
-            font-weight: 800;
+            font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+            font-weight: 700;
             line-height: 1.15;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
+            margin-bottom: 16px;
+            color: #fff;
         }
 
         .hero-content h1 span {
@@ -282,125 +275,113 @@
         }
 
         .hero-content p {
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: var(--text-muted);
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
 
         .hero-cards-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1px); /* fallback */
             display: flex;
-            gap: 16px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
         .mini-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 18px;
+            border-radius: 12px;
+            padding: 15px;
             flex: 1;
-            backdrop-filter: blur(10px);
             transition: all 0.2s;
+            cursor: pointer;
         }
 
         .mini-card:hover {
             border-color: var(--border-hover);
-            transform: translateY(-2px);
         }
 
         .mini-card i {
-            font-size: 20px;
+            font-size: 18px;
             color: var(--accent);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .mini-card h4 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2px;
             color: #fff;
         }
 
         .mini-card span {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-muted);
         }
 
         .btn-main {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            gap: 8px;
+            background: var(--primary);
             color: #fff;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
             text-decoration: none;
-            box-shadow: 0 4px 25px var(--primary-glow);
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             border: none;
             cursor: pointer;
         }
 
         .btn-main:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(147, 51, 234, 0.5);
+            background: #7c3aed;
         }
 
-        /* Holographic Shield Graphic Area */
+        /* Shield Graphic Area */
         .shield-graphic-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-            height: 380px;
-            background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, transparent 70%);
-            border-radius: 20px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
+            border-radius: 16px;
             border: 1px dashed var(--border);
         }
 
         .shield-icon-glow {
-            font-size: 110px;
+            font-size: 90px;
             color: var(--accent);
-            filter: drop-shadow(0 0 30px var(--primary));
-            animation: pulseShield 3s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.4));
         }
 
-        @keyframes pulseShield {
-            0% { transform: scale(1); filter: drop-shadow(0 0 20px var(--primary)); }
-            100% { transform: scale(1.05); filter: drop-shadow(0 0 40px var(--accent)); }
-        }
-
-        /* Features / Bottom Bar */
+        /* Features Bar */
         .features-bar {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 50px;
-            padding-top: 30px;
+            gap: 16px;
+            margin-top: 40px;
+            padding-top: 24px;
             border-top: 1px solid var(--border);
         }
 
         .feature-item {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
 
         .feature-item i {
-            font-size: 22px;
+            font-size: 18px;
             color: var(--accent);
         }
 
         .feature-item h5 {
-            font-size: 0.9rem;
-            font-weight: 700;
+            font-size: 0.85rem;
+            font-weight: 600;
             color: #fff;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
 
         .feature-item p {
@@ -408,94 +389,88 @@
             color: var(--text-muted);
         }
 
-        /* Section Headings & Cards for Other Pages */
+        /* Section Headings & Cards */
         .section-heading {
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
         .section-heading h2 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            margin-bottom: 8px;
-            color: #fff;
-        }
-
-        .section-heading p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 30px;
-            backdrop-filter: blur(12px);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--border-hover);
-            box-shadow: 0 12px 30px rgba(147, 51, 234, 0.2);
-        }
-
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(147, 51, 234, 0.1);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            font-size: 1.25rem;
+            font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 6px;
             color: #fff;
         }
 
-        .card .username {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
+        .section-heading p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .card-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--accent);
-            margin-bottom: 14px;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #fff;
+        }
+
+        .card .username {
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 12px;
             display: inline-block;
         }
 
         .card p {
             color: var(--text-muted);
-            font-size: 0.93rem;
-            line-height: 1.6;
-            margin-bottom: 24px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
         }
 
         /* Footer */
         footer {
-            margin-top: 50px;
-            padding-top: 20px;
+            margin-top: 40px;
+            padding-top: 16px;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: var(--text-muted);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         footer span {
@@ -507,10 +482,10 @@
         @media (max-width: 900px) {
             aside { display: none; }
             .mobile-header { display: flex; }
-            main { padding: 90px 20px 40px; }
-            .hero-grid { grid-template-columns: 1fr; gap: 30px; }
-            .features-bar { grid-template-columns: 1fr; gap: 16px; }
-            .shield-graphic-container { height: 260px; }
+            main { padding: 80px 16px 30px; }
+            .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+            .features-bar { grid-template-columns: 1fr; gap: 14px; }
+            .shield-graphic-container { height: 220px; }
         }
     </style>
 </head>
@@ -525,8 +500,8 @@
     <!-- Mobile Header -->
     <div class="mobile-header">
         <a class="brand" style="margin: 0;" onclick="switchPage('home')">
-            <div class="brand-emblem" style="width: 36px; height: 36px; font-size: 16px;">FX</div>
-            <div class="brand-title" style="font-size: 15px;">Foxry HQ <span>Built for Archon</span></div>
+            <div class="brand-emblem" style="width: 32px; height: 32px; font-size: 14px;">FX</div>
+            <div class="brand-title" style="font-size: 14px;">Foxry HQ <span>Built for Archon</span></div>
         </a>
         <button class="mobile-toggle" onclick="toggleSidebar()">
             <i class="fas fa-bars"></i>
@@ -564,9 +539,9 @@
             <div class="secure-tag">
                 <i class="fas fa-shield-check"></i> 100% Secure
             </div>
-            <p>We never store your credentials, tokens, or sessions safely.</p>
-            <div style="margin-top: 15px; font-size: 11px; color: var(--text-muted);">
-                &copy; 2026 Built for Archon<br>All rights reserved.
+            <p>We never store your credentials or sessions.</p>
+            <div style="margin-top: 10px; font-size: 10px; color: var(--text-muted);">
+                &copy; 2026 Built for Archon[span_1](start_span)[span_1](end_span)
             </div>
         </div>
     </aside>
@@ -578,26 +553,26 @@
             <div class="hero-grid">
                 <div class="hero-content">
                     <div class="secure-badge">
-                        <i class="fas fa-shield-alt"></i> Secure. Private. Trusted.
+                        <i class="fas fa-shield-alt"></i> Secure. Private. Trusted.[span_2](start_span)[span_2](end_span)
                     </div>
-                    <h1>Generate Your Own <span>Telegram Ecosystem</span></h1>
-                    <p>Create Pyrogram or Telethon automation bots, manage community channels, and track GitHub pipelines safely and securely. Built for Archon.</p>
+                    <h1>Generate Your Own <span>Telegram Session</span>[span_3](start_span)[span_3](end_span)</h1>
+                    <p>Create Pyrogram or Telethon session strings safely and securely. We never store your credentials or sessions[span_4](start_span)[span_4](end_span). Built for Archon.</p>
                     
                     <div class="hero-cards-row">
-                        <div class="mini-card" onclick="switchPage('bots')" style="cursor: pointer;">
+                        <div class="mini-card" onclick="switchPage('bots')">
                             <i class="fas fa-music"></i>
-                            <h4>Music & Guard</h4>
-                            <span>For Telegram Clients</span>
+                            <h4>Pyrogram Session</h4>
+                            <span>For Pyrogram Clients[span_5](start_span)[span_5](end_span)</span>
                         </div>
-                        <div class="mini-card" onclick="switchPage('community')" style="cursor: pointer;">
+                        <div class="mini-card" onclick="switchPage('community')">
                             <i class="fas fa-comments"></i>
-                            <h4>FoxryChat</h4>
-                            <span>Active Support</span>
+                            <h4>Telethon Session</h4>
+                            <span>For Telethon Clients[span_6](start_span)[span_6](end_span)</span>
                         </div>
                     </div>
 
                     <button class="btn-main" onclick="switchPage('bots')">
-                        Get Started <i class="fas fa-arrow-right"></i>
+                        Get Started <i class="fas fa-arrow-right"></i>[span_7](start_span)[span_7](end_span)
                     </button>
                 </div>
 
@@ -612,22 +587,22 @@
                 <div class="feature-item">
                     <i class="fas fa-lock"></i>
                     <div>
-                        <h5>End-to-End Secure</h5>
-                        <p>Encrypted in transit and execution</p>
+                        <h5>End-to-End Secure[span_8](start_span)[span_8](end_span)</h5>
+                        <p>Encrypted in transit[span_9](start_span)[span_9](end_span)</p>
                     </div>
                 </div>
                 <div class="feature-item">
                     <i class="fas fa-database"></i>
                     <div>
-                        <h5>Zero Data Storage</h5>
-                        <p>We don't store any sensitive info</p>
+                        <h5>Zero Data Storage[span_10](start_span)[span_10](end_span)</h5>
+                        <p>We don't store anything[span_11](start_span)[span_11](end_span)</p>
                     </div>
                 </div>
                 <div class="feature-item">
                     <i class="fas fa-bolt"></i>
                     <div>
-                        <h5>Blazing Fast</h5>
-                        <p>Instant deployment & response</p>
+                        <h5>Blazing Fast[span_12](start_span)[span_12](end_span)</h5>
+                        <p>Instant generation[span_13](start_span)[span_13](end_span)</p>
                     </div>
                 </div>
             </div>
@@ -645,7 +620,7 @@
                         <div class="card-icon"><i class="fas fa-music"></i></div>
                         <h3>Kavya Music Bot</h3>
                         <span class="username">@KavyaMusicBot</span>
-                        <p>High-fidelity audio streaming across group voice chats with minimal latency, smooth queues, and custom filters.</p>
+                        <p>High-fidelity audio streaming across group voice chats with minimal latency and smooth queues.</p>
                     </div>
                     <a href="https://t.me/KavyaMusicBot" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 10px;">
                         <i class="fab fa-telegram"></i> Open Bot
@@ -657,7 +632,7 @@
                         <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
                         <h3>Foxy Guard Bot</h3>
                         <span class="username">@FoxyGuardBot</span>
-                        <p>Advanced security management bot designed to neutralize spam, track name modifications, and secure group chats.</p>
+                        <p>Advanced security management bot designed to neutralize spam and secure group chats.</p>
                     </div>
                     <a href="https://t.me/FoxyGuardBot" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 10px;">
                         <i class="fab fa-telegram"></i> Open Bot
@@ -669,7 +644,7 @@
                         <div class="card-icon"><i class="fab fa-github"></i></div>
                         <h3>Foxy Git Bot</h3>
                         <span class="username">@FoxyGitBot</span>
-                        <p>GitHub notification bot that bridges your code repositories straight to Telegram with push and CI/CD logs.</p>
+                        <p>GitHub notification bot that bridges your code repositories straight to Telegram.</p>
                     </div>
                     <a href="https://t.me/FoxyGitBot" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 10px;">
                         <i class="fab fa-telegram"></i> Open Bot
@@ -684,13 +659,13 @@
                 <h2>Updates & Support Group</h2>
                 <p>Stay connected with announcements, updates, and community assistance.</p>
             </div>
-            <div class="grid" style="max-width: 800px; margin: 0 auto;">
+            <div class="grid" style="max-width: 750px; margin: 0 auto;">
                 <div class="card" style="text-align: center;">
                     <div>
-                        <div class="card-icon" style="margin: 0 auto 20px;"><i class="fab fa-telegram-plane"></i></div>
+                        <div class="card-icon" style="margin: 0 auto 16px;"><i class="fab fa-telegram-plane"></i></div>
                         <h3>FoxryHQ Update Channel</h3>
                         <span class="username">@FoxryHQ</span>
-                        <p>Official broadcast channel for announcements, new bot releases, and logs.</p>
+                        <p>Official broadcast channel for announcements and new bot releases.</p>
                     </div>
                     <a href="https://t.me/FoxryHQ" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 10px;">
                         <i class="fab fa-telegram"></i> Join Channel
@@ -699,10 +674,10 @@
 
                 <div class="card" style="text-align: center;">
                     <div>
-                        <div class="card-icon" style="margin: 0 auto 20px;"><i class="fas fa-comments"></i></div>
+                        <div class="card-icon" style="margin: 0 auto 16px;"><i class="fas fa-comments"></i></div>
                         <h3>FoxryChat Support Group</h3>
                         <span class="username">@FoxryChat</span>
-                        <p>Join our interactive support community to ask questions, report bugs, and chat.</p>
+                        <p>Join our interactive support community to ask questions and report bugs.</p>
                     </div>
                     <a href="https://t.me/FoxryChat" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 10px;">
                         <i class="fas fa-headset"></i> Join Support Group
@@ -715,7 +690,7 @@
         <div id="developers" class="page-section">
             <div class="section-heading">
                 <h2>Core Developers</h2>
-                <p>The engineering minds behind Foxry HQ architecture — Built for Archon.</p>
+                <p>The engineering minds behind Foxry HQ — Built for Archon[span_14](start_span)[span_14](end_span).</p>
             </div>
             <div class="grid">
                 <div class="card">
@@ -723,10 +698,10 @@
                         <div class="card-icon"><i class="fas fa-code"></i></div>
                         <h3>𝘈𝘠𝘜𝘚𝘏</h3>
                         <span class="username">@MightyAyush</span>
-                        <p>Core developer handling backend bot architecture, database optimization, and high-speed streaming modules.</p>
+                        <p>Backend bot architecture, database optimization, and high-speed streaming modules.</p>
                     </div>
-                    <a href="https://t.me/MightyAyush" target="_blank" class="card-icon" style="width: 100%; margin: 20px 0 0 0; background: rgba(255,255,255,0.03); text-decoration: none; color: #fff; font-size: 14px; font-weight: 600;">
-                        <i class="fab fa-telegram" style="margin: 0; font-size: 16px;"></i> Contact
+                    <a href="https://t.me/MightyAyush" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 9px; background: rgba(255,255,255,0.05); border: 1px solid var(--border);">
+                        <i class="fab fa-telegram"></i> Contact
                     </a>
                 </div>
 
@@ -735,10 +710,10 @@
                         <div class="card-icon"><i class="fas fa-terminal"></i></div>
                         <h3>⏤͟‌𝐀ʀᴄʜᴏɴ</h3>
                         <span class="username">@ArchonCEO</span>
-                        <p>System architect managing cloud deployments, infrastructure security, and overall platform scalability.</p>
+                        <p>Cloud deployments, infrastructure security, and overall platform scalability.</p>
                     </div>
-                    <a href="https://t.me/ArchonCEO" target="_blank" class="card-icon" style="width: 100%; margin: 20px 0 0 0; background: rgba(255,255,255,0.03); text-decoration: none; color: #fff; font-size: 14px; font-weight: 600;">
-                        <i class="fab fa-telegram" style="margin: 0; font-size: 16px;"></i> Contact
+                    <a href="https://t.me/ArchonCEO" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 9px; background: rgba(255,255,255,0.05); border: 1px solid var(--border);">
+                        <i class="fab fa-telegram"></i> Contact
                     </a>
                 </div>
 
@@ -747,10 +722,10 @@
                         <div class="card-icon"><i class="fas fa-microchip"></i></div>
                         <h3>༎ࠫ🫧⛧‌ٖٖٖٖٖٖٜٖٖٖٖ 𝑹⌾𝒀𝜜𝑳...</h3>
                         <span class="username">@II_ROYALENTRY1128_II</span>
-                        <p>Full-stack developer contributing to feature integration, automated scripts, and interactive bot commands.</p>
+                        <p>Feature integration, automated scripts, and interactive bot command execution.</p>
                     </div>
-                    <a href="https://t.me/II_ROYALENTRY1128_II" target="_blank" class="card-icon" style="width: 100%; margin: 20px 0 0 0; background: rgba(255,255,255,0.03); text-decoration: none; color: #fff; font-size: 14px; font-weight: 600;">
-                        <i class="fab fa-telegram" style="margin: 0; font-size: 16px;"></i> Contact
+                    <a href="https://t.me/II_ROYALENTRY1128_II" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 9px; background: rgba(255,255,255,0.05); border: 1px solid var(--border);">
+                        <i class="fab fa-telegram"></i> Contact
                     </a>
                 </div>
             </div>
@@ -762,21 +737,21 @@
                 <h2>About Foxry HQ</h2>
                 <p>Our vision and mission for secure Telegram automation ecosystems.</p>
             </div>
-            <div class="card" style="max-width: 800px; margin: 0 auto; text-align: left;">
-                <h3 style="color: #fff; margin-bottom: 14px;">Scalable Architecture & Security</h3>
-                <p style="margin-bottom: 16px;">Foxry HQ is an independent ecosystem dedicated to creating fast, reliable, and secure tools for Telegram communities. Built under the supervision of Archon infrastructure, from uninterrupted music streams to group security management and developer integrations.</p>
-                <p>We maintain strict zero-data storage policies to ensure all user sessions and credentials remain fully protected and private.</p>
+            <div class="card" style="max-width: 750px; margin: 0 auto; text-align: left;">
+                <h3 style="color: #fff; margin-bottom: 12px;">Scalable Architecture & Security</h3>
+                <p style="margin-bottom: 14px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Foxry HQ is an independent ecosystem dedicated to creating fast, reliable, and secure tools for Telegram communities. Built under the supervision of Archon infrastructure, from uninterrupted music streams to group security management.</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">We maintain strict zero-data storage policies to ensure all user sessions and credentials remain fully protected and private[span_15](start_span)[span_15](end_span).</p>
             </div>
         </div>
 
         <!-- Footer -->
         <footer>
-            <p>&copy; 2026 <span>Foxy</span>. Built for Archon.</p>
-            <p style="font-size: 12px;">Secure. Private. Trusted.</p>
+            <p>&copy; 2026 <span>Foxry HQ</span>. Built for Archon[span_16](start_span)[span_16](end_span).</p>
+            <p style="font-size: 11px;">Secure. Private. Trusted[span_17](start_span)[span_17](end_span).</p>
         </footer>
     </main>
 
-    <!-- JavaScript for Navigation and Mobile Menu -->
+    <!-- JavaScript -->
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
@@ -785,10 +760,10 @@
             } else {
                 sidebar.style.display = 'flex';
                 sidebar.style.position = 'fixed';
-                sidebar.style.top = '65px';
+                sidebar.style.top = '60px';
                 sidebar.style.left = '0';
                 sidebar.style.width = '100%';
-                sidebar.style.height = 'calc(100vh - 65px)';
+                sidebar.style.height = 'calc(100vh - 60px)';
                 sidebar.style.zIndex = '999';
             }
         }
@@ -805,7 +780,6 @@
                 }
             });
 
-            // Close mobile sidebar if open
             if(window.innerWidth <= 900) {
                 document.getElementById('sidebar').style.display = 'none';
             }
