@@ -13,13 +13,12 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f0fdf4',
-                            500: '#10b981',
-                            600: '#059669',
-                            900: '#064e3b',
-                            dark: '#0a0f1d',
-                            card: '#111827',
-                            border: '#1f2937'
+                            400: '#a855f7',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            cyan: '#06b6d4',
+                            dark: '#05050a',
+                            card: '#0f0e17'
                         }
                     }
                 }
@@ -32,7 +31,7 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #030712;
+            background-color: #05050a;
             color: #f3f4f6;
             overflow-x: hidden;
         }
@@ -40,114 +39,122 @@
             font-family: 'Fira Code', monospace;
         }
         .glass-panel {
-            background: rgba(17, 24, 39, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: linear-gradient(135deg, rgba(15, 14, 23, 0.85) 0%, rgba(20, 18, 35, 0.75) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.15);
         }
         .glass-panel-hover:hover {
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
         }
-        .glow-effect {
+        .glow-violet {
             position: absolute;
-            width: 500px;
-            height: 500px;
+            width: 450px;
+            height: 450px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(3, 7, 18, 0) 70%);
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(5, 5, 10, 0) 70%);
             z-index: -1;
             pointer-events: none;
         }
-        /* Custom Scrollbar */
+        .glow-cyan {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(5, 5, 10, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #030712;
+            background: #05050a;
         }
         ::-webkit-scrollbar-thumb {
-            background: #1f2937;
+            background: #1f1b2c;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #10b981;
+            background: #8b5cf6;
         }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-100 relative selection:bg-emerald-500 selection:text-white">
+<body class="bg-gray-950 text-gray-100 relative selection:bg-purple-500 selection:text-white">
 
     <!-- Background Glows -->
-    <div class="glow-effect top-0 left-1/4 -translate-x-1/2"></div>
-    <div class="glow-effect top-1/2 right-10"></div>
+    <div class="glow-violet top-0 left-1/4 -translate-x-1/2"></div>
+    <div class="glow-cyan top-1/3 right-10"></div>
 
     <!-- Command Palette Modal (Ctrl + K) -->
-    <div id="command-palette" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl border border-emerald-500/30 animate-in fade-in zoom-in duration-200">
-            <div class="p-4 border-b border-gray-800 flex items-center gap-3">
-                <i class="fa-solid fa-search text-emerald-400"></i>
-                <input type="text" id="cmd-input" placeholder="Type a command or search sections (e.g., 'bots', 'github', 'contact')..." class="bg-transparent border-none outline-none w-full text-gray-100 placeholder-gray-500 font-medium">
-                <span class="text-xs bg-gray-800 text-gray-400 px-2 py-1 rounded border border-gray-700">ESC</span>
+    <div id="command-palette" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl border border-purple-500/40 animate-in fade-in zoom-in duration-200">
+            <div class="p-4 border-b border-gray-800/80 flex items-center gap-3">
+                <i class="fa-solid fa-search text-purple-400"></i>
+                <input type="text" id="cmd-input" placeholder="Type a command or search sections..." class="bg-transparent border-none outline-none w-full text-gray-100 placeholder-gray-500 font-medium">
+                <span class="text-xs bg-gray-900 text-gray-400 px-2 py-1 rounded border border-gray-800">ESC</span>
             </div>
             <div class="p-2 max-h-72 overflow-y-auto space-y-1" id="cmd-list">
-                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-emerald-500/10 cursor-pointer flex items-center justify-between group transition" onclick="scrollToSection('hero'); closeCommandPalette();">
-                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-emerald-400"><i class="fa-solid fa-house w-5"></i> Home / Hero</div>
+                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-purple-500/10 cursor-pointer flex items-center justify-between group transition" onclick="scrollToSection('hero'); closeCommandPalette();">
+                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-purple-400"><i class="fa-solid fa-house w-5"></i> Home / Hero</div>
                     <span class="text-xs text-gray-600 font-mono">#home</span>
                 </div>
-                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-emerald-500/10 cursor-pointer flex items-center justify-between group transition" onclick="scrollToSection('bots'); closeCommandPalette();">
-                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-emerald-400"><i class="fa-solid fa-robot w-5"></i> Telegram Bots & Projects</div>
+                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-purple-500/10 cursor-pointer flex items-center justify-between group transition" onclick="scrollToSection('bots'); closeCommandPalette();">
+                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-purple-400"><i class="fa-solid fa-robot w-5"></i> Telegram Bots & Projects</div>
                     <span class="text-xs text-gray-600 font-mono">#bots</span>
                 </div>
-                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-emerald-500/10 cursor-pointer flex items-center justify-between group transition" onclick="scrollToSection('ecosystem'); closeCommandPalette();">
-                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-emerald-400"><i class="fa-solid fa-bullhorn w-5"></i> Foxry Ecosystem (@FoxryHQ)</div>
+                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-purple-500/10 cursor-pointer flex items-center justify-between group transition" onclick="scrollToSection('ecosystem'); closeCommandPalette();">
+                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-purple-400"><i class="fa-solid fa-bullhorn w-5"></i> Foxry Ecosystem (@FoxryHQ)</div>
                     <span class="text-xs text-gray-600 font-mono">#ecosystem</span>
                 </div>
-                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-emerald-500/10 cursor-pointer flex items-center justify-between group transition" onclick="scrollToSection('terminal'); closeCommandPalette();">
-                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-emerald-400"><i class="fa-solid fa-terminal w-5"></i> Interactive CLI Terminal</div>
+                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-purple-500/10 cursor-pointer flex items-center justify-between group transition" onclick="scrollToSection('terminal'); closeCommandPalette();">
+                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-purple-400"><i class="fa-solid fa-terminal w-5"></i> Interactive CLI Terminal</div>
                     <span class="text-xs text-gray-600 font-mono">#cli</span>
                 </div>
-                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-emerald-500/10 cursor-pointer flex items-center justify-between group transition" onclick="window.open('https://t.me/FoxryHQ', '_blank'); closeCommandPalette();">
-                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-emerald-400"><i class="fa-brands fa-telegram w-5"></i> Open Telegram Channel</div>
-                    <span class="text-xs text-emerald-500 font-mono">External</span>
+                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-purple-500/10 cursor-pointer flex items-center justify-between group transition" onclick="window.open('https://t.me/FoxryHQ', '_blank'); closeCommandPalette();">
+                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-purple-400"><i class="fa-brands fa-telegram w-5"></i> Open Telegram Channel</div>
+                    <span class="text-xs text-purple-400 font-mono">External</span>
                 </div>
             </div>
-            <div class="px-4 py-2.5 bg-gray-900/80 border-t border-gray-800 text-xs text-gray-400 flex justify-between items-center">
+            <div class="px-4 py-2.5 bg-gray-900/90 border-t border-gray-800 text-xs text-gray-400 flex justify-between items-center">
                 <span>Navigate with arrows or click</span>
-                <span class="text-emerald-400 font-semibold">ArchonOS v3.2</span>
+                <span class="text-purple-400 font-semibold">ArchonOS v4.0 Ultra</span>
             </div>
         </div>
     </div>
 
     <!-- Navigation Bar -->
-    <header class="fixed top-0 left-0 right-0 z-40 glass-panel border-b border-gray-800/60">
+    <header class="fixed top-0 left-0 right-0 z-40 glass-panel border-b border-purple-500/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="scrollToSection('hero')">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-700 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-gray-950 font-black text-xl">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-purple-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-purple-500/25 text-gray-950 font-black text-xl">
                     A
                 </div>
                 <div>
-                    <span class="text-lg font-bold tracking-tight text-white">Archon<span class="text-emerald-400">.dev</span></span>
-                    <span class="block text-[10px] text-emerald-400/80 font-mono tracking-widest uppercase">Telegram Architect</span>
+                    <span class="text-lg font-bold tracking-tight text-white">Archon<span class="text-purple-400">.dev</span></span>
+                    <span class="block text-[10px] text-cyan-400 font-mono tracking-widest uppercase">Telegram Architect</span>
                 </div>
             </div>
 
             <!-- Desktop Nav Links -->
             <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300">
-                <a href="#hero" class="hover:text-emerald-400 transition">Home</a>
-                <a href="#status" class="hover:text-emerald-400 transition">Status</a>
-                <a href="#bots" class="hover:text-emerald-400 transition">Bots & Projects</a>
-                <a href="#ecosystem" class="hover:text-emerald-400 transition">Ecosystem</a>
-                <a href="#terminal" class="hover:text-emerald-400 transition">CLI Terminal</a>
-                <a href="#skills" class="hover:text-emerald-400 transition">Tech Stack</a>
+                <a href="#hero" class="hover:text-purple-400 transition">Home</a>
+                <a href="#status" class="hover:text-purple-400 transition">Status</a>
+                <a href="#bots" class="hover:text-purple-400 transition">Bots & Projects</a>
+                <a href="#ecosystem" class="hover:text-purple-400 transition">Ecosystem</a>
+                <a href="#terminal" class="hover:text-purple-400 transition">CLI Terminal</a>
+                <a href="#skills" class="hover:text-purple-400 transition">Tech Stack</a>
             </nav>
 
             <!-- Actions -->
             <div class="flex items-center gap-3">
-                <button onclick="toggleCommandPalette()" class="hidden sm:flex items-center gap-2 bg-gray-900 border border-gray-800 hover:border-emerald-500/50 px-3 py-2 rounded-xl text-xs text-gray-400 transition shadow-inner">
+                <button onclick="toggleCommandPalette()" class="hidden sm:flex items-center gap-2 bg-gray-900/90 border border-gray-800 hover:border-purple-500/50 px-3 py-2 rounded-xl text-xs text-gray-400 transition shadow-inner">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <span>Quick Search</span>
+                    <span>Search</span>
                     <kbd class="bg-gray-800 px-1.5 py-0.5 rounded text-[10px] text-gray-300 font-mono">Ctrl K</kbd>
                 </button>
-                <a href="https://t.me/FoxryHQ" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-bold px-4 py-2.5 rounded-xl text-sm transition shadow-lg shadow-emerald-500/25 flex items-center gap-2">
+                <a href="https://t.me/FoxryHQ" target="_blank" class="bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-bold px-4 py-2.5 rounded-xl text-sm transition shadow-lg shadow-purple-500/25 flex items-center gap-2">
                     <i class="fa-brands fa-telegram"></i>
                     <span>Join @FoxryHQ</span>
                 </a>
@@ -158,13 +165,13 @@
         </div>
 
         <!-- Mobile Menu Drawer -->
-        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-gray-800 px-6 py-4 space-y-3">
-            <a href="#hero" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-emerald-400 font-medium py-1">Home</a>
-            <a href="#status" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-emerald-400 font-medium py-1">Live Status</a>
-            <a href="#bots" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-emerald-400 font-medium py-1">Bots & Projects</a>
-            <a href="#ecosystem" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-emerald-400 font-medium py-1">Foxry Ecosystem</a>
-            <a href="#terminal" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-emerald-400 font-medium py-1">CLI Terminal</a>
-            <a href="#skills" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-emerald-400 font-medium py-1">Tech Stack</a>
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-purple-500/10 px-6 py-4 space-y-3">
+            <a href="#hero" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-purple-400 font-medium py-1">Home</a>
+            <a href="#status" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-purple-400 font-medium py-1">Live Status</a>
+            <a href="#bots" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-purple-400 font-medium py-1">Bots & Projects</a>
+            <a href="#ecosystem" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-purple-400 font-medium py-1">Foxry Ecosystem</a>
+            <a href="#terminal" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-purple-400 font-medium py-1">CLI Terminal</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-purple-400 font-medium py-1">Tech Stack</a>
         </div>
     </header>
 
@@ -174,23 +181,23 @@
             
             <!-- Hero Text -->
             <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
                     Available for Telegram Bot Architecture & Scalable Backend
                 </div>
                 <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
-                    Architecting Next-Gen <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">Telegram Ecosystems</span>
+                    Architecting Next-Gen <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">Telegram Ecosystems</span>
                 </h1>
                 <p class="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto lg:mx-0 font-normal">
                     Hi, I'm <strong class="text-white">Archon</strong>. Full-stack developer specializing in high-performance Telegram music bots (`FoxyMusic`), group moderation tools (`Sangmata`), GitHub automated webhooks, and resilient cloud deployments.
                 </p>
                 <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
-                    <a href="https://t.me/FoxryHQ" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-bold px-6 py-3.5 rounded-xl transition shadow-lg shadow-emerald-500/25 flex items-center gap-3">
+                    <a href="https://t.me/FoxryHQ" target="_blank" class="bg-gradient-to-r from-purple-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-bold px-6 py-3.5 rounded-xl transition shadow-lg shadow-purple-500/25 flex items-center gap-3">
                         <i class="fa-brands fa-telegram text-lg"></i>
                         <span>Explore @FoxryHQ</span>
                     </a>
-                    <a href="https://t.me/FoxryChat" target="_blank" class="glass-panel hover:bg-gray-800/80 text-gray-200 font-semibold px-6 py-3.5 rounded-xl transition flex items-center gap-3 border border-gray-700">
-                        <i class="fa-solid fa-comments text-emerald-400"></i>
+                    <a href="https://t.me/FoxryChat" target="_blank" class="glass-panel hover:bg-purple-500/10 text-gray-200 font-semibold px-6 py-3.5 rounded-xl transition flex items-center gap-3 border border-purple-500/20">
+                        <i class="fa-solid fa-comments text-cyan-400"></i>
                         <span>Join @FoxryChat</span>
                     </a>
                 </div>
@@ -214,29 +221,29 @@
 
             <!-- Hero Visual / Live Card -->
             <div class="lg:col-span-5">
-                <div class="glass-panel p-6 rounded-3xl relative shadow-2xl border border-emerald-500/20 glass-panel-hover transition duration-300">
-                    <div class="absolute -top-3 right-6 bg-emerald-500 text-gray-950 text-[10px] font-mono font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">
+                <div class="glass-panel p-6 rounded-3xl relative shadow-2xl border border-purple-500/30 glass-panel-hover transition duration-300">
+                    <div class="absolute -top-3 right-6 bg-gradient-to-r from-purple-600 to-cyan-500 text-white text-[10px] font-mono font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">
                         Live Telemetry
                     </div>
                     
                     <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl font-bold">
                             <i class="fa-solid fa-server"></i>
                         </div>
                         <div>
                             <h4 class="font-bold text-white text-lg">Foxry Core Daemon</h4>
-                            <p class="text-xs text-emerald-400 font-mono">Cluster ID: #FX-904X</p>
+                            <p class="text-xs text-cyan-400 font-mono">Cluster ID: #FX-904X</p>
                         </div>
                     </div>
 
                     <div class="space-y-4 font-mono text-xs">
                         <div class="bg-gray-900/90 p-3.5 rounded-xl border border-gray-800 flex items-center justify-between">
                             <span class="text-gray-400">FoxyMusic Streamer</span>
-                            <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Active (18ms)</span>
+                            <span class="text-cyan-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Active (16ms)</span>
                         </div>
                         <div class="bg-gray-900/90 p-3.5 rounded-xl border border-gray-800 flex items-center justify-between">
                             <span class="text-gray-400">Sangmata Imposter DB</span>
-                            <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Synced (2ms)</span>
+                            <span class="text-purple-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span> Synced (2ms)</span>
                         </div>
                         <div class="bg-gray-900/90 p-3.5 rounded-xl border border-gray-800 flex items-center justify-between">
                             <span class="text-gray-400">GitHub Webhook Dispatch</span>
@@ -246,7 +253,7 @@
 
                     <div class="mt-6 pt-4 border-t border-gray-800 flex items-center justify-between text-xs text-gray-400">
                         <span>Environment: Heroku / Vercel</span>
-                        <span class="text-emerald-400 font-mono font-semibold">Secure SSL</span>
+                        <span class="text-cyan-400 font-mono font-semibold">Secure SSL</span>
                     </div>
                 </div>
             </div>
@@ -255,19 +262,19 @@
     </section>
 
     <!-- Live Status Banner -->
-    <section id="status" class="py-10 border-y border-gray-800 bg-gray-900/30">
+    <section id="status" class="py-10 border-y border-purple-500/10 bg-gray-900/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div class="flex items-center gap-4">
-                    <div class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></div>
+                    <div class="w-3 h-3 rounded-full bg-cyan-400 animate-ping"></div>
                     <div>
-                        <h4 class="font-bold text-white text-sm">Foxry Network Status: <span class="text-emerald-400 font-mono">All Systems Operational</span></h4>
+                        <h4 class="font-bold text-white text-sm">Foxry Network Status: <span class="text-cyan-400 font-mono">All Systems Operational</span></h4>
                         <p class="text-xs text-gray-400">Real-time health check across music nodes, database clusters, and webhooks.</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
-                    <span class="bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-xl text-xs font-mono text-gray-300">Uptime: 99.98%</span>
-                    <span class="bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-xl text-xs font-mono text-emerald-400">Latency: 16ms</span>
+                    <span class="bg-gray-900 border border-purple-500/20 px-3 py-1.5 rounded-xl text-xs font-mono text-gray-300">Uptime: 99.98%</span>
+                    <span class="bg-gray-900 border border-purple-500/20 px-3 py-1.5 rounded-xl text-xs font-mono text-cyan-400">Latency: 14ms</span>
                 </div>
             </div>
         </div>
@@ -277,7 +284,7 @@
     <section id="bots" class="py-24 px-4 relative">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <span class="text-emerald-400 text-xs font-mono uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Featured Telegram Bots & Projects</span>
+                <span class="text-purple-400 text-xs font-mono uppercase tracking-widest bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">Featured Telegram Bots & Projects</span>
                 <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Engineered for High Scale & Speed</h2>
                 <p class="text-gray-400 text-base sm:text-lg">Discover the core bots and automated infrastructure built and maintained under the Foxry brand.</p>
             </div>
@@ -288,10 +295,10 @@
                 <div class="glass-panel p-8 rounded-3xl relative flex flex-col justify-between glass-panel-hover transition duration-300">
                     <div>
                         <div class="flex items-center justify-between mb-6">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl">
                                 <i class="fa-solid fa-music"></i>
                             </div>
-                            <span class="bg-emerald-500/10 text-emerald-400 font-mono text-xs px-3 py-1 rounded-full border border-emerald-500/20">Pyrogram / Async</span>
+                            <span class="bg-purple-500/10 text-purple-400 font-mono text-xs px-3 py-1 rounded-full border border-purple-500/20">Pyrogram / Async</span>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-3">FoxyMusic Streamer</h3>
                         <p class="text-gray-400 text-sm mb-6 leading-relaxed">
@@ -304,8 +311,8 @@
                         </div>
                     </div>
                     <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
-                        <span class="text-xs text-emerald-400 font-mono flex items-center gap-1"><i class="fa-solid fa-circle text-[8px]"></i> Active Production</span>
-                        <a href="https://t.me/FoxryHQ" target="_blank" class="text-xs font-semibold text-white hover:text-emerald-400 transition flex items-center gap-1">Channel <i class="fa-solid fa-arrow-right"></i></a>
+                        <span class="text-xs text-cyan-400 font-mono flex items-center gap-1"><i class="fa-solid fa-circle text-[8px]"></i> Active Production</span>
+                        <a href="https://t.me/FoxryHQ" target="_blank" class="text-xs font-semibold text-white hover:text-purple-400 transition flex items-center gap-1">Channel <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
 
@@ -313,10 +320,10 @@
                 <div class="glass-panel p-8 rounded-3xl relative flex flex-col justify-between glass-panel-hover transition duration-300">
                     <div>
                         <div class="flex items-center justify-between mb-6">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl">
                                 <i class="fa-solid fa-shield-halved"></i>
                             </div>
-                            <span class="bg-emerald-500/10 text-emerald-400 font-mono text-xs px-3 py-1 rounded-full border border-emerald-500/20">RAM Caching</span>
+                            <span class="bg-purple-500/10 text-purple-400 font-mono text-xs px-3 py-1 rounded-full border border-purple-500/20">RAM Caching</span>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-3">Sangmata Imposter Guard</h3>
                         <p class="text-gray-400 text-sm mb-6 leading-relaxed">
@@ -329,8 +336,8 @@
                         </div>
                     </div>
                     <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
-                        <span class="text-xs text-emerald-400 font-mono flex items-center gap-1"><i class="fa-solid fa-circle text-[8px]"></i> Real-time Sync</span>
-                        <a href="https://t.me/FoxryChat" target="_blank" class="text-xs font-semibold text-white hover:text-emerald-400 transition flex items-center gap-1">Support Group <i class="fa-solid fa-arrow-right"></i></a>
+                        <span class="text-xs text-purple-400 font-mono flex items-center gap-1"><i class="fa-solid fa-circle text-[8px]"></i> Real-time Sync</span>
+                        <a href="https://t.me/FoxryChat" target="_blank" class="text-xs font-semibold text-white hover:text-purple-400 transition flex items-center gap-1">Support Group <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
 
@@ -338,10 +345,10 @@
                 <div class="glass-panel p-8 rounded-3xl relative flex flex-col justify-between glass-panel-hover transition duration-300">
                     <div>
                         <div class="flex items-center justify-between mb-6">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl">
                                 <i class="fa-solid fa-code-branch"></i>
                             </div>
-                            <span class="bg-emerald-500/10 text-emerald-400 font-mono text-xs px-3 py-1 rounded-full border border-emerald-500/20">Webhook CI</span>
+                            <span class="bg-purple-500/10 text-purple-400 font-mono text-xs px-3 py-1 rounded-full border border-purple-500/20">Webhook CI</span>
                         </div>
                         <h3 class="text-xl font-bold text-white mb-3">GitHub Notification Hub</h3>
                         <p class="text-gray-400 text-sm mb-6 leading-relaxed">
@@ -354,8 +361,8 @@
                         </div>
                     </div>
                     <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
-                        <span class="text-xs text-emerald-400 font-mono flex items-center gap-1"><i class="fa-solid fa-circle text-[8px]"></i> Automated CI</span>
-                        <a href="https://github.com" target="_blank" class="text-xs font-semibold text-white hover:text-emerald-400 transition flex items-center gap-1">GitHub Repos <i class="fa-solid fa-arrow-right"></i></a>
+                        <span class="text-xs text-cyan-400 font-mono flex items-center gap-1"><i class="fa-solid fa-circle text-[8px]"></i> Automated CI</span>
+                        <a href="https://github.com" target="_blank" class="text-xs font-semibold text-white hover:text-purple-400 transition flex items-center gap-1">GitHub Repos <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
 
@@ -364,10 +371,10 @@
     </section>
 
     <!-- Foxry Ecosystem Hub -->
-    <section id="ecosystem" class="py-24 px-4 bg-gray-900/20 border-y border-gray-800/60 relative">
+    <section id="ecosystem" class="py-24 px-4 bg-gray-900/20 border-y border-purple-500/10 relative">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div class="space-y-6">
-                <span class="text-emerald-400 text-xs font-mono uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Community Hub</span>
+                <span class="text-purple-400 text-xs font-mono uppercase tracking-widest bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">Community Hub</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">The Foxry Ecosystem</h2>
                 <p class="text-gray-400 text-base leading-relaxed">
                     A vibrant community built around open-source development, Telegram bot management, and high-performance cloud tools. Join the update channel for latest releases or hop into the support group for direct assistance.
@@ -375,7 +382,7 @@
                 <div class="space-y-4 pt-2">
                     <div class="glass-panel p-4 rounded-2xl flex items-center justify-between">
                         <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
                                 <i class="fa-brands fa-telegram text-lg"></i>
                             </div>
                             <div>
@@ -383,12 +390,12 @@
                                 <p class="text-xs text-gray-400 font-mono">@FoxryHQ</p>
                             </div>
                         </div>
-                        <a href="https://t.me/FoxryHQ" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-bold px-4 py-2 rounded-xl text-xs transition">Join Channel</a>
+                        <a href="https://t.me/FoxryHQ" target="_blank" class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-4 py-2 rounded-xl text-xs transition">Join Channel</a>
                     </div>
 
                     <div class="glass-panel p-4 rounded-2xl flex items-center justify-between">
                         <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
                                 <i class="fa-solid fa-comments text-lg"></i>
                             </div>
                             <div>
@@ -396,31 +403,31 @@
                                 <p class="text-xs text-gray-400 font-mono">@FoxryChat</p>
                             </div>
                         </div>
-                        <a href="https://t.me/FoxryChat" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-bold px-4 py-2 rounded-xl text-xs transition">Join Group</a>
+                        <a href="https://t.me/FoxryChat" target="_blank" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold px-4 py-2 rounded-xl text-xs transition">Join Group</a>
                     </div>
                 </div>
             </div>
 
-            <div class="glass-panel p-8 rounded-3xl border border-emerald-500/20 shadow-2xl">
+            <div class="glass-panel p-8 rounded-3xl border border-purple-500/30 shadow-2xl">
                 <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
-                    <i class="fa-solid fa-terminal text-emerald-400"></i>
+                    <i class="fa-solid fa-terminal text-purple-400"></i>
                     <span>Ecosystem Features</span>
                 </h3>
                 <ul class="space-y-4 text-sm text-gray-300">
                     <li class="flex items-start gap-3">
-                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                        <i class="fa-solid fa-check text-purple-400 mt-1"></i>
                         <span><strong>Clone Bot Architecture:</strong> Easily deploy custom clones of music and management bots using Heroku workers.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                        <i class="fa-solid fa-check text-purple-400 mt-1"></i>
                         <span><strong>Encrypted Security:</strong> Utilization of Fernet encryption and CyberChef 32-byte Base64 keys for robust session storage.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                        <i class="fa-solid fa-check text-purple-400 mt-1"></i>
                         <span><strong>Lightning Fast MongoDB:</strong> Persistent storage backed by motor.motor_asyncio and optimized RAM caching.</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                        <i class="fa-solid fa-check text-purple-400 mt-1"></i>
                         <span><strong>Vercel & Heroku Deployment:</strong> Seamless automated pipelines with Docker CI workflows and CodeQL scanning.</span>
                     </li>
                 </ul>
@@ -432,28 +439,28 @@
     <section id="terminal" class="py-24 px-4">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-12 space-y-3">
-                <span class="text-emerald-400 text-xs font-mono uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Interactive CLI</span>
+                <span class="text-purple-400 text-xs font-mono uppercase tracking-widest bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">Interactive CLI</span>
                 <h2 class="text-3xl font-extrabold text-white">ArchonOS Terminal</h2>
-                <p class="text-gray-400 text-sm">Type commands below to interact with the system shell (e.g., <code class="text-emerald-400 font-mono">help</code>, <code class="text-emerald-400 font-mono">bots</code>, <code class="text-emerald-400 font-mono">status</code>, <code class="text-emerald-400 font-mono">clear</code>).</p>
+                <p class="text-gray-400 text-sm">Type commands below to interact with the system shell (e.g., <code class="text-purple-400 font-mono">help</code>, <code class="text-purple-400 font-mono">bots</code>, <code class="text-purple-400 font-mono">status</code>, <code class="text-purple-400 font-mono">clear</code>).</p>
             </div>
 
             <!-- Terminal Window -->
-            <div class="glass-panel rounded-2xl overflow-hidden border border-emerald-500/30 shadow-2xl">
+            <div class="glass-panel rounded-2xl overflow-hidden border border-purple-500/40 shadow-2xl">
                 <!-- Terminal Header -->
                 <div class="bg-gray-900/90 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
                     <div class="flex items-center gap-2">
                         <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
                         <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
-                        <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-purple-500 inline-block"></span>
                         <span class="ml-3 text-xs font-mono text-gray-400">archon@foxry-core:~</span>
                     </div>
-                    <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">BASH</span>
+                    <span class="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">BASH</span>
                 </div>
 
                 <!-- Terminal Body -->
                 <div id="terminal-body" class="p-6 font-mono text-xs sm:text-sm h-80 overflow-y-auto space-y-3 text-gray-300">
                     <div>
-                        <p class="text-emerald-400">Welcome to ArchonOS v3.2.0 (x86_64-foxry-linux-gnu)</p>
+                        <p class="text-purple-400">Welcome to ArchonOS v4.0.0 (x86_64-foxry-linux-gnu)</p>
                         <p class="text-gray-500">Type <span class="text-white font-bold">help</span> to view available system commands.</p>
                         <p class="text-gray-500 mb-4">--------------------------------------------------</p>
                     </div>
@@ -461,7 +468,7 @@
 
                 <!-- Terminal Input Form -->
                 <form id="terminal-form" onsubmit="handleTerminalCommand(event)" class="bg-gray-900/90 px-4 py-3 border-t border-gray-800 flex items-center gap-3">
-                    <span class="text-emerald-400 font-mono font-bold">archon@foxry:~$</span>
+                    <span class="text-purple-400 font-mono font-bold">archon@foxry:~$</span>
                     <input type="text" id="terminal-input" autocomplete="off" placeholder="type a command..." class="bg-transparent border-none outline-none w-full font-mono text-gray-100 text-sm placeholder-gray-600">
                 </form>
             </div>
@@ -469,10 +476,10 @@
     </section>
 
     <!-- Tech Stack / Skills Section -->
-    <section id="skills" class="py-24 px-4 bg-gray-900/20 border-t border-gray-800/60">
+    <section id="skills" class="py-24 px-4 bg-gray-900/20 border-t border-purple-500/10">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <span class="text-emerald-400 text-xs font-mono uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Tech Stack</span>
+                <span class="text-purple-400 text-xs font-mono uppercase tracking-widest bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">Tech Stack</span>
                 <h2 class="text-3xl font-extrabold text-white">Core Technologies & Tools</h2>
                 <p class="text-gray-400 text-sm">Built using industry standard asynchronous Python frameworks, Golang, databases, and secure cloud platforms.</p>
             </div>
@@ -480,37 +487,37 @@
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
                 
                 <div class="glass-panel p-6 rounded-2xl text-center space-y-3 glass-panel-hover transition">
-                    <div class="text-3xl text-emerald-400"><i class="fa-brands fa-python"></i></div>
+                    <div class="text-3xl text-purple-400"><i class="fa-brands fa-python"></i></div>
                     <h4 class="font-bold text-white text-sm">Python</h4>
                     <p class="text-[11px] text-gray-400">Pyrogram / Kurigram</p>
                 </div>
 
                 <div class="glass-panel p-6 rounded-2xl text-center space-y-3 glass-panel-hover transition">
-                    <div class="text-3xl text-emerald-400"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="text-3xl text-cyan-400"><i class="fa-solid fa-bolt"></i></div>
                     <h4 class="font-bold text-white text-sm">Golang</h4>
                     <p class="text-[11px] text-gray-400">High-speed bots</p>
                 </div>
 
                 <div class="glass-panel p-6 rounded-2xl text-center space-y-3 glass-panel-hover transition">
-                    <div class="text-3xl text-emerald-400"><i class="fa-solid fa-database"></i></div>
+                    <div class="text-3xl text-purple-400"><i class="fa-solid fa-database"></i></div>
                     <h4 class="font-bold text-white text-sm">MongoDB</h4>
                     <p class="text-[11px] text-gray-400">motor_asyncio</p>
                 </div>
 
                 <div class="glass-panel p-6 rounded-2xl text-center space-y-3 glass-panel-hover transition">
-                    <div class="text-3xl text-emerald-400"><i class="fa-solid fa-cloud"></i></div>
+                    <div class="text-3xl text-cyan-400"><i class="fa-solid fa-cloud"></i></div>
                     <h4 class="font-bold text-white text-sm">Heroku & Vercel</h4>
                     <p class="text-[11px] text-gray-400">Cloud Infrastructure</p>
                 </div>
 
                 <div class="glass-panel p-6 rounded-2xl text-center space-y-3 glass-panel-hover transition">
-                    <div class="text-3xl text-emerald-400"><i class="fa-solid fa-shield-cat"></i></div>
+                    <div class="text-3xl text-purple-400"><i class="fa-solid fa-shield-cat"></i></div>
                     <h4 class="font-bold text-white text-sm">Fernet Encryption</h4>
                     <p class="text-[11px] text-gray-400">CyberChef Keys</p>
                 </div>
 
                 <div class="glass-panel p-6 rounded-2xl text-center space-y-3 glass-panel-hover transition">
-                    <div class="text-3xl text-emerald-400"><i class="fa-brands fa-github"></i></div>
+                    <div class="text-3xl text-cyan-400"><i class="fa-brands fa-github"></i></div>
                     <h4 class="font-bold text-white text-sm">Docker CI</h4>
                     <p class="text-[11px] text-gray-400">CodeQL Security</p>
                 </div>
@@ -520,24 +527,23 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-gray-800 bg-gray-950 text-center text-xs text-gray-500">
+    <footer class="py-12 border-t border-purple-500/10 bg-gray-950 text-center text-xs text-gray-500">
         <div class="max-w-7xl mx-auto px-4 space-y-4">
             <div class="flex items-center justify-center gap-2">
-                <span class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-gray-950 font-black">A</span>
-                <span class="text-white font-bold text-sm">Archon <span class="text-emerald-400">| Foxry Ecosystem</span></span>
+                <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-cyan-400 flex items-center justify-center text-gray-950 font-black">A</span>
+                <span class="text-white font-bold text-sm">Archon <span class="text-purple-400">| Foxry Ecosystem</span></span>
             </div>
             <p>Designed and built with precision. All rights reserved © 2026.</p>
             <div class="flex justify-center gap-6 pt-2">
-                <a href="https://t.me/FoxryHQ" target="_blank" class="hover:text-emerald-400 transition"><i class="fa-brands fa-telegram text-base"></i> Telegram Channel</a>
-                <a href="https://t.me/FoxryChat" target="_blank" class="hover:text-emerald-400 transition"><i class="fa-solid fa-comments text-base"></i> Support Group</a>
-                <a href="https://github.com" target="_blank" class="hover:text-emerald-400 transition"><i class="fa-brands fa-github text-base"></i> GitHub</a>
+                <a href="https://t.me/FoxryHQ" target="_blank" class="hover:text-purple-400 transition"><i class="fa-brands fa-telegram text-base"></i> Telegram Channel</a>
+                <a href="https://t.me/FoxryChat" target="_blank" class="hover:text-purple-400 transition"><i class="fa-solid fa-comments text-base"></i> Support Group</a>
+                <a href="https://github.com" target="_blank" class="hover:text-purple-400 transition"><i class="fa-brands fa-github text-base"></i> GitHub</a>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript for Interactivity -->
     <script>
-        // Smooth Scroll helper
         function scrollToSection(id) {
             const el = document.getElementById(id);
             if (el) {
@@ -545,7 +551,6 @@
             }
         }
 
-        // Mobile Menu Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('menu-icon');
@@ -557,7 +562,6 @@
             }
         }
 
-        // Command Palette (Ctrl + K)
         const cmdPalette = document.getElementById('command-palette');
         const cmdInput = document.getElementById('cmd-input');
 
@@ -591,7 +595,6 @@
             if (e.target === cmdPalette) closeCommandPalette();
         });
 
-        // Interactive Terminal Logic
         const terminalBody = document.getElementById('terminal-body');
         const terminalInput = document.getElementById('terminal-input');
 
@@ -599,7 +602,7 @@
             'help': "Available commands:\n - bio: Display architect profile\n - bots: List active Telegram bots\n - status: Check Foxry cluster telemetry\n - ecosystem: Show @FoxryHQ and @FoxryChat\n - github: View GitHub repositories & CI\n - clear: Clear terminal output",
             'bio': "Archon: Full-Stack Developer & Telegram Bot Architect specializing in Python, Pyrogram, Kurigram, and Golang backend systems.",
             'bots': "Active Bots:\n 1. FoxyMusic (Streamer & Voice Chat Bot)\n 2. Sangmata Imposter Tracker\n 3. GitHub Notification Webhook Bot",
-            'status': "System Status: 99.9% Uptime | Latency: 16ms | MongoDB Connected | Heroku Workers Online",
+            'status': "System Status: 99.9% Uptime | Latency: 14ms | MongoDB Connected | Heroku Workers Online",
             'ecosystem': "Foxry Ecosystem:\n - Update Channel: @FoxryHQ\n - Support Group: @FoxryChat",
             'github': "GitHub Repositories: SurFlow (Docker CI & CodeQL), YariMusic, and automated bot architectures."
         };
@@ -609,22 +612,21 @@
             const cmd = terminalInput.value.trim().toLowerCase();
             if (!cmd) return;
 
-            // Echo user command
             const userLine = document.createElement('div');
-            userLine.innerHTML = `<span class="text-emerald-400">archon@foxry:~$</span> <span class="text-white">${escapeHtml(terminalInput.value)}</span>`;
+            userLine.innerHTML = `<span class="text-purple-400">archon@foxry:~$</span> <span class="text-white">${escapeHtml(terminalInput.value)}</span>`;
             terminalBody.appendChild(userLine);
 
             if (cmd === 'clear') {
                 terminalBody.innerHTML = `
                     <div>
-                        <p class="text-emerald-400">Welcome to ArchonOS v3.2.0 (x86_64-foxry-linux-gnu)</p>
+                        <p class="text-purple-400">Welcome to ArchonOS v4.0.0 (x86_64-foxry-linux-gnu)</p>
                         <p class="text-gray-500">Type <span class="text-white font-bold">help</span> to view available system commands.</p>
                         <p class="text-gray-500 mb-4">--------------------------------------------------</p>
                     </div>
                 `;
             } else if (terminalResponses[cmd]) {
                 const resLine = document.createElement('div');
-                resLine.className = "text-gray-300 whitespace-pre-line pl-4 border-l-2 border-emerald-500/40 my-1";
+                resLine.className = "text-gray-300 whitespace-pre-line pl-4 border-l-2 border-purple-500/40 my-1";
                 resLine.textContent = terminalResponses[cmd];
                 terminalBody.appendChild(resLine);
             } else {
