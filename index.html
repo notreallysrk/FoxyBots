@@ -1,337 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080711">
-  <meta name="description" content="Foxy Network — a universe of creative Telegram bots, community and digital projects.">
-  <title>Foxy Network — Beyond Ordinary</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg:#080711; --bg2:#0d0b18; --panel:rgba(20,17,34,.76); --panel2:#151226;
-      --ink:#f7f3ff; --muted:#aaa4bb; --soft:#777087; --violet:#a77aff; --pink:#ff83bd;
-      --cyan:#8de8ed; --line:rgba(222,207,255,.12); --glow:rgba(167,122,255,.3);
-      --max:1200px; --ease:cubic-bezier(.2,.8,.2,1);
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth;scroll-padding-top:90px}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope, sans-serif;overflow-x:hidden;line-height:1.65}
-    body:before{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(ellipse at 12% 9%,rgba(115,73,205,.18),transparent 34%),radial-gradient(ellipse at 87% 27%,rgba(211,77,151,.12),transparent 31%),radial-gradient(ellipse at 50% 100%,rgba(58,96,157,.1),transparent 35%)}
-    body:after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.13;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.23'/%3E%3C/svg%3E")}
-    a{color:inherit;text-decoration:none}button{font:inherit}::selection{background:#b58cff;color:#10091d}
-    .wrap{width:min(var(--max),calc(100% - 48px));margin:auto}
-    #particles{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.58}
-    .pointer-glow{position:fixed;left:0;top:0;width:360px;height:360px;border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle,rgba(155,105,255,.075),transparent 68%);transform:translate(-50%,-50%)}
-    .progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--violet),var(--pink),var(--cyan));z-index:100}
-    .header{position:fixed;top:0;left:0;right:0;z-index:50;border-bottom:1px solid transparent;transition:.35s var(--ease)}
-    .header.scrolled{background:rgba(8,7,17,.78);backdrop-filter:blur(20px);border-color:var(--line)}
-    .nav{height:82px;display:flex;align-items:center;justify-content:space-between;gap:25px}
-    .brand{display:flex;align-items:center;gap:12px;font:700 18px "Space Grotesk";letter-spacing:-.5px}
-    .brand-mark{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(140deg,#b38aff,#ed83bd);box-shadow:0 7px 28px rgba(164,112,255,.28);position:relative;overflow:hidden}
-    .brand-mark:after{content:"";position:absolute;inset:-40%;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.55),transparent 60%);transform:translateX(-100%) rotate(15deg);animation:shine 5s infinite}
-    .brand-mark svg{width:27px;position:relative;z-index:1}
-    .brand .network{color:#c5a5ff}
-    .navlinks{display:flex;align-items:center;gap:30px;color:#b7b0c7;font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
-    .navlinks a{position:relative;transition:.2s}
-    .navlinks a:after{content:"";position:absolute;left:0;bottom:-9px;width:0;height:1px;background:linear-gradient(90deg,var(--violet),var(--pink));transition:.3s}
-    .navlinks a:hover{color:white}.navlinks a:hover:after{width:100%}
-    .nav-right{display:flex;align-items:center;gap:12px}
-    .nav-join,.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid transparent;border-radius:12px;padding:12px 17px;font-size:12px;font-weight:800;letter-spacing:.25px;transition:.3s var(--ease);cursor:pointer}
-    .nav-join,.primary{color:#160d24;background:linear-gradient(110deg,#c6a5ff,#ff9acb);box-shadow:0 8px 30px rgba(167,122,255,.16)}
-    .nav-join:hover,.primary:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(167,122,255,.3)}
-    .menu{display:none;width:43px;height:43px;border:1px solid var(--line);border-radius:12px;background:#171326;color:white;font-size:20px}
-    .hero{min-height:810px;display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:30px;padding:140px 0 95px;position:relative}
-    .hero-copy{position:relative;z-index:2}
-    .eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(182,146,255,.24);background:rgba(167,122,255,.075);padding:8px 13px;border-radius:100px;color:#d6c3ff;font:500 10px "DM Mono";letter-spacing:1.3px;text-transform:uppercase}
-    .live-dot{width:7px;height:7px;border-radius:50%;background:#9cf2c4;box-shadow:0 0 12px #9cf2c4;animation:pulse 1.8s infinite}
-    h1,h2,h3{font-family:"Space Grotesk";margin:0;line-height:1.08;letter-spacing:-1.5px}
-    h1{font-size:clamp(55px,7.3vw,91px);font-weight:700;margin:25px 0 22px;max-width:720px}
-    .gradient{background:linear-gradient(105deg,#d5baff 3%,#a88aff 42%,#ff9bc8 86%);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .hero-desc{max-width:540px;color:#aaa4ba;font-size:15px;line-height:1.9;margin:0 0 30px}
-    .actions{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{padding:14px 19px;border-radius:13px}
-    .secondary{border-color:var(--line);background:rgba(255,255,255,.035);color:#eee9fa}
-    .secondary:hover{background:rgba(255,255,255,.09);border-color:rgba(198,165,255,.35);transform:translateY(-3px)}
-    .micro{display:flex;align-items:center;gap:12px;color:#777187;font:10px "DM Mono";letter-spacing:.8px;text-transform:uppercase;margin-top:29px}
-    .micro:before{content:"";width:28px;height:1px;background:linear-gradient(90deg,var(--violet),transparent)}
-    .hero-stage{min-height:530px;display:grid;place-items:center;position:relative;perspective:900px}
-    .stage-grid{position:absolute;width:530px;height:530px;border-radius:50%;background:repeating-radial-gradient(circle,rgba(197,164,255,.11) 0 1px,transparent 1px 48px);mask-image:radial-gradient(circle,#000 10%,transparent 72%);animation:rotate 80s linear infinite}
-    .halo{position:absolute;width:370px;height:370px;border-radius:50%;background:radial-gradient(circle,rgba(158,102,255,.25),rgba(234,113,180,.08) 52%,transparent 72%);filter:blur(12px);animation:breathe 5s ease-in-out infinite}
-    .ring{position:absolute;width:440px;height:440px;border:1px solid rgba(198,165,255,.23);border-radius:50%;transform:rotateX(67deg) rotateZ(-25deg);animation:orbit 16s linear infinite}
-    .ring.r2{width:365px;height:365px;border-color:rgba(255,139,198,.25);transform:rotateX(67deg) rotateZ(45deg);animation-direction:reverse;animation-duration:21s}
-    .ring:before{content:"";position:absolute;top:8%;left:18%;width:9px;height:9px;background:var(--pink);border-radius:50%;box-shadow:0 0 18px var(--pink)}
-    .logo-shell{width:300px;height:330px;display:grid;place-items:center;position:relative;z-index:2;border-radius:46% 46% 39% 39%;background:linear-gradient(145deg,rgba(35,27,57,.94),rgba(13,11,24,.95));border:1px solid rgba(219,199,255,.22);box-shadow:0 35px 100px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.15);transform:rotateY(-10deg) rotateX(5deg);animation:float 6s ease-in-out infinite}
-    .logo-shell:before{content:"";position:absolute;inset:11px;border:1px solid rgba(255,255,255,.08);border-radius:inherit}
-    .logo-shell:after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.075),transparent 52%);pointer-events:none}
-    .fox{width:82%;filter:drop-shadow(0 14px 28px rgba(188,136,255,.28));position:relative;z-index:1}
-    .float-chip{position:absolute;z-index:4;padding:11px 14px;border:1px solid rgba(218,201,255,.15);background:rgba(20,17,34,.85);backdrop-filter:blur(15px);border-radius:13px;box-shadow:0 12px 35px rgba(0,0,0,.3);font:10px "DM Mono";letter-spacing:.4px;color:#e4d9fa}
-    .chip-a{top:82px;left:-3px;animation:float 5s ease-in-out infinite}
-    .chip-b{bottom:79px;right:-8px;animation:float 6s ease-in-out -2s infinite}
-    .chip-c{top:47%;right:-42px;color:#b8eff0;animation:float 7s ease-in-out -1s infinite}
-    .scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;color:#777187;font:9px "DM Mono";letter-spacing:1.8px;text-transform:uppercase}
-    .scroll-cue i{display:block;width:1px;height:28px;background:linear-gradient(var(--violet),transparent);animation:scrollline 1.8s infinite}
-    .ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.018);overflow:hidden}
-    .ticker-track{display:flex;width:max-content;animation:marquee 32s linear infinite;padding:17px 0;gap:34px;color:#aaa1bd;font:10px "DM Mono";letter-spacing:1.8px;text-transform:uppercase}
-    .ticker-track span{display:flex;align-items:center;gap:34px}.ticker-track b{color:#c6a5ff;font-size:14px}
-    section{padding:110px 0;position:relative}
-    .section-top{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:43px}
-    .kicker{color:#c4a4ff;font:10px "DM Mono";letter-spacing:2px;text-transform:uppercase}
-    h2{font-size:clamp(36px,4.8vw,58px);margin:12px 0 0}
-    .section-intro{max-width:400px;color:var(--muted);font-size:13px;line-height:1.9;margin:0 0 4px}
-    .bot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
-    .bot-card{position:relative;overflow:hidden;min-height:350px;padding:26px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(25,21,41,.88),rgba(13,12,23,.93));transition:.4s var(--ease);transform-style:preserve-3d}
-    .bot-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,0%),rgba(173,130,255,.17),transparent 42%);opacity:0;transition:.4s;pointer-events:none}
-    .bot-card:hover{border-color:rgba(190,151,255,.4);box-shadow:0 25px 65px rgba(0,0,0,.28);transform:translateY(-8px)}
-    .bot-card:hover:before{opacity:1}
-    .bot-top{display:flex;align-items:center;justify-content:space-between;position:relative}
-    .bot-icon{width:57px;height:57px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(140deg,rgba(167,122,255,.22),rgba(255,131,189,.12));border:1px solid rgba(193,161,255,.18);font-size:25px;color:#e4d2ff;box-shadow:inset 0 1px rgba(255,255,255,.1)}
-    .bot-index{color:#625b72;font:10px "DM Mono"}
-    .bot-card h3{font-size:25px;margin:27px 0 10px;letter-spacing:-.7px}
-    .bot-card p{color:var(--muted);font-size:12px;line-height:1.9;min-height:69px;margin:0 0 18px}
-    .bot-handle{color:#c7a8ff;font:10px "DM Mono";letter-spacing:.3px}
-    .card-bottom{position:absolute;bottom:25px;left:26px;right:26px;padding-top:15px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:800}
-    .arrow{width:29px;height:29px;border-radius:50%;display:grid;place-items:center;background:rgba(179,140,255,.13);color:#d8c3ff;transition:.3s}
-    .bot-card:hover .arrow{transform:rotate(45deg);background:#c4a4ff;color:#140d20}
-    .bot-card:nth-child(2) .bot-icon{background:linear-gradient(140deg,rgba(255,131,189,.2),rgba(167,122,255,.12))}
-    .bot-card:nth-child(3) .bot-icon{background:linear-gradient(140deg,rgba(141,232,237,.16),rgba(167,122,255,.13))}
-    .community{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .community-card{position:relative;overflow:hidden;min-height:270px;padding:32px;border-radius:23px;border:1px solid var(--line);background:linear-gradient(130deg,rgba(117,77,185,.16),rgba(18,15,30,.85) 65%);transition:.35s}
-    .community-card.pink{background:linear-gradient(130deg,rgba(183,76,133,.16),rgba(18,15,30,.85) 65%)}
-    .community-card:hover{transform:translateY(-5px);border-color:rgba(199,166,255,.32)}
-    .community-card:after{content:"✦";position:absolute;right:27px;top:12px;font-size:120px;line-height:1;color:rgba(201,169,255,.07);transform:rotate(15deg)}
-    .comm-symbol{width:49px;height:49px;border:1px solid rgba(204,177,255,.2);background:rgba(177,137,255,.12);border-radius:15px;display:grid;place-items:center;font-size:22px;color:#d6baff}
-    .community-card h3{font-size:27px;margin:23px 0 8px}
-    .community-card p{max-width:410px;color:var(--muted);font-size:12px;line-height:1.9;margin:0 0 22px}
-    .comm-link{position:relative;z-index:1;color:#d5baff;font:10px "DM Mono";letter-spacing:1px}
-    .about-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:75px;align-items:center}
-    .about-art{height:370px;border:1px solid rgba(194,158,255,.17);border-radius:27px;position:relative;overflow:hidden;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,rgba(147,96,228,.2),transparent 60%),linear-gradient(145deg,#171128,#0d0b17)}
-    .about-art:before,.about-art:after{content:"";position:absolute;width:280px;height:280px;border:1px solid rgba(195,160,255,.14);border-radius:50%;animation:orbit 30s linear infinite}
-    .about-art:after{width:350px;height:350px;animation-direction:reverse}
-    .about-emblem{width:150px;z-index:1;filter:drop-shadow(0 12px 30px rgba(184,135,255,.28));animation:float 5s ease-in-out infinite}
-    .about-copy p{color:var(--muted);font-size:13px;line-height:2;margin:19px 0}
-    .values{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:25px}
-    .value{display:flex;align-items:center;gap:10px;color:#e3d9f4;font-size:11px;font-weight:700}
-    .value i{font-style:normal;color:#c6a5ff;font-size:17px}
-    .developer-card{max-width:790px;margin:auto;display:grid;grid-template-columns:150px 1fr;gap:30px;align-items:center;padding:33px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(120deg,rgba(166,119,255,.12),rgba(255,131,189,.045),rgba(17,15,28,.8));position:relative;overflow:hidden}
-    .developer-card:after{content:"FOX";position:absolute;right:22px;bottom:-36px;font:700 100px "Space Grotesk";letter-spacing:-10px;color:rgba(255,255,255,.025);pointer-events:none}
-    .avatar{width:135px;height:135px;border-radius:32px;display:grid;place-items:center;background:linear-gradient(145deg,#c4a0ff,#ff91c5);box-shadow:0 15px 40px rgba(166,119,255,.2);font:700 58px "Space Grotesk";color:#21142f;position:relative}
-    .avatar:after{content:"";position:absolute;inset:8px;border:1px solid rgba(255,255,255,.35);border-radius:25px}
-    .dev-label{color:#c4a4ff;font:10px "DM Mono";letter-spacing:1.6px;text-transform:uppercase}
-    .developer-card h3{font-size:31px;margin:8px 0 3px}
-    .dev-handle{color:#c9aaff;font:11px "DM Mono"}
-    .developer-card p{color:var(--muted);font-size:12px;line-height:1.9;max-width:480px;margin:15px 0 18px}
-    .github-panel{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:35px;border-radius:24px;border:1px solid rgba(197,164,255,.19);background:radial-gradient(ellipse at 90% 0%,rgba(174,126,255,.15),transparent 42%),#11101c}
-    .github-left{display:flex;align-items:center;gap:20px}
-    .github-icon{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;background:#201a30;border:1px solid var(--line);font-size:27px}
-    .github-panel h3{font-size:24px;margin:0 0 6px}
-    .github-panel p{font-size:12px;color:var(--muted);margin:0}
-    .footer{border-top:1px solid var(--line);padding:29px 0 35px;color:#777187;font-size:10px}
-    .footer-row{display:flex;justify-content:space-between;align-items:center;gap:20px}
-    .footer-brand{font:700 13px "Space Grotesk";color:#e6ddf4}
-    .footer-brand span{color:#c19cff}
-    .footer-links{display:flex;gap:21px}.footer-links a:hover{color:white}
-    .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-    .reveal.show{opacity:1;transform:none}
-    .delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}
-    @keyframes pulse{50%{opacity:.35;box-shadow:0 0 2px #9cf2c4}}
-    @keyframes shine{0%,65%{transform:translateX(-130%) rotate(15deg)}100%{transform:translateX(130%) rotate(15deg)}}
-    @keyframes float{0%,100%{translate:0 0}50%{translate:0 -13px}}
-    @keyframes breathe{0%,100%{transform:scale(.92);opacity:.7}50%{transform:scale(1.08);opacity:1}}
-    @keyframes rotate{to{transform:rotate(360deg)}}
-    @keyframes orbit{to{transform:rotateX(67deg) rotateZ(335deg)}}
-    @keyframes scrollline{0%{transform:scaleY(.3);transform-origin:top;opacity:.4}50%{transform:scaleY(1);transform-origin:top;opacity:1}100%{transform:scaleY(.2);transform-origin:bottom;opacity:.2}}
-    @keyframes marquee{to{transform:translateX(-50%)}}
-    @media(max-width:950px){.navlinks{gap:17px}.hero{min-height:740px}.hero-stage{transform:scale(.87)}.about-layout{gap:40px}}
-    @media(max-width:740px){
-      .wrap{width:calc(100% - 34px)}.nav{height:72px}.navlinks{display:none;position:absolute;top:72px;left:0;right:0;padding:17px 25px 24px;background:rgba(9,8,18,.97);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}
-      .navlinks.open{display:flex}.navlinks a{padding:12px 0}.navlinks a:after{display:none}.nav-join{display:none}.menu{display:block}
-      .hero{display:flex;flex-direction:column;align-items:flex-start;padding:130px 0 35px;min-height:unset;gap:0}
-      h1{font-size:clamp(52px,13vw,75px);margin:22px 0 18px}.hero-desc{font-size:13px}.hero-stage{width:100%;min-height:425px;transform:none;margin-top:10px}
-      .stage-grid{width:390px;height:390px}.halo{width:290px;height:290px}.ring{width:350px;height:350px}.ring.r2{width:300px;height:300px}
-      .logo-shell{width:245px;height:270px}.chip-a{left:0;top:55px}.chip-b{right:0;bottom:55px}.chip-c{right:-4px}
-      .scroll-cue{display:none}section{padding:78px 0}.section-top{display:block;margin-bottom:30px}.section-intro{margin-top:15px}.bot-grid{grid-template-columns:1fr}.bot-card{min-height:320px}.bot-card p{min-height:0}
-      .community{grid-template-columns:1fr}.community-card{min-height:245px}.about-layout{grid-template-columns:1fr;gap:34px}.about-art{height:290px}.developer-card{grid-template-columns:1fr;text-align:center;justify-items:center;padding:28px 22px}.developer-card p{margin-left:auto;margin-right:auto}.github-panel{align-items:flex-start;flex-direction:column;padding:27px}.footer-row{flex-direction:column;text-align:center}.footer-links{flex-wrap:wrap;justify-content:center}
-    }
-    @media(max-width:390px){.wrap{width:calc(100% - 28px)}.hero-stage{min-height:365px}.logo-shell{width:220px;height:245px}.ring{width:310px;height:310px}.ring.r2{width:265px;height:265px}.chip-c{display:none}.actions .btn{width:100%}.github-left{align-items:flex-start}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}#particles,.pointer-glow{display:none}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f3f2ed">
+<meta name="description" content="Foxy Network — tools, music and community, connected in one place.">
+<title>Foxy Network — The Internet, With Personality</title>
+<style>
+:root{--paper:#f3f2ed;--ink:#171914;--muted:#6f7469;--blue:#4548e8;--lime:#d7f36b;--line:#d9dbd2;--white:#fff;--max:1180px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,Arial,Helvetica,sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(var(--max),calc(100% - 48px));margin:auto}
+.topline{height:5px;background:linear-gradient(90deg,var(--blue) 0 38%,var(--lime) 38% 72%,#ff805f 72%)}
+header{height:84px;border-bottom:1px solid var(--line);display:flex;align-items:center;background:rgba(243,242,237,.93);position:sticky;top:0;z-index:20;backdrop-filter:blur(12px)}.nav{display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:11px;font-weight:950;font-size:17px;letter-spacing:-.06em}.logo{width:43px;height:43px;border-radius:14px;background:var(--blue);display:grid;place-items:center;box-shadow:4px 4px 0 var(--lime)}.logo svg{width:31px;height:31px}.navlinks{display:flex;gap:30px;align-items:center;font-size:12px;font-weight:800;color:#53584e}.navlinks a:hover{color:var(--blue)}.navbutton{background:var(--ink);color:white;border-radius:999px;padding:13px 19px;font-size:12px;font-weight:850;transition:.2s}.navbutton:hover{background:var(--blue);transform:translateY(-2px)}.hamb{display:none;background:transparent;border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:19px}
+.hero{padding:83px 0 72px}.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:44px;align-items:center}.micro{display:flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.17em;font-size:10px;font-weight:900;color:var(--blue)}.micro:before{content:"";width:26px;height:2px;background:var(--blue)}h1{font-size:clamp(58px,8vw,108px);line-height:.88;letter-spacing:-.095em;margin:25px 0 25px;font-weight:950}h1 em{font-style:normal;color:var(--blue);position:relative}h1 em:after{content:"";position:absolute;left:0;right:3px;bottom:-5px;height:8px;background:var(--lime);z-index:-1;transform:rotate(-2deg)}.intro{max-width:485px;color:var(--muted);font-size:16px;line-height:1.8}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;align-items:center;gap:12px;border:1px solid var(--ink);border-radius:8px;padding:14px 18px;font-size:12px;font-weight:900;transition:transform .2s,background .2s}.btn.dark{background:var(--ink);color:white}.btn.light{background:transparent}.btn:hover{transform:translateY(-3px)}.btn.dark:hover{background:var(--blue);border-color:var(--blue)}
+.art{min-height:420px;position:relative;display:grid;place-items:center}.poster{width:min(420px,100%);aspect-ratio:1/1.04;background:var(--blue);border-radius:7px;position:relative;overflow:hidden;transform:rotate(2deg);box-shadow:18px 18px 0 var(--lime)}.poster:before{content:"FOX";position:absolute;left:18px;top:12px;color:#fff;font-size:clamp(60px,8vw,105px);font-weight:950;letter-spacing:-.1em;line-height:1}.poster:after{content:"NETWORK";position:absolute;right:18px;bottom:17px;color:#fff;font-size:12px;font-weight:900;letter-spacing:.35em}.sun{position:absolute;width:66%;aspect-ratio:1;border-radius:50%;background:var(--lime);left:17%;top:18%;}.foxmark{position:absolute;inset:22% 17% 16%;width:66%;height:66%;z-index:2}.poster-sticker{position:absolute;z-index:4;right:-6px;top:35px;background:#ff805f;color:#1a1b16;padding:15px 17px;border-radius:50%;font-size:11px;line-height:1.1;font-weight:950;text-align:center;transform:rotate(12deg);box-shadow:4px 4px 0 var(--ink)}.art-caption{position:absolute;bottom:-28px;left:0;font-size:10px;font-weight:850;letter-spacing:.14em;color:#777b71;text-transform:uppercase}
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:17px 0;overflow:hidden;white-space:nowrap}.marquee-track{display:flex;justify-content:space-around;gap:35px;font-size:11px;font-weight:950;letter-spacing:.18em;text-transform:uppercase;color:#666b60}.marquee b{color:var(--blue);font-size:16px}
+.section{padding:100px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:36px}.eyebrow{font-size:10px;color:var(--blue);font-weight:950;letter-spacing:.18em;text-transform:uppercase}.section h2{font-size:clamp(38px,5vw,64px);line-height:.96;letter-spacing:-.08em;margin:13px 0 0;font-weight:950}.section-head p{max-width:370px;color:var(--muted);font-size:14px;line-height:1.75;margin:0 0 4px}
+.project-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.project{min-height:285px;background:var(--white);border:1px solid var(--line);border-radius:10px;padding:21px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .22s,box-shadow .22s,border-color .22s}.project:hover{transform:translateY(-7px);box-shadow:0 18px 35px #1c21101b;border-color:#a8a9e6}.project-icon{height:50px;width:50px;border-radius:14px;background:#ececff;color:var(--blue);display:grid;place-items:center;font-size:23px;font-weight:900}.project:nth-child(2) .project-icon{background:#f1f8d8;color:#637d13}.project:nth-child(3) .project-icon{background:#ffede6;color:#d95c3e}.project:nth-child(4) .project-icon{background:#e5f2ef;color:#247b69}.project small{font-size:9px;letter-spacing:.15em;font-weight:900;color:#888d81}.project h3{font-size:22px;letter-spacing:-.06em;margin:13px 0 7px}.project p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}.project-link{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:15px;margin-top:22px;font-size:10px;font-weight:950}.project-link span:last-child{font-size:18px;color:var(--blue)}
+.community{background:var(--ink);color:#fff;border-radius:12px;padding:55px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:25px;position:relative;overflow:hidden}.community:after{content:"♡";position:absolute;right:18%;top:-105px;font-size:350px;font-weight:900;color:#ffffff08;line-height:1}.community .eyebrow{color:var(--lime)}.community h2{font-size:clamp(38px,5vw,62px);letter-spacing:-.08em;line-height:.94;margin:14px 0}.community p{max-width:480px;color:#b5b9ad;font-size:14px;line-height:1.8}.community .btn{background:var(--lime);border-color:var(--lime);color:var(--ink);position:relative;z-index:1;white-space:nowrap}.developer{display:flex;justify-content:space-between;align-items:center;gap:20px;background:#e7e8df;border:1px solid var(--line);padding:25px;border-radius:10px}.person{display:flex;align-items:center;gap:15px}.avatar{width:54px;height:54px;background:var(--orange,#ff805f);border-radius:16px;display:grid;place-items:center;font-size:22px;font-weight:950;color:#171914}.person strong{display:block;font-size:17px;letter-spacing:-.04em}.person span{font-size:11px;color:var(--muted)}.developer .btn{white-space:nowrap}
+footer{border-top:1px solid var(--line);padding:28px 0;color:#73786d;font-size:11px}.footer{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.footer strong{color:var(--ink)}
+@media(max-width:900px){.project-grid{grid-template-columns:repeat(2,1fr)}.hero-grid{gap:25px}.art{min-height:350px}}
+@media(max-width:680px){.wrap{width:calc(100% - 34px)}header{height:72px}.navlinks{display:none;position:absolute;top:71px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);padding:22px;flex-direction:column;align-items:flex-start;gap:20px}.navlinks.show{display:flex}.hamb{display:block}.navbutton{display:none}.hero{padding:55px 0 60px}.hero-grid{grid-template-columns:1fr;gap:32px}.art{grid-row:1;min-height:300px}.poster{width:290px}.hero-copy{grid-row:2}h1{font-size:clamp(60px,16vw,86px)}.section{padding:72px 0}.section-head{display:block}.section-head p{margin-top:16px}.project-grid{grid-template-columns:1fr}.project{min-height:220px}.community{grid-template-columns:1fr;padding:34px 25px}.community .btn{justify-self:start}.developer{align-items:flex-start;flex-direction:column}.marquee-track{justify-content:flex-start;min-width:700px;animation:slide 22s linear infinite}}
+@keyframes slide{to{transform:translateX(-30%)}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
 </head>
 <body>
-  <canvas id="particles" aria-hidden="true"></canvas><div class="pointer-glow" id="pointerGlow"></div><div class="progress" id="progress"></div>
-  <header class="header" id="header">
-    <div class="wrap nav">
-      <a class="brand" href="#home" aria-label="Foxy Network home">
-        <span class="brand-mark"><svg viewBox="0 0 64 64" fill="none"><path d="M13 27 17 8l15 11L47 8l4 19c3 4 5 9 4 15-2 11-12 17-23 17S11 53 9 42c-1-6 1-11 4-15Z" fill="#21132f"/><path d="m18 26 2-11 10 8-12 3Zm28 0-2-11-10 8 12 3Z" fill="#fff"/><path d="M20 36c0-4 3-7 7-7s7 3 7 7-3 7-7 7-7-3-7-7Zm14 0c0-4 3-7 7-7s7 3 7 7-3 7-7 7-7-3-7-7Z" fill="#c69bff"/><path d="m29 46 3-3 3 3-3 4-3-4Z" fill="#ff9bce"/></svg></span>
-        <span>FOXY <span class="network">NETWORK</span></span>
-      </a>
-      <nav class="navlinks" id="navlinks"><a href="#home">Home</a><a href="#about">About</a><a href="#bots">Bots</a><a href="#community">Community</a><a href="#developer">Developer</a></nav>
-      <div class="nav-right"><a class="nav-join" href="https://t.me/FoxryChat" target="_blank" rel="noopener">Join the network ↗</a><button class="menu" id="menu" aria-label="Toggle navigation" aria-expanded="false">☰</button></div>
-    </div>
-  </header>
-
-  <main>
-    <div class="wrap">
-      <section class="hero" id="home">
-        <div class="hero-copy">
-          <div class="eyebrow"><span class="live-dot"></span> Your digital universe starts here</div>
-          <h1>Not just a<br>network. A <span class="gradient">whole vibe.</span></h1>
-          <p class="hero-desc">Welcome to Foxy Network — where smart Telegram bots, creative ideas and a growing community come together. Explore our tools, connect with us and be part of what's next.</p>
-          <div class="actions"><a class="btn primary" href="#bots">Explore the bots <span>↗</span></a><a class="btn secondary" href="https://t.me/FoxryChat" target="_blank" rel="noopener">Join our community <span>♡</span></a></div>
-          <div class="micro">Independent projects · One connected home</div>
-        </div>
-        <div class="hero-stage">
-          <div class="stage-grid"></div><div class="halo"></div><div class="ring"></div><div class="ring r2"></div>
-          <div class="float-chip chip-a">✦ BUILT DIFFERENT</div><div class="float-chip chip-b">♡ FOXY NETWORK</div><div class="float-chip chip-c">03 / PROJECTS</div>
-          <div class="logo-shell">
-            <svg class="fox" viewBox="0 0 240 240" fill="none" role="img" aria-label="Foxy Network fox emblem">
-              <defs><linearGradient id="fur" x1="35" y1="30" x2="200" y2="210" gradientUnits="userSpaceOnUse"><stop stop-color="#D7BEFF"/><stop offset="1" stop-color="#FF91C8"/></linearGradient><linearGradient id="inner" x1="60" y1="25" x2="180" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF"/><stop offset="1" stop-color="#E9D9FF"/></linearGradient></defs>
-              <path d="M38 95 49 25l61 43h20l61-43 11 70c18 20 27 42 23 66-7 37-42 58-84 58s-77-21-84-58c-4-24 5-46 23-66Z" fill="url(#fur)"/>
-              <path d="m53 78 6-38 40 28-46 10Zm134 0-6-38-40 28 46 10Z" fill="url(#inner)"/>
-              <path d="M58 119c11-18 28-27 49-24 10 1 18 6 25 14 7-8 15-13 25-14 21-3 38 6 49 24-5 41-34 70-74 70s-69-29-74-70Z" fill="#241934"/>
-              <path d="M77 126c0-12 9-21 21-21s21 9 21 21-9 21-21 21-21-9-21-21Zm44 0c0-12 9-21 21-21s21 9 21 21-9 21-21 21-21-9-21-21Z" fill="#fff"/>
-              <circle cx="99" cy="128" r="9" fill="#7652A8"/><circle cx="142" cy="128" r="9" fill="#7652A8"/>
-              <path d="m111 159 9-8 9 8-9 11-9-11Z" fill="#FF9BCB"/><path d="M120 170c-5 9-14 13-22 9m22-9c5 9 14 13 22 9" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-              <path d="m77 156-24 7m27 5-20 13m103-25 24 7m-27 5 20 13" stroke="#F7EFFF" stroke-width="3" stroke-linecap="round" opacity=".8"/>
-            </svg>
-          </div>
-        </div>
-        <div class="scroll-cue"><i></i> Scroll to explore</div>
-      </section>
-    </div>
-
-    <div class="ticker"><div class="ticker-track">
-      <span>FOXY NETWORK <b>✦</b> TELEGRAM BOTS <b>✦</b> COMMUNITY FIRST <b>✦</b> BUILT WITH PASSION <b>✦</b> ALWAYS EVOLVING <b>✦</b></span>
-      <span>FOXY NETWORK <b>✦</b> TELEGRAM BOTS <b>✦</b> COMMUNITY FIRST <b>✦</b> BUILT WITH PASSION <b>✦</b> ALWAYS EVOLVING <b>✦</b></span>
-    </div></div>
-
-    <section id="bots">
-      <div class="wrap">
-        <div class="section-top reveal"><div><div class="kicker">01 / The collection</div><h2>Meet your new<br><span class="gradient">favourite tools.</span></h2></div><p class="section-intro">Three different bots. Three different purposes. One connected network. Pick the one that makes your Telegram experience better.</p></div>
-        <div class="bot-grid">
-          <a class="bot-card reveal" href="https://t.me/KavyaMusicBot" target="_blank" rel="noopener"><div class="bot-top"><div class="bot-icon">♫</div><span class="bot-index">BOT / 001</span></div><h3>Kavya Music</h3><p>Bring your favourite tracks to Telegram voice chats. A music companion made for listening together and keeping the vibe alive.</p><span class="bot-handle">@KavyaMusicBot</span><div class="card-bottom"><span>Explore music bot</span><span class="arrow">↗</span></div></a>
-          <a class="bot-card reveal delay-1" href="https://t.me/FoxyGuardBot" target="_blank" rel="noopener"><div class="bot-top"><div class="bot-icon">✧</div><span class="bot-index">BOT / 002</span></div><h3>Foxy Guard</h3><p>Your group management and chat companion. Keep communities organised, protected and more engaging with one helpful bot.</p><span class="bot-handle">@FoxyGuardBot</span><div class="card-bottom"><span>Explore guard bot</span><span class="arrow">↗</span></div></a>
-          <a class="bot-card reveal delay-2" href="https://t.me/FoxyGitBot" target="_blank" rel="noopener"><div class="bot-top"><div class="bot-icon">⌘</div><span class="bot-index">BOT / 003</span></div><h3>Foxy Git</h3><p>Keep an eye on your GitHub world. Get repository notifications and stay closer to the development activity that matters.</p><span class="bot-handle">@FoxyGitBot</span><div class="card-bottom"><span>Explore Git bot</span><span class="arrow">↗</span></div></a>
-        </div>
-      </div>
-    </section>
-
-    <section id="community">
-      <div class="wrap">
-        <div class="section-top reveal"><div><div class="kicker">02 / Stay in the loop</div><h2>Good things happen<br><span class="gradient">when we connect.</span></h2></div><p class="section-intro">Whether you need a hand or want to hear about the latest release, our Telegram spaces keep you connected.</p></div>
-        <div class="community">
-          <article class="community-card reveal"><div class="comm-symbol">⌁</div><h3>The Support Space</h3><p>Questions, help, feedback or just a friendly conversation. Come meet the people behind the network and the community around it.</p><a class="comm-link" href="https://t.me/FoxryChat" target="_blank" rel="noopener">JOIN @FOXRYCHAT&nbsp; ↗</a></article>
-          <article class="community-card pink reveal delay-1"><div class="comm-symbol">◉</div><h3>The Update Feed</h3><p>New features, announcements, improvements and important news from Foxy Network — delivered straight to your Telegram.</p><a class="comm-link" href="https://t.me/FoxryHQ" target="_blank" rel="noopener">FOLLOW @FoxryHQ&nbsp; ↗</a></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="wrap about-layout">
-        <div class="about-art reveal">
-          <svg class="about-emblem" viewBox="0 0 64 64" fill="none" aria-hidden="true"><defs><linearGradient id="af" x1="8" y1="8" x2="56" y2="56"><stop stop-color="#D5B8FF"/><stop offset="1" stop-color="#FF91C8"/></linearGradient></defs><path d="M13 27 17 8l15 11L47 8l4 19c3 4 5 9 4 15-2 11-12 17-23 17S11 53 9 42c-1-6 1-11 4-15Z" fill="url(#af)"/><path d="m18 26 2-11 10 8-12 3Zm28 0-2-11-10 8 12 3Z" fill="#fff"/><path d="M20 36c0-4 3-7 7-7s7 3 7 7-3 7-7 7-7-3-7-7Zm14 0c0-4 3-7 7-7s7 3 7 7-3 7-7 7-7-3-7-7Z" fill="#281a3a"/><path d="m29 46 3-3 3 3-3 4-3-4Z" fill="#fff"/></svg>
-        </div>
-        <div class="about-copy reveal delay-1"><div class="kicker">03 / The story</div><h2>A little world<br>called <span class="gradient">Foxy.</span></h2>
-          <p>Foxy Network is a home for independent Telegram projects built around creativity, usefulness and community. Each project has its own personality, but they all share one idea: make everyday digital experiences a little better.</p>
-          <p>From music and group tools to developer notifications, we're always learning, building and improving. This is just the beginning.</p>
-          <div class="values"><div class="value"><i>✦</i> Community driven</div><div class="value"><i>✦</i> Made to be useful</div><div class="value"><i>✦</i> Always evolving</div><div class="value"><i>✦</i> Built with care</div></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="developer">
-      <div class="wrap">
-        <div class="section-top reveal"><div><div class="kicker">04 / The creator</div><h2>Behind the <span class="gradient">fox.</span></h2></div><p class="section-intro">Every network has a builder. Here's the person bringing the Foxy projects to life.</p></div>
-        <div class="developer-card reveal"><div class="avatar">F</div><div><div class="dev-label">Founder & Developer</div><h3>𝑭𝒐𝒙𝒚 ♡</h3><a class="dev-handle" href="https://t.me/FoxyPookie" target="_blank" rel="noopener">@FoxyPookie</a><p>Building and maintaining the Foxy Network projects, one idea at a time. For collaborations, questions or a simple hello, feel free to reach out.</p><a class="btn secondary" href="https://t.me/FoxyPookie" target="_blank" rel="noopener">Contact developer ↗</a></div></div>
-      </div>
-    </section>
-
-    <section id="github">
-      <div class="wrap"><div class="github-panel reveal"><div class="github-left"><div class="github-icon">⌘</div><div><h3>Open source energy.</h3><p>Explore repositories, code and projects from FoxyPookie on GitHub.</p></div></div><a class="btn primary" href="https://github.com/FoxyPookie" target="_blank" rel="noopener">Visit GitHub ↗</a></div></div>
-    </section>
-  </main>
-
-  <footer class="footer"><div class="wrap footer-row"><div><div class="footer-brand">FOXY <span>NETWORK</span></div><div>© <span id="year"></span> Foxy Network. Made with ♡</div></div><div class="footer-links"><a href="https://t.me/FoxryChat" target="_blank" rel="noopener">Support</a><a href="https://t.me/FoxryHQ" target="_blank" rel="noopener">Updates</a><a href="https://github.com/FoxyPookie" target="_blank" rel="noopener">GitHub</a></div></div></footer>
-
-  <script>
-    // Mobile navigation
-    const menu = document.getElementById('menu');
-    const nav = document.getElementById('navlinks');
-    menu.addEventListener('click', () => {
-      const open = nav.classList.toggle('open');
-      menu.textContent = open ? '×' : '☰';
-      menu.setAttribute('aria-expanded', String(open));
-    });
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      nav.classList.remove('open'); menu.textContent = '☰'; menu.setAttribute('aria-expanded','false');
-    }));
-
-    // Header glass effect and reading progress
-    const header = document.getElementById('header');
-    const progress = document.getElementById('progress');
-    const updateScroll = () => {
-      header.classList.toggle('scrolled', window.scrollY > 30);
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      progress.style.width = (max > 0 ? window.scrollY / max * 100 : 0) + '%';
-    };
-    window.addEventListener('scroll', updateScroll, {passive:true}); updateScroll();
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Scroll reveal
-    const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (entry.isIntersecting) { entry.target.classList.add('show'); revealObserver.unobserve(entry.target); }
-    }), {threshold:.12});
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-    // Subtle card spotlight and tilt
-    document.querySelectorAll('.bot-card').forEach(card => {
-      card.addEventListener('pointermove', e => {
-        const r = card.getBoundingClientRect(), x = e.clientX-r.left, y = e.clientY-r.top;
-        card.style.setProperty('--mx', x+'px'); card.style.setProperty('--my', y+'px');
-        if (e.pointerType === 'mouse' && window.innerWidth > 900) {
-          const rx = ((y/r.height)-.5)*-3, ry = ((x/r.width)-.5)*3;
-          card.style.transform = `translateY(-8px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-        }
-      });
-      card.addEventListener('pointerleave', () => card.style.transform = '');
-    });
-
-    // Ambient cursor light (desktop only)
-    const glow = document.getElementById('pointerGlow');
-    if (window.matchMedia('(pointer:fine)').matches) {
-      window.addEventListener('pointermove', e => {
-        glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px';
-      }, {passive:true});
-    }
-
-    // Lightweight ambient particle field
-    (() => {
-      const canvas = document.getElementById('particles'), ctx = canvas.getContext('2d');
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce || !ctx) return;
-      let w, h, dots = [], raf;
-      const resize = () => {
-        const dpr = Math.min(window.devicePixelRatio || 1, 1.6);
-        w = window.innerWidth; h = window.innerHeight;
-        canvas.width = w*dpr; canvas.height = h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
-        const count = Math.min(75, Math.floor(w*h/18000));
-        dots = Array.from({length:count}, () => ({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.35,vx:(Math.random()-.5)*.19,vy:(Math.random()-.5)*.19,a:Math.random()*.5+.15}));
-      };
-      const draw = () => {
-        ctx.clearRect(0,0,w,h);
-        for (let i=0;i<dots.length;i++) {
-          const p=dots[i]; p.x+=p.vx; p.y+=p.vy;
-          if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
-          ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(205,177,255,${p.a})`;ctx.fill();
-          for(let j=i+1;j<dots.length;j++){const q=dots[j],dx=p.x-q.x,dy=p.y-q.y,dist=dx*dx+dy*dy;if(dist<105*105){ctx.strokeStyle=`rgba(174,143,225,${.075*(1-dist/(105*105))})`;ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}}
-        }
-        raf=requestAnimationFrame(draw);
-      };
-      resize(); draw(); window.addEventListener('resize',resize,{passive:true});
-      document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else draw();});
-    })();
-  </script>
+<div class="topline"></div>
+<header><div class="wrap nav">
+<a class="brand" href="#home"><span class="logo"><svg viewBox="0 0 64 64" fill="none"><path d="M7 8 25 18 32 11 39 18 57 8 52 42 32 57 12 42 7 8Z" fill="#F3F2ED"/><path d="m14 19 12 7-4 19-10-11 2-15Zm36 0-12 7 4 19 10-11-2-15Z" fill="#4548E8"/><path d="m23 42 9-8 9 8-9 9-9-9Z" fill="#FF805F"/><path d="m25 18 7 10 7-10" stroke="#171914" stroke-width="3" stroke-linecap="round"/></svg></span>FOXY NETWORK</a>
+<nav class="navlinks" id="navlinks"><a href="#projects">Projects</a><a href="#community">Community</a><a href="#developer">Developer</a><a href="https://github.com/FoxyPookie" target="_blank" rel="noopener">GitHub ↗</a></nav>
+<a class="navbutton" href="https://t.me/FoxryChat" target="_blank" rel="noopener">Join the community ↗</a><button class="hamb" id="hamb" aria-label="Toggle menu" aria-expanded="false">☰</button>
+</div></header>
+<main id="home">
+<section class="hero"><div class="wrap hero-grid">
+<div><div class="micro">A different kind of network</div><h1>Good things<br>happen in<br><em>good company.</em></h1><p class="intro">Welcome to Foxy Network. Discover useful Telegram bots, music, updates and a community that keeps things moving. A small universe of projects, built with a big imagination.</p><div class="hero-actions"><a class="btn dark" href="#projects">Explore projects <span>↗</span></a><a class="btn light" href="https://t.me/FoxryChat" target="_blank" rel="noopener">Say hello <span>♡</span></a></div></div>
+<div class="art"><div class="poster"><div class="sun"></div><svg class="foxmark" viewBox="0 0 300 300" fill="none"><path d="M30 43 117 84 150 55 183 84 270 43 248 185 150 260 52 185 30 43Z" fill="#171914"/><path d="m52 82 65 24-22 91-46-43 3-72Zm196 0-65 24 22 91 46-43-3-72Z" fill="#F3F2ED"/><path d="m103 194 47-43 47 43-47 53-47-53Z" fill="#FF805F"/><path d="m117 84 33 42 33-42" stroke="#F3F2ED" stroke-width="12" stroke-linecap="round"/><circle cx="113" cy="145" r="7" fill="#171914"/><circle cx="187" cy="145" r="7" fill="#171914"/></svg></div><div class="poster-sticker">STAY<br>FOXY ✳</div><div class="art-caption">Independent minds. Connected projects.</div></div>
+</div></section>
+<div class="marquee"><div class="wrap marquee-track"><span>Made to connect</span><b>✳</b><span>Built to explore</span><b>✳</b><span>Powered by community</span><b>✳</b><span>Always evolving</span></div></div>
+<section class="section" id="projects"><div class="wrap"><div class="section-head"><div><div class="eyebrow">01 / The ecosystem</div><h2>Pick your corner.</h2></div><p>Different tools, one home. Jump into the project that fits what you need today.</p></div>
+<div class="project-grid">
+<a class="project" href="https://t.me/KavyaMusicBot" target="_blank" rel="noopener"><div><div class="project-icon">♫</div><small>MUSIC / TELEGRAM</small><h3>Kavya Music</h3><p>Bring music into your voice chats and let the good times roll.</p></div><div class="project-link"><span>@KavyaMusicBot</span><span>↗</span></div></a>
+<a class="project" href="https://t.me/FoxyGuardBot" target="_blank" rel="noopener"><div><div class="project-icon">⌘</div><small>COMMUNITY / TOOLS</small><h3>Foxy Guard</h3><p>Helpful group management tools to keep your community in shape.</p></div><div class="project-link"><span>@FoxyGuardBot</span><span>↗</span></div></a>
+<a class="project" href="https://t.me/FoxyGitBot" target="_blank" rel="noopener"><div><div class="project-icon">⌁</div><small>DEVELOPMENT / GITHUB</small><h3>Foxy Git</h3><p>Stay close to repository activity and updates from GitHub.</p></div><div class="project-link"><span>@FoxyGitBot</span><span>↗</span></div></a>
+<a class="project" href="https://t.me/FoxryHQ" target="_blank" rel="noopener"><div><div class="project-icon">✳</div><small>NEWS / ANNOUNCEMENTS</small><h3>Foxy HQ</h3><p>News, launches and updates from across the Foxy Network.</p></div><div class="project-link"><span>@FoxryHQ</span><span>↗</span></div></a>
+</div></div></section>
+<section class="section" id="community" style="padding-top:0"><div class="wrap"><div class="community"><div><div class="eyebrow">02 / The people</div><h2>Come for the bots.<br>Stay for the people.</h2><p>Have a question, an idea, or just want to hang out? Our community is the place to connect with the people behind the projects.</p></div><a class="btn" href="https://t.me/FoxryChat" target="_blank" rel="noopener">Join @FoxryChat&nbsp; ↗</a></div></div></section>
+<section class="section" id="developer" style="padding-top:0"><div class="wrap"><div class="section-head"><div><div class="eyebrow">03 / The maker</div><h2>One curious mind.</h2></div><p>Behind every project is the joy of making something useful, learning along the way and sharing it with others.</p></div><div class="developer"><div class="person"><div class="avatar">F♡</div><div><strong>𝑭𝒐𝒙𝒚 ♡</strong><span>Developer · @FoxyPookie</span></div></div><a class="btn dark" href="https://github.com/FoxyPookie" target="_blank" rel="noopener">Explore GitHub ↗</a></div></div></section>
+</main>
+<footer><div class="wrap footer"><div><strong>FOXY NETWORK</strong> &nbsp;·&nbsp; A little corner of the internet.</div><div>© <span id="year">2026</span> Foxy Network. Made with ♡</div></div></footer>
+<script>
+const btn=document.getElementById('hamb'),links=document.getElementById('navlinks');btn.addEventListener('click',()=>{const s=links.classList.toggle('show');btn.setAttribute('aria-expanded',s?'true':'false');btn.textContent=s?'×':'☰'});links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('show');btn.setAttribute('aria-expanded','false');btn.textContent='☰'}));document.getElementById('year').textContent=new Date().getFullYear();
+</script>
 </body>
 </html>
