@@ -1,870 +1,647 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foxry HQ — Built for Archon</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <title>Archon | Full-Stack Developer & Telegram Bot Architect</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            500: '#10b981',
+                            600: '#059669',
+                            900: '#064e3b',
+                            dark: '#0a0f1d',
+                            card: '#111827',
+                            border: '#1f2937'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #030712;
-            --sidebar-bg: #0b0f19;
-            --card-bg: #111827;
-            --border: rgba(6, 182, 212, 0.2);
-            --border-hover: rgba(6, 182, 212, 0.6);
-            --primary: #06b6d4;
-            --primary-glow: rgba(6, 182, 212, 0.4);
-            --accent: #3b82f6;
-            --success: #10b981;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
+            background-color: #030712;
+            color: #f3f4f6;
             overflow-x: hidden;
-            position: relative;
         }
-
-        /* Continuous Background Animation */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
+        .font-mono {
+            font-family: 'Fira Code', monospace;
         }
-
-        .orb {
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-panel-hover:hover {
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
+        }
+        .glow-effect {
             position: absolute;
-            border-radius: 50%;
-            filter: blur(130px);
-            opacity: 0.25;
-            animation: floatOrb 8s ease-in-out infinite alternate;
-        }
-
-        .orb-1 {
-            width: 450px;
-            height: 450px;
-            background: #06b6d4;
-            top: -100px;
-            left: -100px;
-        }
-
-        .orb-2 {
             width: 500px;
             height: 500px;
-            background: #3b82f6;
-            bottom: -150px;
-            right: -100px;
-            animation-delay: -4s;
-        }
-
-        @keyframes floatOrb {
-            0% { transform: translateY(0px) scale(1) rotate(0deg); }
-            100% { transform: translateY(40px) scale(1.1) rotate(10deg); }
-        }
-
-        /* Animated Professional Logo (Fox / Tech Emblem) */
-        .brand-emblem {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #030712;
-            position: relative;
-            box-shadow: 0 0 20px var(--primary-glow);
-            animation: logoPulse 3s ease-in-out infinite alternate;
-        }
-
-        .brand-emblem::after {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 14px;
-            border: 2px solid var(--primary);
-            opacity: 0.6;
-            animation: borderGlow 2s linear infinite;
-        }
-
-        @keyframes logoPulse {
-            0% { transform: scale(1); box-shadow: 0 0 15px var(--primary-glow); }
-            100% { transform: scale(1.06); box-shadow: 0 0 25px var(--primary); }
-        }
-
-        @keyframes borderGlow {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 0.2; }
-            100% { transform: scale(1); opacity: 0.8; }
-        }
-
-        /* Sidebar Navigation */
-        aside {
-            width: 270px;
-            background: var(--sidebar-bg);
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 28px 20px;
-            height: 100vh;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: #fff;
-            margin-bottom: 35px;
-            cursor: pointer;
-        }
-
-        .brand-title {
-            font-size: 16px;
-            font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
-        }
-
-        .brand-title span {
-            display: block;
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .nav-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            flex-grow: 1;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: transparent;
-            border: 1px solid transparent;
-            color: var(--text-muted);
-            padding: 11px 16px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            text-align: left;
-            width: 100%;
-        }
-
-        .nav-item i {
-            font-size: 15px;
-            width: 20px;
-            text-align: center;
-        }
-
-        .nav-item:hover, .nav-item.active {
-            background: rgba(6, 182, 212, 0.1);
-            color: var(--primary);
-            border-color: var(--border);
-            transform: translateX(4px);
-        }
-
-        .sidebar-footer-box {
-            background: rgba(6, 182, 212, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 15px;
-            animation: boxGlow 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes boxGlow {
-            0% { border-color: rgba(6, 182, 212, 0.2); }
-            100% { border-color: rgba(6, 182, 212, 0.6); }
-        }
-
-        .sidebar-footer-box .secure-tag {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 4px;
-        }
-
-        .sidebar-footer-box p {
-            font-size: 11px;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
-        /* Mobile Header */
-        .mobile-header {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: var(--sidebar-bg);
-            border-bottom: 1px solid var(--border);
-            padding: 14px 20px;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .mobile-toggle {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 22px;
-            cursor: pointer;
-        }
-
-        /* Main Content */
-        main {
-            flex-grow: 1;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 45px 55px;
-            overflow-y: auto;
-        }
-
-        .page-section {
-            display: none;
-            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            max-width: 1100px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .page-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Home Hero Grid */
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .hero-content .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.25);
-            color: var(--success);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 22px;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--success);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--success);
-            animation: pulseDot 1.5s infinite;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(3, 7, 18, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
         }
-
-        @keyframes pulseDot {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 1; }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        .hero-content h1 {
-            font-size: clamp(2.3rem, 4vw, 3.6rem);
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 18px;
-            letter-spacing: -0.5px;
-            color: #fff;
+        ::-webkit-scrollbar-track {
+            background: #030712;
         }
-
-        .hero-content h1 span {
-            color: var(--primary);
-            text-shadow: 0 0 20px var(--primary-glow);
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
         }
-
-        .hero-content p {
-            font-size: 1.02rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 28px;
-        }
-
-        .hero-cards-row {
-            display: flex;
-            gap: 14px;
-            margin-bottom: 28px;
-        }
-
-        .mini-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
-            flex: 1;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .mini-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.2);
-        }
-
-        .mini-card i {
-            font-size: 18px;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-
-        .mini-card h4 {
-            font-size: 0.92rem;
-            font-weight: 700;
-            margin-bottom: 3px;
-            color: #fff;
-        }
-
-        .mini-card span {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        .btn-main {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: #030712;
-            padding: 13px 26px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            text-decoration: none;
-            box-shadow: 0 4px 20px var(--primary-glow);
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-main:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px var(--primary-glow);
-        }
-
-        /* Animated Bot Graphic Showcase Area */
-        .shield-graphic-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 340px;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
-            border-radius: 18px;
-            border: 1px dashed var(--border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .shield-icon-glow {
-            font-size: 100px;
-            color: var(--primary);
-            filter: drop-shadow(0 0 30px var(--primary-glow));
-            animation: floatRobot 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes floatRobot {
-            0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(-12px) rotate(2deg); }
-        }
-
-        /* Features Bar */
-        .features-bar {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 45px;
-            padding-top: 28px;
-            border-top: 1px solid var(--border);
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            transition: transform 0.3s;
-        }
-
-        .feature-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .feature-item i {
-            font-size: 20px;
-            color: var(--primary);
-        }
-
-        .feature-item h5 {
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 2px;
-        }
-
-        .feature-item p {
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        /* Section Headings & Cards */
-        .section-heading {
-            margin-bottom: 32px;
-        }
-
-        .section-heading h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-            color: #fff;
-            letter-spacing: -0.5px;
-        }
-
-        .section-heading p {
-            color: var(--text-muted);
-            font-size: 0.98rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 22px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 28px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 35px rgba(6, 182, 212, 0.15);
-        }
-
-        .card-icon {
-            width: 46px;
-            height: 46px;
-            background: rgba(6, 182, 212, 0.1);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 20px;
-            margin-bottom: 18px;
-            transition: transform 0.3s;
-        }
-
-        .card:hover .card-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .card h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #fff;
-        }
-
-        .card .username {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.82rem;
-            color: var(--primary);
-            margin-bottom: 12px;
-            display: inline-block;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.93rem;
-            line-height: 1.6;
-            margin-bottom: 22px;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 45px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        footer span {
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            aside { display: none; }
-            .mobile-header { display: flex; }
-            main { padding: 85px 18px 35px; }
-            .hero-grid { grid-template-columns: 1fr; gap: 30px; }
-            .features-bar { grid-template-columns: 1fr; gap: 16px; }
-            .shield-graphic-container { height: 240px; }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-950 text-gray-100 relative selection:bg-emerald-500 selection:text-white">
 
-    <!-- Background Animation Orbs -->
-    <div class="bg-animation">
-        <div class="orb orb-1"></div>
-        <div class="orb-2 orb"></div>
+    <!-- Background Glows -->
+    <div class="glow-effect top-0 left-1/4 -translate-x-1/2"></div>
+    <div class="glow-effect top-1/2 right-10"></div>
+
+    <!-- Command Palette Modal (Ctrl + K) -->
+    <div id="command-palette" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl border border-emerald-500/30 animate-in fade-in zoom-in duration-200">
+            <div class="p-4 border-b border-gray-800 flex items-center gap-3">
+                <i class="fa-solid fa-search text-emerald-400"></i>
+                <input type="text" id="cmd-input" placeholder="Type a command or search sections (e.g., 'bots', 'github', 'contact')..." class="bg-transparent border-none outline-none w-full text-gray-100 placeholder-gray-500 font-medium">
+                <span class="text-xs bg-gray-800 text-gray-400 px-2 py-1 rounded border border-gray-700">ESC</span>
+            </div>
+            <div class="p-2 max-h-72 overflow-y-auto space-y-1" id="cmd-list">
+                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-emerald-500/10 cursor-pointer flex items-center justify-between group transition" onclick="scrollToSection('hero'); closeCommandPalette();">
+                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-emerald-400"><i class="fa-solid fa-house w-5"></i> Home / Hero</div>
+                    <span class="text-xs text-gray-600 font-mono">#home</span>
+                </div>
+                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-emerald-500/10 cursor-pointer flex items-center justify-between group transition" onclick="scrollToSection('bots'); closeCommandPalette();">
+                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-emerald-400"><i class="fa-solid fa-robot w-5"></i> Telegram Bots & Projects</div>
+                    <span class="text-xs text-gray-600 font-mono">#bots</span>
+                </div>
+                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-emerald-500/10 cursor-pointer flex items-center justify-between group transition" onclick="scrollToSection('ecosystem'); closeCommandPalette();">
+                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-emerald-400"><i class="fa-solid fa-bullhorn w-5"></i> Foxry Ecosystem (@FoxryHQ)</div>
+                    <span class="text-xs text-gray-600 font-mono">#ecosystem</span>
+                </div>
+                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-emerald-500/10 cursor-pointer flex items-center justify-between group transition" onclick="scrollToSection('terminal'); closeCommandPalette();">
+                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-emerald-400"><i class="fa-solid fa-terminal w-5"></i> Interactive CLI Terminal</div>
+                    <span class="text-xs text-gray-600 font-mono">#cli</span>
+                </div>
+                <div class="cmd-item px-3 py-2.5 rounded-xl hover:bg-emerald-500/10 cursor-pointer flex items-center justify-between group transition" onclick="window.open('https://t.me/FoxryHQ', '_blank'); closeCommandPalette();">
+                    <div class="flex items-center gap-3 text-gray-300 group-hover:text-emerald-400"><i class="fa-brands fa-telegram w-5"></i> Open Telegram Channel</div>
+                    <span class="text-xs text-emerald-500 font-mono">External</span>
+                </div>
+            </div>
+            <div class="px-4 py-2.5 bg-gray-900/80 border-t border-gray-800 text-xs text-gray-400 flex justify-between items-center">
+                <span>Navigate with arrows or click</span>
+                <span class="text-emerald-400 font-semibold">ArchonOS v3.2</span>
+            </div>
+        </div>
     </div>
 
-    <!-- Mobile Header -->
-    <div class="mobile-header">
-        <a class="brand" style="margin: 0;" onclick="switchPage('home')">
-            <div class="brand-emblem"><i class="fas fa-bolt"></i></div>
-            <div class="brand-title" style="font-size: 14px;">Foxry HQ <span>Built for Archon</span></div>
-        </a>
-        <button class="mobile-toggle" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
-        </button>
-    </div>
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-panel border-b border-gray-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="scrollToSection('hero')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-700 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-gray-950 font-black text-xl">
+                    A
+                </div>
+                <div>
+                    <span class="text-lg font-bold tracking-tight text-white">Archon<span class="text-emerald-400">.dev</span></span>
+                    <span class="block text-[10px] text-emerald-400/80 font-mono tracking-widest uppercase">Telegram Architect</span>
+                </div>
+            </div>
 
-    <!-- Sidebar Navigation -->
-    <aside id="sidebar">
-        <div>
-            <a class="brand" onclick="switchPage('home')">
-                <div class="brand-emblem"><i class="fas fa-bolt"></i></div>
-                <div class="brand-title">Foxry HQ <span>Built for Archon</span></div>
-            </a>
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300">
+                <a href="#hero" class="hover:text-emerald-400 transition">Home</a>
+                <a href="#status" class="hover:text-emerald-400 transition">Status</a>
+                <a href="#bots" class="hover:text-emerald-400 transition">Bots & Projects</a>
+                <a href="#ecosystem" class="hover:text-emerald-400 transition">Ecosystem</a>
+                <a href="#terminal" class="hover:text-emerald-400 transition">CLI Terminal</a>
+                <a href="#skills" class="hover:text-emerald-400 transition">Tech Stack</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleCommandPalette()" class="hidden sm:flex items-center gap-2 bg-gray-900 border border-gray-800 hover:border-emerald-500/50 px-3 py-2 rounded-xl text-xs text-gray-400 transition shadow-inner">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Quick Search</span>
+                    <kbd class="bg-gray-800 px-1.5 py-0.5 rounded text-[10px] text-gray-300 font-mono">Ctrl K</kbd>
+                </button>
+                <a href="https://t.me/FoxryHQ" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-bold px-4 py-2.5 rounded-xl text-sm transition shadow-lg shadow-emerald-500/25 flex items-center gap-2">
+                    <i class="fa-brands fa-telegram"></i>
+                    <span>Join @FoxryHQ</span>
+                </a>
+                <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-white p-2">
+                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-gray-800 px-6 py-4 space-y-3">
+            <a href="#hero" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-emerald-400 font-medium py-1">Home</a>
+            <a href="#status" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-emerald-400 font-medium py-1">Live Status</a>
+            <a href="#bots" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-emerald-400 font-medium py-1">Bots & Projects</a>
+            <a href="#ecosystem" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-emerald-400 font-medium py-1">Foxry Ecosystem</a>
+            <a href="#terminal" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-emerald-400 font-medium py-1">CLI Terminal</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-emerald-400 font-medium py-1">Tech Stack</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="pt-32 pb-20 md:pt-44 md:pb-32 px-4 relative">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            <div class="nav-menu">
-                <button class="nav-item active" onclick="switchPage('home')">
-                    <i class="fas fa-house"></i> Home
-                </button>
-                <button class="nav-item" onclick="switchPage('bots')">
-                    <i class="fas fa-robot"></i> Bots
-                </button>
-                <button class="nav-item" onclick="switchPage('community')">
-                    <i class="fas fa-bullhorn"></i> Updates & Support
-                </button>
-                <button class="nav-item" onclick="switchPage('developers')">
-                    <i class="fas fa-code"></i> Developers
-                </button>
-                <button class="nav-item" onclick="switchPage('about')">
-                    <i class="fas fa-shield-halved"></i> About
-                </button>
-            </div>
-        </div>
+            <!-- Hero Text -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    Available for Telegram Bot Architecture & Scalable Backend
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                    Architecting Next-Gen <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">Telegram Ecosystems</span>
+                </h1>
+                <p class="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto lg:mx-0 font-normal">
+                    Hi, I'm <strong class="text-white">Archon</strong>. Full-stack developer specializing in high-performance Telegram music bots (`FoxyMusic`), group moderation tools (`Sangmata`), GitHub automated webhooks, and resilient cloud deployments.
+                </p>
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                    <a href="https://t.me/FoxryHQ" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-bold px-6 py-3.5 rounded-xl transition shadow-lg shadow-emerald-500/25 flex items-center gap-3">
+                        <i class="fa-brands fa-telegram text-lg"></i>
+                        <span>Explore @FoxryHQ</span>
+                    </a>
+                    <a href="https://t.me/FoxryChat" target="_blank" class="glass-panel hover:bg-gray-800/80 text-gray-200 font-semibold px-6 py-3.5 rounded-xl transition flex items-center gap-3 border border-gray-700">
+                        <i class="fa-solid fa-comments text-emerald-400"></i>
+                        <span>Join @FoxryChat</span>
+                    </a>
+                </div>
 
-        <div class="sidebar-footer-box">
-            <div class="secure-tag">
-                <i class="fas fa-server"></i> Active Ecosystem
-            </div>
-            <p>High-performance Telegram bots infrastructure.</p>
-            <div style="margin-top: 10px; font-size: 10px; color: var(--text-muted);">
-                &copy; 2026 Built for Archon
-            </div>
-        </div>
-    </aside>
-
-    <!-- Main Content Area -->
-    <main>
-        <!-- 1. HOME PAGE -->
-        <div id="home" class="page-section active">
-            <div class="hero-grid">
-                <div class="hero-content">
-                    <div class="status-badge">
-                        <div class="status-dot"></div> All Bots Online & Operational
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-3 gap-4 pt-8 border-t border-gray-800/80 max-w-lg mx-auto lg:mx-0">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white font-mono">99.9%</h3>
+                        <p class="text-xs text-gray-500">Bot Uptime</p>
                     </div>
-                    <h1>Next-Gen <span>Telegram Bots</span> Ecosystem</h1>
-                    <p>Welcome to Foxry HQ. High-performance music streaming, advanced group security moderation, and GitHub notification pipelines. Built for Archon.</p>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white font-mono">100k+</h3>
+                        <p class="text-xs text-gray-500">Users Served</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white font-mono">Python / Go</h3>
+                        <p class="text-xs text-gray-500">Core Stack</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Visual / Live Card -->
+            <div class="lg:col-span-5">
+                <div class="glass-panel p-6 rounded-3xl relative shadow-2xl border border-emerald-500/20 glass-panel-hover transition duration-300">
+                    <div class="absolute -top-3 right-6 bg-emerald-500 text-gray-950 text-[10px] font-mono font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">
+                        Live Telemetry
+                    </div>
                     
-                    <div class="hero-cards-row">
-                        <div class="mini-card" onclick="switchPage('bots')">
-                            <i class="fas fa-music"></i>
-                            <h4>Music & Guard</h4>
-                            <span>Active Telegram Bots</span>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl font-bold">
+                            <i class="fa-solid fa-server"></i>
                         </div>
-                        <div class="mini-card" onclick="switchPage('community')">
-                            <i class="fas fa-comments"></i>
-                            <h4>FoxryChat</h4>
-                            <span>Support Community</span>
+                        <div>
+                            <h4 class="font-bold text-white text-lg">Foxry Core Daemon</h4>
+                            <p class="text-xs text-emerald-400 font-mono">Cluster ID: #FX-904X</p>
                         </div>
                     </div>
 
-                    <button class="btn-main" onclick="switchPage('bots')">
-                        Explore Bots <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
+                    <div class="space-y-4 font-mono text-xs">
+                        <div class="bg-gray-900/90 p-3.5 rounded-xl border border-gray-800 flex items-center justify-between">
+                            <span class="text-gray-400">FoxyMusic Streamer</span>
+                            <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Active (18ms)</span>
+                        </div>
+                        <div class="bg-gray-900/90 p-3.5 rounded-xl border border-gray-800 flex items-center justify-between">
+                            <span class="text-gray-400">Sangmata Imposter DB</span>
+                            <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Synced (2ms)</span>
+                        </div>
+                        <div class="bg-gray-900/90 p-3.5 rounded-xl border border-gray-800 flex items-center justify-between">
+                            <span class="text-gray-400">GitHub Webhook Dispatch</span>
+                            <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Listening</span>
+                        </div>
+                    </div>
 
-                <!-- Animated Graphic Showcase -->
-                <div class="shield-graphic-container">
-                    <i class="fas fa-robot shield-icon-glow"></i>
+                    <div class="mt-6 pt-4 border-t border-gray-800 flex items-center justify-between text-xs text-gray-400">
+                        <span>Environment: Heroku / Vercel</span>
+                        <span class="text-emerald-400 font-mono font-semibold">Secure SSL</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Bottom Features Bar -->
-            <div class="features-bar">
-                <div class="feature-item">
-                    <i class="fas fa-bolt"></i>
+        </div>
+    </section>
+
+    <!-- Live Status Banner -->
+    <section id="status" class="py-10 border-y border-gray-800 bg-gray-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></div>
                     <div>
-                        <h5>High Speed</h5>
-                        <p>Lightning fast response</p>
+                        <h4 class="font-bold text-white text-sm">Foxry Network Status: <span class="text-emerald-400 font-mono">All Systems Operational</span></h4>
+                        <p class="text-xs text-gray-400">Real-time health check across music nodes, database clusters, and webhooks.</p>
                     </div>
                 </div>
-                <div class="feature-item">
-                    <i class="fas fa-shield-halved"></i>
-                    <div>
-                        <h5>Group Moderation</h5>
-                        <p>Advanced security tools</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-server"></i>
-                    <div>
-                        <h5>99.9% Uptime</h5>
-                        <p>Reliable infrastructure</p>
-                    </div>
+                <div class="flex items-center gap-3">
+                    <span class="bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-xl text-xs font-mono text-gray-300">Uptime: 99.98%</span>
+                    <span class="bg-gray-900 border border-gray-800 px-3 py-1.5 rounded-xl text-xs font-mono text-emerald-400">Latency: 16ms</span>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- 2. BOTS PAGE -->
-        <div id="bots" class="page-section">
-            <div class="section-heading">
-                <h2>Our Telegram Bots</h2>
-                <p>Powerful automation tools engineered for high availability.</p>
+    <!-- Projects & Telegram Bots Showcase -->
+    <section id="bots" class="py-24 px-4 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-emerald-400 text-xs font-mono uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Featured Telegram Bots & Projects</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Engineered for High Scale & Speed</h2>
+                <p class="text-gray-400 text-base sm:text-lg">Discover the core bots and automated infrastructure built and maintained under the Foxry brand.</p>
             </div>
-            <div class="grid">
-                <div class="card">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Bot 1: FoxyMusic -->
+                <div class="glass-panel p-8 rounded-3xl relative flex flex-col justify-between glass-panel-hover transition duration-300">
                     <div>
-                        <div class="card-icon"><i class="fas fa-music"></i></div>
-                        <h3>Kavya Music Bot</h3>
-                        <span class="username">@KavyaMusicBot</span>
-                        <p>High-fidelity audio streaming across group voice chats with minimal latency and smooth queues.</p>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+                                <i class="fa-solid fa-music"></i>
+                            </div>
+                            <span class="bg-emerald-500/10 text-emerald-400 font-mono text-xs px-3 py-1 rounded-full border border-emerald-500/20">Pyrogram / Async</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">FoxyMusic Streamer</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            High-fidelity Telegram music bot supporting group voice chats, YouTube audio streaming, playlist management, and Heroku worker dyno clone management.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs bg-gray-900 border border-gray-800 px-2.5 py-1 rounded-lg text-gray-300 font-mono">Python</span>
+                            <span class="text-xs bg-gray-900 border border-gray-800 px-2.5 py-1 rounded-lg text-gray-300 font-mono">Pyrogram</span>
+                            <span class="text-xs bg-gray-900 border border-gray-800 px-2.5 py-1 rounded-lg text-gray-300 font-mono">MongoDB</span>
+                        </div>
                     </div>
-                    <a href="https://t.me/KavyaMusicBot" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 11px;">
-                        <i class="fab fa-telegram"></i> Open Bot
-                    </a>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
+                        <span class="text-xs text-emerald-400 font-mono flex items-center gap-1"><i class="fa-solid fa-circle text-[8px]"></i> Active Production</span>
+                        <a href="https://t.me/FoxryHQ" target="_blank" class="text-xs font-semibold text-white hover:text-emerald-400 transition flex items-center gap-1">Channel <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
                 </div>
 
-                <div class="card">
+                <!-- Bot 2: Sangmata Imposter Tracker -->
+                <div class="glass-panel p-8 rounded-3xl relative flex flex-col justify-between glass-panel-hover transition duration-300">
                     <div>
-                        <div class="card-icon"><i class="fas fa-shield-halved"></i></div>
-                        <h3>Foxy Guard Bot</h3>
-                        <span class="username">@FoxyGuardBot</span>
-                        <p>Advanced security management bot designed to neutralize spam and secure group chats.</p>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <span class="bg-emerald-500/10 text-emerald-400 font-mono text-xs px-3 py-1 rounded-full border border-emerald-500/20">RAM Caching</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Sangmata Imposter Guard</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Real-time Telegram group moderation and imposter tracking module. Detects instant username and name changes to protect communities from impersonation fraud.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs bg-gray-900 border border-gray-800 px-2.5 py-1 rounded-lg text-gray-300 font-mono">Motor Asyncio</span>
+                            <span class="text-xs bg-gray-900 border border-gray-800 px-2.5 py-1 rounded-lg text-gray-300 font-mono">MongoDB</span>
+                            <span class="text-xs bg-gray-900 border border-gray-800 px-2.5 py-1 rounded-lg text-gray-300 font-mono">Security</span>
+                        </div>
                     </div>
-                    <a href="https://t.me/FoxyGuardBot" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 11px;">
-                        <i class="fab fa-telegram"></i> Open Bot
-                    </a>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
+                        <span class="text-xs text-emerald-400 font-mono flex items-center gap-1"><i class="fa-solid fa-circle text-[8px]"></i> Real-time Sync</span>
+                        <a href="https://t.me/FoxryChat" target="_blank" class="text-xs font-semibold text-white hover:text-emerald-400 transition flex items-center gap-1">Support Group <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
                 </div>
 
-                <div class="card">
+                <!-- Bot 3: GitHub Notification & CI Bot -->
+                <div class="glass-panel p-8 rounded-3xl relative flex flex-col justify-between glass-panel-hover transition duration-300">
                     <div>
-                        <div class="card-icon"><i class="fab fa-github"></i></div>
-                        <h3>Foxy Git Bot</h3>
-                        <span class="username">@FoxyGitBot</span>
-                        <p>GitHub notification bot that bridges your code repositories straight to Telegram.</p>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl">
+                                <i class="fa-solid fa-code-branch"></i>
+                            </div>
+                            <span class="bg-emerald-500/10 text-emerald-400 font-mono text-xs px-3 py-1 rounded-full border border-emerald-500/20">Webhook CI</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">GitHub Notification Hub</h3>
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            Automated webhook bridge transmitting repository commits, pull requests, Docker CI workflow status, and CodeQL security alerts straight to Telegram channels.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs bg-gray-900 border border-gray-800 px-2.5 py-1 rounded-lg text-gray-300 font-mono">Golang / Python</span>
+                            <span class="text-xs bg-gray-900 border border-gray-800 px-2.5 py-1 rounded-lg text-gray-300 font-mono">Docker CI</span>
+                            <span class="text-xs bg-gray-900 border border-gray-800 px-2.5 py-1 rounded-lg text-gray-300 font-mono">Webhooks</span>
+                        </div>
                     </div>
-                    <a href="https://t.me/FoxyGitBot" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 11px;">
-                        <i class="fab fa-telegram"></i> Open Bot
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. UPDATES & SUPPORT PAGE -->
-        <div id="community" class="page-section">
-            <div class="section-heading">
-                <h2>Updates & Support Group</h2>
-                <p>Stay connected with announcements, updates, and community assistance.</p>
-            </div>
-            <div class="grid" style="max-width: 780px; margin: 0 auto;">
-                <div class="card" style="text-align: center;">
-                    <div>
-                        <div class="card-icon" style="margin: 0 auto 16px;"><i class="fab fa-telegram-plane"></i></div>
-                        <h3>FoxryHQ Update Channel</h3>
-                        <span class="username">@FoxryHQ</span>
-                        <p>Official broadcast channel for announcements and new bot releases.</p>
+                    <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between">
+                        <span class="text-xs text-emerald-400 font-mono flex items-center gap-1"><i class="fa-solid fa-circle text-[8px]"></i> Automated CI</span>
+                        <a href="https://github.com" target="_blank" class="text-xs font-semibold text-white hover:text-emerald-400 transition flex items-center gap-1">GitHub Repos <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
-                    <a href="https://t.me/FoxryHQ" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 11px;">
-                        <i class="fab fa-telegram"></i> Join Channel
-                    </a>
                 </div>
 
-                <div class="card" style="text-align: center;">
-                    <div>
-                        <div class="card-icon" style="margin: 0 auto 16px;"><i class="fas fa-comments"></i></div>
-                        <h3>FoxryChat Support Group</h3>
-                        <span class="username">@FoxryChat</span>
-                        <p>Join our interactive support community to ask questions and report bugs.</p>
-                    </div>
-                    <a href="https://t.me/FoxryChat" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 11px;">
-                        <i class="fas fa-headset"></i> Join Support Group
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. DEVELOPERS PAGE -->
-        <div id="developers" class="page-section">
-            <div class="section-heading">
-                <h2>Core Developers</h2>
-                <p>The engineering minds behind Foxry HQ — Built for Archon.</p>
-            </div>
-            <div class="grid">
-                <div class="card">
-                    <div>
-                        <div class="card-icon"><i class="fas fa-code"></i></div>
-                        <h3>𝘈𝘠𝘜𝘚𝘏</h3>
-                        <span class="username">@MightyAyush</span>
-                        <p>Backend bot architecture, database optimization, and high-speed streaming modules.</p>
-                    </div>
-                    <a href="https://t.me/MightyAyush" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 10px; background: rgba(255,255,255,0.04); color: #fff; border: 1px solid var(--border); box-shadow: none;">
-                        <i class="fab fa-telegram" style="color: var(--primary);"></i> Contact
-                    </a>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <div class="card-icon"><i class="fas fa-terminal"></i></div>
-                        <h3>𝐀ʀᴄʜᴏɴ</h3>
-                        <span class="username">@ArchonCEO</span>
-                        <p>Cloud deployments, infrastructure security, and overall platform scalability.</p>
-                    </div>
-                    <a href="https://t.me/ArchonCEO" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 10px; background: rgba(255,255,255,0.04); color: #fff; border: 1px solid var(--border); box-shadow: none;">
-                        <i class="fab fa-telegram" style="color: var(--primary);"></i> Contact
-                    </a>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <div class="card-icon"><i class="fas fa-microchip"></i></div>
-                        <h3>ROYAL</h3>
-                        <span class="username">@II_ROYALENTRY1128_II</span>
-                        <p>Feature integration, automated scripts, and interactive bot command execution.</p>
-                    </div>
-                    <a href="https://t.me/II_ROYALENTRY1128_II" target="_blank" class="btn-main" style="width: 100%; justify-content: center; padding: 10px; background: rgba(255,255,255,0.04); color: #fff; border: 1px solid var(--border); box-shadow: none;">
-                        <i class="fab fa-telegram" style="color: var(--primary);"></i> Contact
-                    </a>
-                </div>
             </div>
         </div>
+    </section>
 
-        <!-- 5. ABOUT PAGE -->
-        <div id="about" class="page-section">
-            <div class="section-heading">
-                <h2>About Foxry HQ</h2>
-                <p>Our vision and mission for Telegram automation ecosystems.</p>
+    <!-- Foxry Ecosystem Hub -->
+    <section id="ecosystem" class="py-24 px-4 bg-gray-900/20 border-y border-gray-800/60 relative">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <span class="text-emerald-400 text-xs font-mono uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Community Hub</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">The Foxry Ecosystem</h2>
+                <p class="text-gray-400 text-base leading-relaxed">
+                    A vibrant community built around open-source development, Telegram bot management, and high-performance cloud tools. Join the update channel for latest releases or hop into the support group for direct assistance.
+                </p>
+                <div class="space-y-4 pt-2">
+                    <div class="glass-panel p-4 rounded-2xl flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                                <i class="fa-brands fa-telegram text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Update Channel</h4>
+                                <p class="text-xs text-gray-400 font-mono">@FoxryHQ</p>
+                            </div>
+                        </div>
+                        <a href="https://t.me/FoxryHQ" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-bold px-4 py-2 rounded-xl text-xs transition">Join Channel</a>
+                    </div>
+
+                    <div class="glass-panel p-4 rounded-2xl flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                                <i class="fa-solid fa-comments text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Community Chat</h4>
+                                <p class="text-xs text-gray-400 font-mono">@FoxryChat</p>
+                            </div>
+                        </div>
+                        <a href="https://t.me/FoxryChat" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-bold px-4 py-2 rounded-xl text-xs transition">Join Group</a>
+                    </div>
+                </div>
             </div>
-            <div class="card" style="max-width: 780px; margin: 0 auto; text-align: left;">
-                <h3 style="color: #fff; margin-bottom: 12px;">Scalable Architecture & Infrastructure</h3>
-                <p style="margin-bottom: 14px; color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">Foxry HQ is an independent ecosystem dedicated to creating fast, reliable, and secure tools for Telegram communities. Built under the supervision of Archon infrastructure, delivering uninterrupted music streams, group security management, and developer tools.</p>
-                <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">We maintain stable hosting environments to ensure all our bots run smoothly 24/7 without interruption.</p>
+
+            <div class="glass-panel p-8 rounded-3xl border border-emerald-500/20 shadow-2xl">
+                <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                    <i class="fa-solid fa-terminal text-emerald-400"></i>
+                    <span>Ecosystem Features</span>
+                </h3>
+                <ul class="space-y-4 text-sm text-gray-300">
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                        <span><strong>Clone Bot Architecture:</strong> Easily deploy custom clones of music and management bots using Heroku workers.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                        <span><strong>Encrypted Security:</strong> Utilization of Fernet encryption and CyberChef 32-byte Base64 keys for robust session storage.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                        <span><strong>Lightning Fast MongoDB:</strong> Persistent storage backed by motor.motor_asyncio and optimized RAM caching.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-check text-emerald-400 mt-1"></i>
+                        <span><strong>Vercel & Heroku Deployment:</strong> Seamless automated pipelines with Docker CI workflows and CodeQL scanning.</span>
+                    </li>
+                </ul>
             </div>
         </div>
+    </section>
 
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2026 <span>Foxry HQ</span>. Built for Archon.</p>
-            <p style="font-size: 11px;">High-Performance Telegram Ecosystem.</p>
-        </footer>
-    </main>
+    <!-- Interactive CLI Terminal Section -->
+    <section id="terminal" class="py-24 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12 space-y-3">
+                <span class="text-emerald-400 text-xs font-mono uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Interactive CLI</span>
+                <h2 class="text-3xl font-extrabold text-white">ArchonOS Terminal</h2>
+                <p class="text-gray-400 text-sm">Type commands below to interact with the system shell (e.g., <code class="text-emerald-400 font-mono">help</code>, <code class="text-emerald-400 font-mono">bots</code>, <code class="text-emerald-400 font-mono">status</code>, <code class="text-emerald-400 font-mono">clear</code>).</p>
+            </div>
 
-    <!-- JavaScript -->
+            <!-- Terminal Window -->
+            <div class="glass-panel rounded-2xl overflow-hidden border border-emerald-500/30 shadow-2xl">
+                <!-- Terminal Header -->
+                <div class="bg-gray-900/90 px-4 py-3 border-b border-gray-800 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                        <span class="ml-3 text-xs font-mono text-gray-400">archon@foxry-core:~</span>
+                    </div>
+                    <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">BASH</span>
+                </div>
+
+                <!-- Terminal Body -->
+                <div id="terminal-body" class="p-6 font-mono text-xs sm:text-sm h-80 overflow-y-auto space-y-3 text-gray-300">
+                    <div>
+                        <p class="text-emerald-400">Welcome to ArchonOS v3.2.0 (x86_64-foxry-linux-gnu)</p>
+                        <p class="text-gray-500">Type <span class="text-white font-bold">help</span> to view available system commands.</p>
+                        <p class="text-gray-500 mb-4">--------------------------------------------------</p>
+                    </div>
+                </div>
+
+                <!-- Terminal Input Form -->
+                <form id="terminal-form" onsubmit="handleTerminalCommand(event)" class="bg-gray-900/90 px-4 py-3 border-t border-gray-800 flex items-center gap-3">
+                    <span class="text-emerald-400 font-mono font-bold">archon@foxry:~$</span>
+                    <input type="text" id="terminal-input" autocomplete="off" placeholder="type a command..." class="bg-transparent border-none outline-none w-full font-mono text-gray-100 text-sm placeholder-gray-600">
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack / Skills Section -->
+    <section id="skills" class="py-24 px-4 bg-gray-900/20 border-t border-gray-800/60">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-emerald-400 text-xs font-mono uppercase tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">Tech Stack</span>
+                <h2 class="text-3xl font-extrabold text-white">Core Technologies & Tools</h2>
+                <p class="text-gray-400 text-sm">Built using industry standard asynchronous Python frameworks, Golang, databases, and secure cloud platforms.</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+                
+                <div class="glass-panel p-6 rounded-2xl text-center space-y-3 glass-panel-hover transition">
+                    <div class="text-3xl text-emerald-400"><i class="fa-brands fa-python"></i></div>
+                    <h4 class="font-bold text-white text-sm">Python</h4>
+                    <p class="text-[11px] text-gray-400">Pyrogram / Kurigram</p>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl text-center space-y-3 glass-panel-hover transition">
+                    <div class="text-3xl text-emerald-400"><i class="fa-solid fa-bolt"></i></div>
+                    <h4 class="font-bold text-white text-sm">Golang</h4>
+                    <p class="text-[11px] text-gray-400">High-speed bots</p>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl text-center space-y-3 glass-panel-hover transition">
+                    <div class="text-3xl text-emerald-400"><i class="fa-solid fa-database"></i></div>
+                    <h4 class="font-bold text-white text-sm">MongoDB</h4>
+                    <p class="text-[11px] text-gray-400">motor_asyncio</p>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl text-center space-y-3 glass-panel-hover transition">
+                    <div class="text-3xl text-emerald-400"><i class="fa-solid fa-cloud"></i></div>
+                    <h4 class="font-bold text-white text-sm">Heroku & Vercel</h4>
+                    <p class="text-[11px] text-gray-400">Cloud Infrastructure</p>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl text-center space-y-3 glass-panel-hover transition">
+                    <div class="text-3xl text-emerald-400"><i class="fa-solid fa-shield-cat"></i></div>
+                    <h4 class="font-bold text-white text-sm">Fernet Encryption</h4>
+                    <p class="text-[11px] text-gray-400">CyberChef Keys</p>
+                </div>
+
+                <div class="glass-panel p-6 rounded-2xl text-center space-y-3 glass-panel-hover transition">
+                    <div class="text-3xl text-emerald-400"><i class="fa-brands fa-github"></i></div>
+                    <h4 class="font-bold text-white text-sm">Docker CI</h4>
+                    <p class="text-[11px] text-gray-400">CodeQL Security</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800 bg-gray-950 text-center text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto px-4 space-y-4">
+            <div class="flex items-center justify-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-gray-950 font-black">A</span>
+                <span class="text-white font-bold text-sm">Archon <span class="text-emerald-400">| Foxry Ecosystem</span></span>
+            </div>
+            <p>Designed and built with precision. All rights reserved © 2026.</p>
+            <div class="flex justify-center gap-6 pt-2">
+                <a href="https://t.me/FoxryHQ" target="_blank" class="hover:text-emerald-400 transition"><i class="fa-brands fa-telegram text-base"></i> Telegram Channel</a>
+                <a href="https://t.me/FoxryChat" target="_blank" class="hover:text-emerald-400 transition"><i class="fa-solid fa-comments text-base"></i> Support Group</a>
+                <a href="https://github.com" target="_blank" class="hover:text-emerald-400 transition"><i class="fa-brands fa-github text-base"></i> GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            if (sidebar.style.display === 'flex') {
-                sidebar.style.display = 'none';
-            } else {
-                sidebar.style.display = 'flex';
-                sidebar.style.position = 'fixed';
-                sidebar.style.top = '60px';
-                sidebar.style.left = '0';
-                sidebar.style.width = '100%';
-                sidebar.style.height = 'calc(100vh - 60px)';
-                sidebar.style.zIndex = '999';
+        // Smooth Scroll helper
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
-        function switchPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars text-xl';
+            } else {
+                icon.className = 'fa-solid fa-xmark text-xl';
+            }
+        }
 
-            document.getElementById(pageId).classList.add('active');
+        // Command Palette (Ctrl + K)
+        const cmdPalette = document.getElementById('command-palette');
+        const cmdInput = document.getElementById('cmd-input');
 
-            document.querySelectorAll('.nav-item').forEach(item => {
-                if(item.getAttribute('onclick').includes(pageId)) {
-                    item.classList.add('active');
-                }
-            });
+        function toggleCommandPalette() {
+            if (cmdPalette.classList.contains('hidden')) {
+                cmdPalette.classList.remove('hidden');
+                cmdPalette.classList.add('flex');
+                cmdInput.focus();
+            } else {
+                closeCommandPalette();
+            }
+        }
 
-            if(window.innerWidth <= 900) {
-                document.getElementById('sidebar').style.display = 'none';
+        function closeCommandPalette() {
+            cmdPalette.classList.add('hidden');
+            cmdPalette.classList.remove('flex');
+            cmdInput.value = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                toggleCommandPalette();
+            }
+            if (e.key === 'Escape') {
+                closeCommandPalette();
+            }
+        });
+
+        cmdPalette.addEventListener('click', (e) => {
+            if (e.target === cmdPalette) closeCommandPalette();
+        });
+
+        // Interactive Terminal Logic
+        const terminalBody = document.getElementById('terminal-body');
+        const terminalInput = document.getElementById('terminal-input');
+
+        const terminalResponses = {
+            'help': "Available commands:\n - bio: Display architect profile\n - bots: List active Telegram bots\n - status: Check Foxry cluster telemetry\n - ecosystem: Show @FoxryHQ and @FoxryChat\n - github: View GitHub repositories & CI\n - clear: Clear terminal output",
+            'bio': "Archon: Full-Stack Developer & Telegram Bot Architect specializing in Python, Pyrogram, Kurigram, and Golang backend systems.",
+            'bots': "Active Bots:\n 1. FoxyMusic (Streamer & Voice Chat Bot)\n 2. Sangmata Imposter Tracker\n 3. GitHub Notification Webhook Bot",
+            'status': "System Status: 99.9% Uptime | Latency: 16ms | MongoDB Connected | Heroku Workers Online",
+            'ecosystem': "Foxry Ecosystem:\n - Update Channel: @FoxryHQ\n - Support Group: @FoxryChat",
+            'github': "GitHub Repositories: SurFlow (Docker CI & CodeQL), YariMusic, and automated bot architectures."
+        };
+
+        function handleTerminalCommand(e) {
+            e.preventDefault();
+            const cmd = terminalInput.value.trim().toLowerCase();
+            if (!cmd) return;
+
+            // Echo user command
+            const userLine = document.createElement('div');
+            userLine.innerHTML = `<span class="text-emerald-400">archon@foxry:~$</span> <span class="text-white">${escapeHtml(terminalInput.value)}</span>`;
+            terminalBody.appendChild(userLine);
+
+            if (cmd === 'clear') {
+                terminalBody.innerHTML = `
+                    <div>
+                        <p class="text-emerald-400">Welcome to ArchonOS v3.2.0 (x86_64-foxry-linux-gnu)</p>
+                        <p class="text-gray-500">Type <span class="text-white font-bold">help</span> to view available system commands.</p>
+                        <p class="text-gray-500 mb-4">--------------------------------------------------</p>
+                    </div>
+                `;
+            } else if (terminalResponses[cmd]) {
+                const resLine = document.createElement('div');
+                resLine.className = "text-gray-300 whitespace-pre-line pl-4 border-l-2 border-emerald-500/40 my-1";
+                resLine.textContent = terminalResponses[cmd];
+                terminalBody.appendChild(resLine);
+            } else {
+                const errLine = document.createElement('div');
+                errLine.className = "text-red-400";
+                errLine.textContent = `zsh: command not found: ${cmd}. Type 'help' for available commands.`;
+                terminalBody.appendChild(errLine);
             }
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            terminalInput.value = '';
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
         }
     </script>
-
 </body>
 </html>
