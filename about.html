@@ -23,7 +23,20 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:#777;font-size:11px
 @media(max-width:760px){.hero-grid{grid-template-columns:1fr}.art{min-height:260px;grid-row:1}.fox{width:160px}.halo{width:240px}.cards,.people{grid-template-columns:1fr 1fr}.section-head{display:block}.section-head p{margin-top:15px}nav{gap:12px}nav a:not(.join){display:none}}
 @media(max-width:520px){.wrap{width:calc(100% - 32px)}header{height:68px}.brand{font-size:14px}.join{font-size:10px;padding:9px}.hero{padding:52px 0}.art{min-height:230px}.cards,.people{grid-template-columns:1fr}.metrics{grid-template-columns:1fr;gap:12px}.metric,.metric:first-child{border:0;padding:0}.section{padding:60px 0}.banner{display:block;padding:25px}.foot{flex-direction:column}h1{letter-spacing:-4px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-</style></head><body><div class="wrap"><header><a class="brand" href="index.html"><svg viewBox="0 0 100 100" aria-label="Foxy fox logo"><defs><linearGradient id="fg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff626b"/><stop offset="1" stop-color="#a90019"/></linearGradient></defs><path d="M10 17 37 30 50 13 63 30 90 17 80 68 50 94 20 68Z" fill="url(#fg)"/><path d="m26 39 22 9-16 19Zm48 0-22 9 16 19Z" fill="#08090b"/><path d="m39 70 11 10 11-10-11-7Z" fill="#08090b"/></svg><span>FOXY<em> NETWORK</em></span></a><nav><a class="" href="index.html">Home</a><a class="" href="bots.html">Bots</a><a class="" href="groups.html">Groups & Channels</a><a class="" href="developers.html">Developers</a><a class="active" href="about.html">About</a><a href="https://github.com/FoxyPookie" target="_blank" rel="noreferrer">GitHub ↗</a><a class="join" href="https://t.me/FoxryHQ" target="_blank" rel="noreferrer">JOIN NETWORK ↗</a></nav></header>
+
+.menu-toggle{display:none;width:44px;height:42px;border:1px solid rgba(237,41,57,.55);border-radius:8px;background:#15161a;align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer}
+.menu-toggle span{display:block;width:19px;height:2px;border-radius:2px;background:#ff6872;transition:transform .2s,opacity .2s}
+@media(max-width:760px){
+  header{position:relative;z-index:50}
+  .menu-toggle{display:flex;margin-left:auto}
+  header nav{display:none;position:absolute;top:calc(100% + 9px);left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:9px;border:1px solid rgba(237,41,57,.35);border-radius:12px;background:rgba(15,16,20,.98);box-shadow:0 18px 45px #000b;backdrop-filter:blur(16px)}
+  header nav.open{display:flex}
+  header nav a,header nav a:not(.join){display:block;padding:13px 12px;border-radius:7px;font-size:13px}
+  header nav a:hover,header nav a.active{background:#ed29391a;color:#fff}
+  header nav .join{margin-top:6px;text-align:center}
+}
+@media(max-width:520px){header{gap:12px}.menu-toggle{flex:0 0 42px}}
+</style></head><body><div class="wrap"><header><a class="brand" href="index.html"><svg viewBox="0 0 100 100" aria-label="Foxy fox logo"><defs><linearGradient id="fg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff626b"/><stop offset="1" stop-color="#a90019"/></linearGradient></defs><path d="M10 17 37 30 50 13 63 30 90 17 80 68 50 94 20 68Z" fill="url(#fg)"/><path d="m26 39 22 9-16 19Zm48 0-22 9 16 19Z" fill="#08090b"/><path d="m39 70 11 10 11-10-11-7Z" fill="#08090b"/></svg><span>FOXY<em> NETWORK</em></span></a><button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button><nav id="site-nav"><a class="" href="index.html">Home</a><a class="" href="bots.html">Bots</a><a class="" href="groups.html">Groups & Channels</a><a class="" href="developers.html">Developers</a><a class="active" href="about.html">About</a><a href="https://github.com/FoxyPookie" target="_blank" rel="noreferrer">GitHub ↗</a><a class="join" href="https://t.me/FoxryHQ" target="_blank" rel="noreferrer">JOIN NETWORK ↗</a></nav></header>
 <main><section class="pagehero"><div class="tag">A LITTLE ABOUT US</div><h1>MORE THAN<br><span class="red">A NETWORK.</span></h1><p class="lead">Foxy Network is an independent digital ecosystem bringing together Telegram bots, useful tools and a community built around creativity, reliability and making things better.</p></section>
 <section class="section" style="padding-top:15px"><div class="section-head"><div><div class="tag">OUR PURPOSE</div><h2>BUILT WITH<br>INTENTION.</h2></div><p>We want technology to feel simple, useful and enjoyable. Every project has a purpose, and every improvement starts with listening to the people who use it.</p></div>
 <div class="cards">
@@ -33,4 +46,26 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:#777;font-size:11px
 </div></section>
 <section class="section" style="padding-top:0"><div class="banner"><div><div class="tag">THE PEOPLE BEHIND THE PROJECTS</div><h2>MEET THE DEVELOPERS.</h2><p>Foxy Network is built by a team of developers working together on the ecosystem.</p></div><a class="btn primary" href="developers.html">MEET THE TEAM ↗</a></div></section>
 <section class="section" style="padding-top:0"><div class="banner"><div><div class="tag">STAY CONNECTED</div><h2>FOLLOW THE FOXY JOURNEY.</h2><p>Join the community or follow the official channel for updates and announcements.</p></div><a class="btn primary" href="groups.html">OUR GROUPS & CHANNELS ↗</a></div></section></main>
-<footer><div class="foot"><span>© 2026 <b>FOXY NETWORK</b> · BUILT DIFFERENT.</span><span>Made with ♥ by the Foxy team</span></div></footer></div></body></html>
+<footer><div class="foot"><span>© 2026 <b>FOXY NETWORK</b> · BUILT DIFFERENT.</span><span>Made with ♥ by the Foxy team</span></div></footer></div>
+<script>
+(() => {
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('#site-nav');
+  if (!toggle || !nav) return;
+  const closeMenu = () => {
+    nav.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open navigation menu');
+  };
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  });
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('click', event => {
+    if (!nav.contains(event.target) && !toggle.contains(event.target)) closeMenu();
+  });
+})();
+</script>
+</body></html>

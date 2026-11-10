@@ -17,15 +17,53 @@ h1{font-size:clamp(54px,8vw,92px);letter-spacing:-6px;line-height:.93;margin:20p
 .ico{width:46px;height:46px;border-radius:9px;background:#ed29391c;border:1px solid #ed293944;color:#ff7b83;display:grid;place-items:center;font-size:22px}
 .card small,.role{display:block;color:#ff7b83;font-size:9px;font-weight:900;letter-spacing:1.7px;margin-top:22px}.card h3{margin:8px 0;font-size:20px}.card p{color:var(--muted);font-size:12px;line-height:1.75}.arrow{color:var(--red);font-size:17px}
 .banner{padding:35px;border:1px solid #ed29394a;border-radius:10px;background:linear-gradient(110deg,#ed293921,transparent);display:flex;justify-content:space-between;align-items:center;gap:20px}.banner h2{font-size:clamp(28px,4vw,42px);margin:9px 0}.banner p{color:var(--muted);font-size:13px;line-height:1.7;max-width:550px;margin:0}
-.pagehero{padding:75px 0 30px}.people{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:20px 0 85px}.person{min-height:280px}.avatar{width:76px;height:76px;border-radius:17px;background:linear-gradient(145deg,#343840,#111318);border:1px solid #ed293966;display:grid;place-items:center;font-size:23px;font-weight:950;box-shadow:inset 0 0 25px #ed29391c}.person h2{font-size:25px;margin:8px 0 3px}.handle{font-size:12px;color:#aaa}.profile{display:inline-flex;margin-top:20px;font-size:10px;font-weight:900;border-bottom:1px solid #ed2939;padding-bottom:6px}
+.pagehero{padding:75px 0 30px}.people{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:20px 0 85px}.person{min-height:280px}.avatar svg{width:54px;height:54px;display:block}.avatar{width:76px;height:76px;border-radius:17px;background:linear-gradient(145deg,#343840,#111318);border:1px solid #ed293966;display:grid;place-items:center;font-size:23px;font-weight:950;box-shadow:inset 0 0 25px #ed29391c}.person h2{font-size:25px;margin:8px 0 3px}.handle{font-size:12px;color:#aaa}.profile{display:inline-flex;margin-top:20px;font-size:10px;font-weight:900;border-bottom:1px solid #ed2939;padding-bottom:6px}
 footer{border-top:1px solid var(--line);padding:25px 0;color:#777;font-size:11px}.foot{display:flex;justify-content:space-between;gap:15px}.foot b{color:white}
 .reveal{animation:rise .7s both}@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}@keyframes float{50%{transform:translateY(-12px)}}@keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:760px){.hero-grid{grid-template-columns:1fr}.art{min-height:260px;grid-row:1}.fox{width:160px}.halo{width:240px}.cards,.people{grid-template-columns:1fr 1fr}.section-head{display:block}.section-head p{margin-top:15px}nav{gap:12px}nav a:not(.join){display:none}}
 @media(max-width:520px){.wrap{width:calc(100% - 32px)}header{height:68px}.brand{font-size:14px}.join{font-size:10px;padding:9px}.hero{padding:52px 0}.art{min-height:230px}.cards,.people{grid-template-columns:1fr}.metrics{grid-template-columns:1fr;gap:12px}.metric,.metric:first-child{border:0;padding:0}.section{padding:60px 0}.banner{display:block;padding:25px}.foot{flex-direction:column}h1{letter-spacing:-4px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-</style></head><body><div class="wrap"><header><a class="brand" href="index.html"><svg viewBox="0 0 100 100" aria-label="Foxy fox logo"><defs><linearGradient id="fg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff626b"/><stop offset="1" stop-color="#a90019"/></linearGradient></defs><path d="M10 17 37 30 50 13 63 30 90 17 80 68 50 94 20 68Z" fill="url(#fg)"/><path d="m26 39 22 9-16 19Zm48 0-22 9 16 19Z" fill="#08090b"/><path d="m39 70 11 10 11-10-11-7Z" fill="#08090b"/></svg><span>FOXY<em> NETWORK</em></span></a><nav><a class="" href="index.html">Home</a><a class="" href="bots.html">Bots</a><a class="" href="groups.html">Groups & Channels</a><a class="active" href="developers.html">Developers</a><a class="" href="about.html">About</a><a href="https://github.com/FoxyPookie" target="_blank" rel="noreferrer">GitHub ↗</a><a class="join" href="https://t.me/FoxryHQ" target="_blank" rel="noreferrer">JOIN NETWORK ↗</a></nav></header>
+
+.menu-toggle{display:none;width:44px;height:42px;border:1px solid rgba(237,41,57,.55);border-radius:8px;background:#15161a;align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer}
+.menu-toggle span{display:block;width:19px;height:2px;border-radius:2px;background:#ff6872;transition:transform .2s,opacity .2s}
+@media(max-width:760px){
+  header{position:relative;z-index:50}
+  .menu-toggle{display:flex;margin-left:auto}
+  header nav{display:none;position:absolute;top:calc(100% + 9px);left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:9px;border:1px solid rgba(237,41,57,.35);border-radius:12px;background:rgba(15,16,20,.98);box-shadow:0 18px 45px #000b;backdrop-filter:blur(16px)}
+  header nav.open{display:flex}
+  header nav a,header nav a:not(.join){display:block;padding:13px 12px;border-radius:7px;font-size:13px}
+  header nav a:hover,header nav a.active{background:#ed29391a;color:#fff}
+  header nav .join{margin-top:6px;text-align:center}
+}
+@media(max-width:520px){header{gap:12px}.menu-toggle{flex:0 0 42px}}
+</style></head><body><div class="wrap"><header><a class="brand" href="index.html"><svg viewBox="0 0 100 100" aria-label="Foxy fox logo"><defs><linearGradient id="fg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff626b"/><stop offset="1" stop-color="#a90019"/></linearGradient></defs><path d="M10 17 37 30 50 13 63 30 90 17 80 68 50 94 20 68Z" fill="url(#fg)"/><path d="m26 39 22 9-16 19Zm48 0-22 9 16 19Z" fill="#08090b"/><path d="m39 70 11 10 11-10-11-7Z" fill="#08090b"/></svg><span>FOXY<em> NETWORK</em></span></a><button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button><nav id="site-nav"><a class="" href="index.html">Home</a><a class="" href="bots.html">Bots</a><a class="" href="groups.html">Groups & Channels</a><a class="active" href="developers.html">Developers</a><a class="" href="about.html">About</a><a href="https://github.com/FoxyPookie" target="_blank" rel="noreferrer">GitHub ↗</a><a class="join" href="https://t.me/FoxryHQ" target="_blank" rel="noreferrer">JOIN NETWORK ↗</a></nav></header>
 <main><section class="pagehero"><div class="tag">THE PEOPLE BEHIND FOXY</div><h1>BUILT BY<br><span class="red">THE TEAM.</span></h1><p class="lead">A network is more than its projects. Meet the three developers behind Foxy Network.</p></section><section class="people">
-<article class="person"><div class="avatar">MA</div><span class="role">FOXY NETWORK DEVELOPER</span><h2>Ayush</h2><div class="handle">@MightyAyush</div><a class="profile" href="https://t.me/MightyAyush" target="_blank">VIEW TELEGRAM PROFILE ↗</a></article>
-<article class="person"><div class="avatar">RE</div><span class="role">FOXY NETWORK DEVELOPER</span><h2>Royal</h2><div class="handle">@II_ROYALENTRY1128_II</div><a class="profile" href="https://t.me/II_ROYALENTRY1128_II" target="_blank">VIEW TELEGRAM PROFILE ↗</a></article>
-<article class="person"><div class="avatar">AR</div><span class="role">FOXY NETWORK DEVELOPER</span><h2>Archon</h2><div class="handle">@ArchonCEO</div><a class="profile" href="https://t.me/ArchonCEO" target="_blank">VIEW TELEGRAM PROFILE ↗</a></article>
-</section><section class="section" style="padding-top:0"><div class="banner"><div><div class="tag">CONNECT WITH FOXY</div><h2>ONE TEAM. ONE NETWORK.</h2><p>Follow official updates or join the community to stay connected with the projects and people behind Foxy.</p></div><a class="btn primary" href="https://t.me/FoxryHQ" target="_blank">FOLLOW UPDATES ↗</a></div></section></main><footer><div class="foot"><span>© 2026 <b>FOXY NETWORK</b> · BUILT DIFFERENT.</span><span>Made with ♥ by the Foxy team</span></div></footer></div></body></html>
+<article class="person"><div class="avatar" aria-label="Ayush custom developer emblem">
+<svg viewBox="0 0 100 100" role="img" aria-hidden="true"><defs><linearGradient id="ayushMark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff9a72"/><stop offset="1" stop-color="#ed2939"/></linearGradient></defs><path d="M50 8 88 78 72 78 62 59 38 59 28 78 12 78Z" fill="none" stroke="url(#ayushMark)" stroke-width="7" stroke-linejoin="round"/><path d="M43 47h14M50 35v24" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="m76 18 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z" fill="#ff9a72"/></svg></div><span class="role">FOXY NETWORK DEVELOPER</span><h2>Ayush</h2><a class="profile" href="https://t.me/MightyAyush" target="_blank">VIEW TELEGRAM PROFILE ↗</a></article>
+<article class="person"><div class="avatar" aria-label="Royal custom developer emblem">
+<svg viewBox="0 0 100 100" role="img" aria-hidden="true"><defs><linearGradient id="royalMark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe6a1"/><stop offset="1" stop-color="#d08b35"/></linearGradient></defs><path d="M18 34 34 48 50 22 66 48 82 34 74 72H26Z" fill="none" stroke="url(#royalMark)" stroke-width="6" stroke-linejoin="round"/><path d="M30 82h40M34 62h32" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="18" cy="29" r="5" fill="#ffe6a1"/><circle cx="50" cy="16" r="5" fill="#ffe6a1"/><circle cx="82" cy="29" r="5" fill="#ffe6a1"/></svg></div><span class="role">FOXY NETWORK DEVELOPER</span><h2>Royal</h2><a class="profile" href="https://t.me/II_ROYALENTRY1128_II" target="_blank">VIEW TELEGRAM PROFILE ↗</a></article>
+<article class="person"><div class="avatar" aria-label="Archon custom developer emblem">
+<svg viewBox="0 0 100 100" role="img" aria-hidden="true"><defs><linearGradient id="archonMark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9eeaff"/><stop offset="1" stop-color="#5578ff"/></linearGradient></defs><path d="M50 10 82 28v36L50 82 18 64V28Z" fill="none" stroke="url(#archonMark)" stroke-width="6" stroke-linejoin="round"/><path d="M34 58V42l16-9 16 9v16M34 42l16 9 16-9M50 51v18" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="51" r="5" fill="#9eeaff"/></svg></div><span class="role">FOXY NETWORK DEVELOPER</span><h2>Archon</h2><a class="profile" href="https://t.me/ArchonCEO" target="_blank">VIEW TELEGRAM PROFILE ↗</a></article>
+</section><section class="section" style="padding-top:0"><div class="banner"><div><div class="tag">CONNECT WITH FOXY</div><h2>ONE TEAM. ONE NETWORK.</h2><p>Follow official updates or join the community to stay connected with the projects and people behind Foxy.</p></div><a class="btn primary" href="https://t.me/FoxryHQ" target="_blank">FOLLOW UPDATES ↗</a></div></section></main><footer><div class="foot"><span>© 2026 <b>FOXY NETWORK</b> · BUILT DIFFERENT.</span><span>Made with ♥ by the Foxy team</span></div></footer></div>
+<script>
+(() => {
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('#site-nav');
+  if (!toggle || !nav) return;
+  const closeMenu = () => {
+    nav.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open navigation menu');
+  };
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  });
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('click', event => {
+    if (!nav.contains(event.target) && !toggle.contains(event.target)) closeMenu();
+  });
+})();
+</script>
+</body></html>
