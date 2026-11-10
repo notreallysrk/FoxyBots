@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090909">
+<title>Foxy Bots — Foxy Network</title>
+<style>
+:root{--bg:#090909;--red:#f12b35;--white:#f5f3f0;--muted:#a09b99;--line:rgba(255,255,255,.1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 85% 0%,rgba(241,43,53,.15),transparent 32%),var(--bg);color:var(--white);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+.wrap{width:min(1120px,calc(100% - 40px));margin:auto}a{color:inherit;text-decoration:none}
+nav{height:80px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:-.5px}.brand svg{width:38px}.brand em{font-style:normal;color:var(--red)}
+.navright{display:flex;gap:24px;align-items:center;color:#bbb;font-size:13px}.pill{padding:11px 15px;border:1px solid rgba(241,43,53,.5);border-radius:6px;color:white}
+.hero{padding:90px 0 55px}.tag{color:#ff7779;font-size:11px;font-weight:850;letter-spacing:2.4px}.tag:before{content:"";display:inline-block;width:7px;height:7px;background:var(--red);border-radius:50%;margin:0 10px 1px 0;box-shadow:0 0 12px var(--red)}
+h1{font-size:clamp(54px,9vw,92px);letter-spacing:-6px;line-height:.92;margin:22px 0}.red{color:var(--red)}.intro{max-width:570px;color:var(--muted);line-height:1.8;font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;padding:25px 0 100px}
+.bot{border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,#171717,#0e0e0e);padding:27px;min-height:310px;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:.25s}
+.bot:after{content:"";position:absolute;width:160px;height:160px;right:-90px;bottom:-100px;background:var(--red);filter:blur(75px);opacity:0;transition:.3s}.bot:hover{transform:translateY(-7px);border-color:rgba(241,43,53,.6)}.bot:hover:after{opacity:.25}
+.icon{width:54px;height:54px;border-radius:11px;background:rgba(241,43,53,.12);border:1px solid rgba(241,43,53,.25);display:grid;place-items:center;color:#ff666d;font-size:25px}
+.bot small{color:#ff7779;letter-spacing:1.8px;font-size:10px;font-weight:800;margin-top:27px}.bot h2{font-size:26px;letter-spacing:-1px;margin:8px 0}.bot p{font-size:13px;color:#a39e9c;line-height:1.7;margin:0 0 25px}
+.link{margin-top:auto;display:flex;justify-content:space-between;align-items:center;padding-top:17px;border-top:1px solid var(--line);font-size:12px;font-weight:850}.link span{color:var(--red);font-size:19px}
+.bottom{padding:28px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:#777;font-size:12px}
+@media(max-width:760px){.grid{grid-template-columns:1fr 1fr}.hero{padding-top:65px}h1{letter-spacing:-4px}}
+@media(max-width:520px){.wrap{width:calc(100% - 32px)}.grid{grid-template-columns:1fr;padding-bottom:65px}.navright{gap:12px;font-size:12px}.pill{padding:9px 10px}.hero{padding-top:55px}h1{font-size:58px}.bottom{flex-direction:column;gap:10px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style></head><body><div class="wrap">
+<nav><a class="brand" href="index.html"><svg viewBox="0 0 100 100"><path d="M12 18 39 31 50 17 61 31 88 18 80 67 50 91 20 67Z" fill="#f12b35"/><path d="m28 39 18 8-13 14Zm44 0-18 8 13 14Z" fill="#090909"/><path d="m42 68 8 8 8-8-8-5Z" fill="#090909"/></svg><span>FOXY<em> NETWORK</em></span></a><div class="navright"><a href="index.html">Home</a><a class="pill" href="https://t.me/FoxryHQ" target="_blank" rel="noreferrer">JOIN NETWORK ↗</a></div></nav>
+<header class="hero"><div class="tag">THE FOXY ECOSYSTEM</div><h1>MEET THE<br><span class="red">BOTS.</span></h1><p class="intro">Purpose-built Telegram tools, connected by one network. Choose a bot below to open it on Telegram and explore what it can do.</p></header>
+<main class="grid">
+<a class="bot" href="https://t.me/KavyaMusicBot" target="_blank" rel="noreferrer"><div class="icon">♫</div><small>MUSIC EXPERIENCE</small><h2>Kavya Music</h2><p>Bring music to your Telegram voice chats with your own music companion.</p><div class="link">OPEN @KAVYAMUSICBOT <span>↗</span></div></a>
+<a class="bot" href="https://t.me/FoxyGuardBot" target="_blank" rel="noreferrer"><div class="icon">⬡</div><small>GROUP MANAGEMENT</small><h2>Foxy Guard</h2><p>Useful moderation and management tools to help your Telegram community run smoothly.</p><div class="link">OPEN @FOXYGUARDBOT <span>↗</span></div></a>
+<a class="bot" href="https://t.me/FoxyGitBot" target="_blank" rel="noreferrer"><div class="icon">⌘</div><small>DEVELOPER TOOLS</small><h2>Foxy Git</h2><p>Keep up with GitHub activity and receive repository notifications in Telegram.</p><div class="link">OPEN @FOXYGITBOT <span>↗</span></div></a>
+</main>
+<footer class="bottom"><span>© 2026 FOXY NETWORK. BUILT DIFFERENT.</span><a href="https://github.com/FoxyPookie" target="_blank" rel="noreferrer">GITHUB ↗</a></footer>
+</div></body></html>
